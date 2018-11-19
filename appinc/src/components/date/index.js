@@ -4,9 +4,9 @@ import { View, Image, Text, TouchableOpacity } from 'react-native';
 
 import styles from './styles';
 
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import { Creators as DateAction } from '../../store/ducks/date';
+//import { connect } from 'react-redux';
+//import { bindActionCreators } from 'redux';
+//import { Creators as DateAction } from '../../store/ducks/date';
 
 class MyDatePicker extends Component {
 
@@ -63,4 +63,4 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => bindActionCreators(DateAction, dispatch);
 
-export default connect(mapStateToProps, mapDispatchToProps)(MyDatePicker);
+export default MyDatePicker;
