@@ -7,13 +7,13 @@ import Login from './pages/login';
 import Main from './pages/main';
 import New from './pages/new';
 import Testes from './pages/Testes';
-import GeoLoc from './pages/geoloc';
 
-
-import Audio from './pages/audio';
-import InputT from './pages/input';
-import Date from './pages/date/index';
-import CameraPage from './pages/camera/index';
+// Componentes
+import GeoLoc from './pages/components/geoloc';
+import Audio from './pages/components/audio';
+import InputT from './pages/components/input';
+import Date from './pages/components/date';
+import CameraPage from './pages/components/camera';
 
 // import testes de tela
 import StepPage from './pages/Step';
