@@ -3,29 +3,50 @@ import {View, Text, TouchableOpacity, StatusBar, Image, AsyncStorage } from 'rea
 import Icon from 'react-native-vector-icons/Ionicons';
 import styles from './styles';
 import axios from 'axios';
+import { DrawerActions } from 'react-navigation-drawer';
+
 
 class Main extends Component {
-
-  static navigationOptions ={
-    title: 'Bem-vindo',
+  
+  static navigationOptions = {    
+    headerTitle: 'Bem-Vindo',      
   }
 
-requestFroms = () => {
-  axios.get('http://35.231.239.168/api/pericia/formularios/1')
-    .then((resp) => {
-      console.tron.log(resp.data);
-      AsyncStorage.setItem('@Form', resp.data);
-    }).catch(err => {
-      console.tron.log(err);
-    });
-} 
+  openDrawer = () => {
+    const { drawerStatus } = this.state;
+    
+    if  (drawerStatus === true) {
+      //this.props.navigation.toggleDrawer();
+    }
+  }
 
-componentWillMount() {
-  this.requestFroms();
-}
+  requestFroms = () => {
+    axios.get('http://35.231.239.168/api/pericia/formularios/1')
+      .then((resp) => {
+        console.tron.log(resp.data);      
+       // AsyncStorage.setItem('@Form', JSON.stringify(resp.data));
+      }).catch(err => {
+        console.tron.log(err);
+      });
+  } 
 
+  state ={
+    drawerStatus: null,
+  }
+
+  componentWillMount() {  
+    //this.requestFroms();
+    console.tron.log(this.props);
+  }
+
+  componentDidMount() {
+   
+    //const drawer = this.props.navigation.setParams({ drawer: 'drawer' });
+  }
   render() {
+    
     return (
+      
       <View style={styles.container}>
         <StatusBar backgroundColor="#EEE" barStyle='dark-content' />    
 
@@ -43,7 +64,7 @@ componentWillMount() {
             </View>
 
             <View style={styles.element}>
-              <TouchableOpacity onPress={this._onPressButton}>
+              <TouchableOpacity onPress={() => this.props.actions.toggleDrawer()}>
                 <View style={styles.button}>
                   <Text style={styles.button_text}>Renovar Token</Text>
                 </View>
