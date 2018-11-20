@@ -214,9 +214,9 @@ const formulario = [
 ];
 
 class New extends Component {
-  static navigationOptions = () => ({
+  static navigationOptions = {
     title: 'Nova Pericia',
-  });
+  }
 
   state ={
     tipo: null,
@@ -269,24 +269,10 @@ retrieveData = async () => {
 
   render() {
     const { tipo, subtipo } = this.state;
-
+   
     return (
       <View style={styles.container}>
-      <StatusBar backgroundColor="#666" />
-
-      <View elevation ={5} style={styles.header}>
-          <View style={styles.viewIcon}>
-            <TouchableOpacity onPress={() => { this.props.navigation.navigate('DrawerToggle'); }}>
-              <Icon name="md-menu" size={28} style={styles.icon} />
-            </TouchableOpacity>
-          </View>
-            <View style={styles.viewTitle}>
-              <Text style={styles.headerTitle}>
-                Nova Pericia
-              </Text>
-            </View>
-            <View style={styles.concerto} />
-      </View>
+      <StatusBar backgroundColor="#EEE" barStyle='dark-content' />      
 
         <View style={styles.forms1}>
           <Text style={styles.textType}> Área </Text>
@@ -296,7 +282,8 @@ retrieveData = async () => {
                 placeholder="Selecione a pericia desejada"
                 selectedValue={this.state.tipo}
                 onValueChange={(itemValue) => this.setState({ tipo: itemValue })}
-              >
+              > 
+                <Picker.Item label='Nenhum' />
                 <Picker.Item label='Homicídio' value='homicidio' />
                 <Picker.Item label='Perícia veicular' value='carro' />
                 <Picker.Item label='Incêndio' value='incendio' />
@@ -314,6 +301,7 @@ retrieveData = async () => {
                 selectedValue={this.state.subtipo}
                 onValueChange={(itemValue) => this.setState({ subtipo: itemValue })}
               >
+                <Picker.Item label='Nenhum' />
                 <Picker.Item label='Morte violenta' value='morteviolenta' />
                 <Picker.Item label='Estrangulamento' value='estrangulamento' />
                 <Picker.Item label='Batida' value='batida' />
@@ -337,8 +325,21 @@ retrieveData = async () => {
   }
 }
 
-New.navigationOptions = {
-  header: null,
-};
-
 export default New;
+
+
+/*
+<View elevation ={5} style={styles.header}>
+          <View style={styles.viewIcon}>
+            <TouchableOpacity onPress={() => { this.props.navigation.navigate('DrawerToggle'); }}>
+              <Icon name="md-menu" size={28} style={styles.icon} />
+            </TouchableOpacity>
+          </View>
+            <View style={styles.viewTitle}>
+              <Text style={styles.headerTitle}>
+                Nova Pericia
+              </Text>
+            </View>
+            <View style={styles.concerto} />
+      </View>
+*/

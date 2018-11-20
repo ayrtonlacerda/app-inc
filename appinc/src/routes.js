@@ -1,7 +1,7 @@
 import React from 'react';
 //import { Dimensions } from 'react-native';
 import { StackNavigator, DrawerNavigator } from 'react-navigation';
-//import { colors } from './styles';
+import { colors } from './styles';
 
 import Login from './pages/login';
 import Main from './pages/main';
@@ -22,8 +22,9 @@ import StepList from './pages/StepList';
 
 const Routes = StackNavigator(
   {
-    Login: { screen: New },
+    Login: { screen: Main },
     StepPage: { screen: StepPage },
+    NewMenu: { screen: New },
     Logged: DrawerNavigator(
       {
         Main: { screen: Main },
@@ -31,6 +32,15 @@ const Routes = StackNavigator(
         Exit: { screen: Login },
       },
       {
+        navigationOptions: {
+          headerStyle: {
+            backgroundColor: colors.lighter,
+            borderBottomWidth: 0,
+          },
+        headerTintColor: colors.halfblack,
+          // headerBackTitle: null,
+          header: true,
+        },
         drawerwidth: 120,
       }
     ),
@@ -44,12 +54,12 @@ const Routes = StackNavigator(
   },
   {
     navigationOptions: {
-      /*headerStyle: {
-        backgroundColor: colors.light,
+      headerStyle: {
+        backgroundColor: colors.lighter,
         borderBottomWidth: 0,
       },
       headerTintColor: colors.halfblack,
-      headerBackTitle: null,*/
+      // headerBackTitle: null,
       //header: null,
     },
   }
