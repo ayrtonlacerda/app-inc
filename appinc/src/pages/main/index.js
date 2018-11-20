@@ -6,6 +6,10 @@ import axios from 'axios';
 
 class Main extends Component {
 
+  static navigationOptions ={
+    title: 'Bem-vindo',
+  }
+
 requestFroms = () => {
   axios.get('http://35.231.239.168/api/pericia/formularios/1')
     .then((resp) => {
@@ -23,22 +27,7 @@ componentWillMount() {
   render() {
     return (
       <View style={styles.container}>
-        <StatusBar backgroundColor="#666"/>
-        <View elevation={5} style={styles.header}>
-          <View style={styles.viewIcon}>
-            <TouchableOpacity onPress={() => {
-                this.props.navigation.navigate('DrawerToggle');
-              }}>
-              <Icon name="md-menu" size={28} style={styles.icon}/>
-            </TouchableOpacity>
-          </View>
-          <View style={styles.viewTitle}>
-            <Text style={styles.headerTitle}>
-              Página Inicial
-            </Text>
-          </View>
-          <View style={styles.concerto}/>
-        </View>
+        <StatusBar backgroundColor="#EEE" barStyle='dark-content' />    
 
         <View style={styles.bodyS}>
           <View style={styles.profile}>
@@ -63,7 +52,7 @@ componentWillMount() {
           </View>
 
             <View style={styles.element}>
-              <TouchableOpacity onPress={() => this.props.navigation.navigate('New')}>
+              <TouchableOpacity onPress={() => this.props.navigation.navigate('NewMenu')}>
                 <View style={styles.button2}>
                   <Text style={styles.button_text}>Nova Pericia</Text>
                 </View>
