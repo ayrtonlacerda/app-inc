@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text } from 'react-native';
 
 import styles from './styles';
-import AudioRec from '../../components/audio';
+import AudioRec from '../../../components/audio';
 
 const Audio = () => (
   <View style={styles.container}>

@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text } from 'react-native';
-import Camera from '../../components/camera';
+import Camera from '../../../components/camera';
 
 import styles from './styles';
 

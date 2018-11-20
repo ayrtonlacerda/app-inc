@@ -70,38 +70,7 @@ class Camera extends React.Component {
       }
     });
   }
-
-  sendImage = () => {
-    console.tron.log(this.state.avatarSource)
-    console.tron.log('sendimage')
-    //console.tron.log(this.state.avatarSource)
-
-    var form = new FormData();
-    form.append("example1", { uri: '../../assents/imgs/camera.jpg' });
-
-    axios.post('http://35.231.239.168/api/pericia/', {
-      async: true,
-     crossDomain: true,
-     url: "http://35.231.239.168/api/pericia/",
-     method: "POST",
-     headers: {
-       "Content-Type": "application/x-www-form-urlencoded",
-       "Cache-Control": "no-cache",
-     },
-     processData: false,
-     contentType: false,
-     mimeType: "multipart/form-data",
-     data: form
-    }).then((resp) => {
-            console.tron.log(resp);
-    }).catch(err => {
-            console.tron.log(err);
-    });
-
-
-
-  }
-
+  
   render() {
     return (
 
