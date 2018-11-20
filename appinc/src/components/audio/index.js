@@ -17,9 +17,9 @@ import Sound from 'react-native-sound';
 import { AudioRecorder, AudioUtils } from 'react-native-audio';
 import styles from './styles';
 
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import { Creators as AudioActions } from '../../store/ducks/audiorec';
+//import { connect } from 'react-redux';
+//import { bindActionCreators } from 'redux';
+//import { Creators as AudioActions } from '../../store/ducks/audiorec';
 
 class AudioRec extends Component {
 
@@ -149,10 +149,7 @@ class AudioRec extends Component {
           this._finishRecording(true, filePath);
           //this.props.submitAudio(filePath)
         }
-
-        console.tron.log('filePath')
-        console.tron.log(filePath)
-        this.sendAudio(filePath);
+       
         return filePath;
       } catch (error) {
         console.error(error);
@@ -214,32 +211,7 @@ class AudioRec extends Component {
       console.tron.log(`Finished recording of duration ${this.state.currentTime} seconds at path: ${filePath} and size of ${fileSize || 0} bytes`);
     }
 
-    sendAudio = (filePath) => {
-      console.tron.log(this.state.avatarSource)
-      console.tron.log('Send Audio')
-            //console.tron.log(this.state.avatarSource)
-
-            const imageData = new FormData();
-
-            imageData.append('example1', {
-              uri: 'file://' + filePath,
-              type: 'audio/aac',
-              name: 'example1.aac'
-            });
-
-            axios.post('http://35.231.239.168/api/pericia/', imageData, {
-              headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'multipart/form-data'
-              },
-            }).then((resp) => {
-                    console.tron.log('send audio 2');
-                    console.tron.log(resp);
-            }).catch(err => {
-                    console.tron.log(err);
-            });
-    }
-
+   
     render(filePath) {
       console.tron.log(this.state.audioPath)
     //  console.tron.log(this.props)
@@ -267,4 +239,4 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => bindActionCreators(AudioActions, dispatch);
 
-export default connect(mapStateToProps, mapDispatchToProps)(AudioRec);
+export default AudioRec;

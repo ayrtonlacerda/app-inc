@@ -3,9 +3,9 @@ import React, { Component } from 'react';
 import { View, Text, TouchableOpacity, Image, ScrollView } from 'react-native';
 import styles from './styles';
 
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import { Creators as GeoActions } from '../../store/ducks/geolocation';
+//import { connect } from 'react-redux';
+//import { bindActionCreators } from 'redux';
+//import { Creators as GeoActions } from '../../store/ducks/geolocation';
 
 
 class GeoLocation extends Component {
@@ -55,7 +55,7 @@ class GeoLocation extends Component {
    };
 
    submitGeolocation = () => {
-     this.props.submitGeoloc(this.state);
+    
    }
 
   render() {
@@ -122,4 +122,4 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch =>
   bindActionCreators(GeoActions, dispatch);
 
-export default connect(mapStateToProps, mapDispatchToProps)(GeoLocation);
+export default GeoLocation;

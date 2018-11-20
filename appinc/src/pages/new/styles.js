@@ -4,6 +4,7 @@ import { colors, metrics } from '../../styles';
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: colors.white,
     //alignItems: 'center',
     //justifyContent: 'center',
   },
@@ -62,19 +63,14 @@ const styles = StyleSheet.create({
   },
 
   Picker: {
-    backgroundColor: colors.white,
-    borderRadius: metrics.baseRadius,
-    borderColor: '#777',
-    // borderWidth: 1,
-    paddingVertical: 10,
-    marginTop: metrics.basePadding / 2,
-    borderRadius: 10
-    //alignItems: 'center'
+    backgroundColor: colors.lighter,
+    borderRadius: 50,        
+    paddingHorizontal: 35,
+    marginTop: metrics.basePadding / 2,      
   },
 
   estiloPicker: {
-    backgroundColor: colors.white,
-    //alignSelf: 'center',
+    backgroundColor: colors.lighter,  
   },
 
   button: {

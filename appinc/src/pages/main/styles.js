@@ -20,8 +20,8 @@ const styles = StyleSheet.create({
   },
 
   icon: {
-    color: colors.white,
-    alignSelf: 'flex-start',
+    color: colors.black,
+    marginLeft: 15,
   },
 
   viewIcon: {

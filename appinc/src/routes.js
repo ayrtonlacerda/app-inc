@@ -1,37 +1,44 @@
 import React from 'react';
 //import { Dimensions } from 'react-native';
-import { StackNavigator, DrawerNavigator } from 'react-navigation';
-//import { colors } from './styles';
+import { createStackNavigator, createDrawerNavigator } from 'react-navigation';
+import { colors } from './styles';
 
 import Login from './pages/login';
 import Main from './pages/main';
 import New from './pages/new';
 import Testes from './pages/Testes';
-import GeoLoc from './pages/geoloc';
 
-
-import Audio from './pages/audio';
-import InputT from './pages/input';
-import Date from './pages/date/index';
-import CameraPage from './pages/camera/index';
+// Componentes
+import GeoLoc from './pages/components/geoloc';
+import Audio from './pages/components/audio';
+import InputT from './pages/components/input';
+import Date from './pages/components/date';
+import CameraPage from './pages/components/camera';
 
 // import testes de tela
 import StepPage from './pages/Step';
 import StepList from './pages/StepList';
 
 
-const Routes = StackNavigator(
+const Routes = createStackNavigator(
   {
-    Login: { screen: New },
+    Login: { screen: Main },
     StepPage: { screen: StepPage },
-    Logged: DrawerNavigator(
+    NewMenu: { screen: New },
+    Logged: createDrawerNavigator(
       {
-        Main: { screen: Main },
+        Main: { screen: Main, drawerLabel: 'Bem-Vindo' },
         NewMenu: { screen: New },
         Exit: { screen: Login },
       },
       {
-        drawerwidth: 120,
+        navigationOptions: {
+          headerStyle: {
+            backgroundColor: colors.lighter,
+            borderBottomWidth: 0,
+          },
+        headerTintColor: colors.halfblack,         
+        },       
       }
     ),
     StepList: { screen: StepList },
@@ -44,12 +51,12 @@ const Routes = StackNavigator(
   },
   {
     navigationOptions: {
-      /*headerStyle: {
-        backgroundColor: colors.light,
+      headerStyle: {
+        backgroundColor: colors.lighter,
         borderBottomWidth: 0,
       },
       headerTintColor: colors.halfblack,
-      headerBackTitle: null,*/
+      // headerBackTitle: null,
       //header: null,
     },
   }

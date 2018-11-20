@@ -3,42 +3,52 @@ import {View, Text, TouchableOpacity, StatusBar, Image, AsyncStorage } from 'rea
 import Icon from 'react-native-vector-icons/Ionicons';
 import styles from './styles';
 import axios from 'axios';
+import { DrawerActions } from 'react-navigation-drawer';
+
 
 class Main extends Component {
+  
+  static navigationOptions = {    
+    headerTitle: 'Bem-Vindo',      
+  }
 
-requestFroms = () => {
-  axios.get('http://35.231.239.168/api/pericia/formularios/1')
-    .then((resp) => {
-      console.tron.log(resp.data);
-      AsyncStorage.setItem('@Form', resp.data);
-    }).catch(err => {
-      console.tron.log(err);
-    });
-} 
+  openDrawer = () => {
+    const { drawerStatus } = this.state;
+    
+    if  (drawerStatus === true) {
+      //this.props.navigation.toggleDrawer();
+    }
+  }
 
-componentWillMount() {
-  this.requestFroms();
-}
+  requestFroms = () => {
+    axios.get('http://35.231.239.168/api/pericia/formularios/1')
+      .then((resp) => {
+        console.tron.log(resp.data);      
+       // AsyncStorage.setItem('@Form', JSON.stringify(resp.data));
+      }).catch(err => {
+        console.tron.log(err);
+      });
+  } 
 
+  state ={
+    drawerStatus: null,
+  }
+
+  componentWillMount() {  
+    //this.requestFroms();
+    console.tron.log(this.props);
+  }
+
+  componentDidMount() {
+   
+    //const drawer = this.props.navigation.setParams({ drawer: 'drawer' });
+  }
   render() {
+    
     return (
+      
       <View style={styles.container}>
-        <StatusBar backgroundColor="#666"/>
-        <View elevation={5} style={styles.header}>
-          <View style={styles.viewIcon}>
-            <TouchableOpacity onPress={() => {
-                this.props.navigation.navigate('DrawerToggle');
-              }}>
-              <Icon name="md-menu" size={28} style={styles.icon}/>
-            </TouchableOpacity>
-          </View>
-          <View style={styles.viewTitle}>
-            <Text style={styles.headerTitle}>
-              Página Inicial
-            </Text>
-          </View>
-          <View style={styles.concerto}/>
-        </View>
+        <StatusBar backgroundColor="#EEE" barStyle='dark-content' />    
 
         <View style={styles.bodyS}>
           <View style={styles.profile}>
@@ -54,7 +64,7 @@ componentWillMount() {
             </View>
 
             <View style={styles.element}>
-              <TouchableOpacity onPress={this._onPressButton}>
+              <TouchableOpacity onPress={() => this.props.actions.toggleDrawer()}>
                 <View style={styles.button}>
                   <Text style={styles.button_text}>Renovar Token</Text>
                 </View>
@@ -63,7 +73,7 @@ componentWillMount() {
           </View>
 
             <View style={styles.element}>
-              <TouchableOpacity onPress={() => this.props.navigation.navigate('New')}>
+              <TouchableOpacity onPress={() => this.props.navigation.navigate('NewMenu')}>
                 <View style={styles.button2}>
                   <Text style={styles.button_text}>Nova Pericia</Text>
                 </View>

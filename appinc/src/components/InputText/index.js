@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import { View, TextInput, TouchableOpacity, Text } from 'react-native';
 import styles from './styles';
 
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import { Creators as InputActions } from '../../store/ducks/input';
+//import { connect } from 'react-redux';
+//import { bindActionCreators } from 'redux';
+//import { Creators as InputActions } from '../../store/ducks/input';
 
 class InputText extends Component {
   state = {
@@ -20,7 +20,9 @@ class InputText extends Component {
     this.props.submitInput(this.state.inputSave);
   }
   render() {
-    return (
+    const { data_name, lenght_max, label, hint, default_value } = this.props;
+    console.tron.log(['input text', data_name, lenght_max, label, hint, default_value]);
+    return ( 
       <View style={styles.container}>
       <Text style={styles.Name}>{this.state.descricao}:</Text>
         <TextInput
@@ -45,4 +47,4 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch =>
   bindActionCreators(InputActions, dispatch);
 
-export default connect(mapStateToProps, mapDispatchToProps)(InputText);
+export default InputText;

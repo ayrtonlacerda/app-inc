@@ -217,6 +217,7 @@ class StepList extends Component {
 
   render() {
     console.tron.log(this.props);
+    const { steps } = this.props;
     const { modalVisible, load } = this.state;
     const form = this.props.navigation.getParam('form');
     console.tron.log('seus steps');
@@ -252,7 +253,7 @@ class StepList extends Component {
         <ScrollView>
 
             <FlatList
-              data={form}
+              data={steps}
               renderItem={item => <StepBox steps={item} />}
             />
 
