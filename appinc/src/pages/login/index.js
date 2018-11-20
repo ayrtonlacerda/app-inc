@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { NavigationActions } from 'react-navigation';
+import { StackActions, NavigationActions } from 'react-navigation';
 import { View, Text, TextInput, Image, TouchableOpacity, StatusBar, ImageBackground } from 'react-native';
 
 import styles from './styles';
@@ -11,7 +11,7 @@ class Login extends Component {
   };
 
   navigateToLogged = () => {
-    const resetAction = NavigationActions.reset({
+    const resetAction = StackActions.reset({
       index: 0,
       actions: [
         // Logged

@@ -251,18 +251,25 @@ formulario = (tipo, subtipo) => {
 navigateToStepList = () => this.props.navigation.navigate('StepList', { form: this.state.form });
 
 
-componentWillMount() {
-  this.retrieveData();
+async componentWillMount() {
+  const value = await AsyncStorage.getItem('@Form');
+  const form = JSON.parse(value)
+  console.tron.log(['testeasjhdajksd', form]);
 }
+ 
 
 retrieveData = async () => {
+  
   try {
-    const value = AsyncStorage.getItem('@Form');
+    
+    
+    console.tron.log(['value', value]);
     if (value !== null) {
       // We have data!!
-      console.tron.log(value);
+      console.tron.log([value]);
     }
    } catch (error) {
+    console.tron.log([value]);
      // Error retrieving data
    }
 }
@@ -312,7 +319,7 @@ retrieveData = async () => {
 
         {
            tipo && subtipo && (
-            <TouchableOpacity style={styles.button} onPress={() => this.formulario(tipo, subtipo)}>
+            <TouchableOpacity style={styles.button} onPress={() => this.retrieveData()}>
               <Text style={styles.buttonText}>
                 Iniciar
               </Text>

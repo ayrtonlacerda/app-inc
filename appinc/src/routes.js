@@ -1,6 +1,6 @@
 import React from 'react';
 //import { Dimensions } from 'react-native';
-import { StackNavigator, DrawerNavigator } from 'react-navigation';
+import { createStackNavigator, createDrawerNavigator } from 'react-navigation';
 import { colors } from './styles';
 
 import Login from './pages/login';
@@ -20,14 +20,14 @@ import StepPage from './pages/Step';
 import StepList from './pages/StepList';
 
 
-const Routes = StackNavigator(
+const Routes = createStackNavigator(
   {
     Login: { screen: Main },
     StepPage: { screen: StepPage },
     NewMenu: { screen: New },
-    Logged: DrawerNavigator(
+    Logged: createDrawerNavigator(
       {
-        Main: { screen: Main },
+        Main: { screen: Main, drawerLabel: 'Bem-Vindo' },
         NewMenu: { screen: New },
         Exit: { screen: Login },
       },
@@ -37,11 +37,8 @@ const Routes = StackNavigator(
             backgroundColor: colors.lighter,
             borderBottomWidth: 0,
           },
-        headerTintColor: colors.halfblack,
-          // headerBackTitle: null,
-          header: true,
-        },
-        drawerwidth: 120,
+        headerTintColor: colors.halfblack,         
+        },       
       }
     ),
     StepList: { screen: StepList },
