@@ -13,7 +13,7 @@ class StepPage extends Component {
     return (
       <View style={styles.container}>
         <ScrollView>
-         { step.form.map(item => <ComponentList data={item} />) }
+         { step.components.map(item => <ComponentList data={item} />) }
 
          <View style={styles.container}>
           <TouchableOpacity style={styles.salvarbutton} onPress={this.navigateToLogged}>

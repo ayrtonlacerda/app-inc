@@ -33,7 +33,7 @@ class AudioRec extends Component {
       hasPermission: true,
     };
 
-    prepareRecordingPath(audioPath){
+    prepareRecordingPath(audioPath) {
       AudioRecorder.prepareRecordingAtPath(audioPath, {
         SampleRate: 22050,
         Channels: 1,
@@ -149,7 +149,7 @@ class AudioRec extends Component {
           this._finishRecording(true, filePath);
           //this.props.submitAudio(filePath)
         }
-       
+
         return filePath;
       } catch (error) {
         console.error(error);
@@ -211,21 +211,23 @@ class AudioRec extends Component {
       console.tron.log(`Finished recording of duration ${this.state.currentTime} seconds at path: ${filePath} and size of ${fileSize || 0} bytes`);
     }
 
-   
+
     render(filePath) {
       console.tron.log(this.state.audioPath)
     //  console.tron.log(this.props)
+    const { label, hint } = this.props.data;
 
       return (
         <View style={styles.container}>
-          <View style={styles}/>
-          <Text style={styles.progressText}>{this.state.currentTime}s</Text>
+        <Text style={styles.label}>{label}:</Text>
+        <Text style={styles.hint}>{hint}</Text>
           <View style={styles.controls}>
             { this._renderButton('RECORD', () => { this._record(); }, this.state.recording ) }
             { this._renderButton('PLAY', () => { this._play(); }) }
             {/* {this._renderButton("PAUSE", () => {this._pause()} )} */}
             { this._renderPauseButton(() => {this.state.paused ? this._resume() : this._pause() })}
             { this._renderButton('STOP', () => { this._stop(); }) }
+            <Text style={styles.progressText}>{this.state.currentTime}s</Text>
           </View>
 
         </View>

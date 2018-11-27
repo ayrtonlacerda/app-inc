@@ -3,23 +3,29 @@ import { colors, metric } from '../../styles';
 
 const styles = StyleSheet.create({
   header: {
-    backgroundColor: colors.dark,
+    backgroundColor: "#ffba08",
     padding: 14,
     paddingTop: 7,
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    borderColor: colors.regular,
-    borderBottomWidth: 0.4,
+    //borderColor: colors.regular,
+    //borderBottomWidth: 0.4,
+    height: 56,
+    //elevation: 1,
   },
 
-  icon: {
+  iconMenu: {
     color: colors.white,
+    alignSelf: 'flex-start',
+  },
+  iconExit: {
+    color: colors.regular,
     alignSelf: 'flex-start',
   },
 
   viewIcon: {
-    marginLeft: 4,
+    //marginLeft: 4,
   },
 
   viewTitle: {
@@ -34,10 +40,6 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
   },
 
-  concerto: {
-    width: 15,
-    height: 15,
-  }
 });
 
 export default styles;
