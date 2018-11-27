@@ -8,37 +8,37 @@ const ComponentList = (props) => (
     <View style={styles.container}>
       <ScrollView>
         {
-          props.data.type === 'camera' && (
+          props.data.component_type === 'camera' && (
             <View style={styles.component}>
-              <Camera />
+              <Camera data={props.data} />
             </View>
           )
         }
         {
-          props.data.type === 'text' && (
+          props.data.component_type === 'text' && (
             <View style={styles.component}>
-              <InputText />
+              <InputText data={props.data} />
             </View>
           )
         }
         {
-          props.data.type === 'audiorec' && (
+          props.data.component_type === 'audiorec' && (
             <View style={styles.component}>
-              <AudioRec />
+              <AudioRec data={props.data} />
             </View>
           )
         }
         {
-          props.data.type === 'date' && (
+          props.data.component_type === 'date' && (
             <View style={styles.component}>
-              <MyDatePicker />
+              <MyDatePicker data={props.data} />
             </View>
           )
         }
         {
-          props.data.type === 'geoloc' && (
+          props.data.component_type === 'geoloc' && (
             <View style={styles.component}>
-              <GeoLocation />
+              <GeoLocation data={props.data} />
             </View>
           )
         }

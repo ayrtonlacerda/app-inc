@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, Picker, TouchableOpacity, StatusBar, AsyncStorage } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
+import { Header } from '../../globalComponents';
 import styles from './styles';
 
 const formulario = [
@@ -256,13 +257,11 @@ async componentWillMount() {
   const form = JSON.parse(value)
   console.tron.log(['testeasjhdajksd', form]);
 }
- 
+
 
 retrieveData = async () => {
-  
+
   try {
-    
-    
     console.tron.log(['value', value]);
     if (value !== null) {
       // We have data!!
@@ -276,11 +275,15 @@ retrieveData = async () => {
 
   render() {
     const { tipo, subtipo } = this.state;
-   
+    const { navigation } = this.props;
+    console.tron.log(navigation);
     return (
       <View style={styles.container}>
-      <StatusBar backgroundColor="#EEE" barStyle='dark-content' />      
-
+        <Header
+          title='Nova Pericia'
+          showMenu
+          openMenu={navigation.toggleDrawer}
+        />
         <View style={styles.forms1}>
           <Text style={styles.textType}> Área </Text>
             <View style={styles.Picker}>
@@ -289,7 +292,7 @@ retrieveData = async () => {
                 placeholder="Selecione a pericia desejada"
                 selectedValue={this.state.tipo}
                 onValueChange={(itemValue) => this.setState({ tipo: itemValue })}
-              > 
+              >
                 <Picker.Item label='Nenhum' />
                 <Picker.Item label='Homicídio' value='homicidio' />
                 <Picker.Item label='Perícia veicular' value='carro' />
@@ -319,7 +322,7 @@ retrieveData = async () => {
 
         {
            tipo && subtipo && (
-            <TouchableOpacity style={styles.button} onPress={() => this.retrieveData()}>
+            <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('StepList')}>
               <Text style={styles.buttonText}>
                 Iniciar
               </Text>

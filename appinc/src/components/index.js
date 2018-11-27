@@ -3,6 +3,6 @@ import AudioRec from './audio';
 import Camera from './camera';
 import MyDatePicker from './date';
 import GeoLocation from './geolocation';
-import Load from './load'
+//import Load from './load'
 
-export { InputText, AudioRec, Camera, MyDatePicker, GeoLocation, Load };
+export { InputText, AudioRec, Camera, MyDatePicker, GeoLocation };

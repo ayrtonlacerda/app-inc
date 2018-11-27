@@ -16,9 +16,10 @@ class MyDatePicker extends Component {
   }
 
   render() {
+    const { hint, label } = this.props.data;
     return (
       <View style={styles.container}>
-        <Text style={styles.titulo}>Descrição:</Text>
+        <Text style={styles.titulo}>{label}:</Text>
         <View style={styles.direcao}>
           <DatePicker
             style={styles.dataPicker}

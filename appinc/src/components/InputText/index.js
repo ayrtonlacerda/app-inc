@@ -20,18 +20,19 @@ class InputText extends Component {
     this.props.submitInput(this.state.inputSave);
   }
   render() {
-    const { data_name, lenght_max, label, hint, default_value } = this.props;
-    console.tron.log(['input text', data_name, lenght_max, label, hint, default_value]);
-    return ( 
+    const { data_name, lenght_max, label, hint, default_value } = this.props.data;
+    console.tron.log(['input text', this.props.data]);
+    const max = lenght_max;
+    return (
       <View style={styles.container}>
-      <Text style={styles.Name}>{this.state.descricao}:</Text>
+      <Text style={styles.Name}>{label}:</Text>
         <TextInput
           style={styles.input}
           autoCapitalize="none"
           autoCorrect={false}
           multiline
-          placeholder={this.props.descricao}
-          maxLength={this.props.lenght_max}
+          placeholder={hint}
+          maxLength={72}
           underlineColorAndroid="rgba(0,0,0,0)"
           onChangeText={inputSave => this.setState({ inputSave })}
         />
