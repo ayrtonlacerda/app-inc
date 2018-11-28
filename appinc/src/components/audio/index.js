@@ -213,7 +213,7 @@ class AudioRec extends Component {
 
 
     render(filePath) {
-      console.tron.log(this.state.audioPath)
+      //console.tron.log(this.state.audioPath)
     //  console.tron.log(this.props)
     const { label, hint } = this.props.data;
 

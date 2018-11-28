@@ -1,27 +1,36 @@
 import React, { Component } from 'react';
+// redux
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { Creators as FormActions } from '../../store/ducks/form';
+
+// styles
 import { View, TextInput, TouchableOpacity, Text } from 'react-native';
 import styles from './styles';
 
-//import { connect } from 'react-redux';
-//import { bindActionCreators } from 'redux';
-//import { Creators as InputActions } from '../../store/ducks/input';
 
 class InputText extends Component {
   state = {
     inputSave: '',
     descricao: 'Descrição teste',
+    flag: null,
   }
 
   componentDidMount() {
     this.setState({ inputSave: this.props.default_value });
   }
 
-  addInput = () => {
-    this.props.submitInput(this.state.inputSave);
+  addInput = data => {
+    this.props.getCreateForm({ data });
+    this.setState({ flag: true });
   }
+
   render() {
     const { data_name, lenght_max, label, hint, default_value } = this.props.data;
-    console.tron.log(['input text', this.props.data]);
+    if (!this.state.flag) {
+      this.addInput(data_name);
+    }
+    console.tron.log(['input text', this.props]);
     const max = lenght_max;
     return (
       <View style={styles.container}>
@@ -41,11 +50,11 @@ class InputText extends Component {
   }
 }
 
-const mapStateToProps = state => ({
-  input: state.input,
+ const mapStateToProps = state => ({
+  form: state.formState,
 });
 
 const mapDispatchToProps = dispatch =>
-  bindActionCreators(InputActions, dispatch);
+  bindActionCreators(FormActions, dispatch);
 
-export default InputText;
+export default connect(mapStateToProps, mapDispatchToProps)(InputText);

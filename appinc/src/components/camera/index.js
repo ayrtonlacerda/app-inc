@@ -23,7 +23,7 @@ class Camera extends React.Component {
     };
 
     ImagePicker.showImagePicker(options, (response) => {
-      console.tron.log('Response = ', response);
+     // console.tron.log('Response = ', response);
 
       if (response.didCancel) {
         console.log('User cancelled photo picker');
