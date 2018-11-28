@@ -9,6 +9,7 @@ const InitialState = {
   erro: null,
   load: false,
   sucsses: false,
+  form: 'sjahdjkashdkashd',
 };
 
 export default function newState(state = InitialState, action) {

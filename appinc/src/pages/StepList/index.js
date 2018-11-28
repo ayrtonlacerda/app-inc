@@ -11,7 +11,7 @@ import styles from './styles';
 import StepBox from './components/StepBox';
 import { Load } from '../../components';
 import { Header } from '../../globalComponents';
-
+import { connect } from 'react-redux';
 
 const forms = {
   "steps": [
@@ -49,7 +49,7 @@ const forms = {
                   "group": "true",
                   "label": "Qual é o seu primeiro nome?",
                   "required": "true",
-                  "data_name": "first_name",
+                  "data_name": "first_name1",
                   "lenght_max": "60",
                   "length_min": "3",
                   "invalid_text": "O nome não atende os requisitos minimos",
@@ -62,7 +62,7 @@ const forms = {
                   "group": "true",
                   "label": "Qual é o seu primeiro nome?",
                   "required": "true",
-                  "data_name": "first_name",
+                  "data_name": "first_name2",
                   "lenght_max": "60",
                   "length_min": "3",
                   "invalid_text": "O nome não atende os requisitos minimos",
@@ -88,7 +88,7 @@ const forms = {
                 "group": "true",
                 "label": "seu primeiro nome",
                 "required": "true",
-                "data_name": "first_name",
+                "data_name": "first_name3",
                 "lenght_max": "60",
                 "length_min": "3",
                 "invalid_text": "O nome não atende os requisitos minimos",
@@ -101,7 +101,7 @@ const forms = {
                 "group": "true",
                 "label": "Nome do mãe",
                 "required": "true",
-                "data_name": "first_name",
+                "data_name": "first_name4",
                 "lenght_max": "60",
                 "length_min": "3",
                 "invalid_text": "O nome não atende os requisitos minimos",
@@ -114,7 +114,7 @@ const forms = {
                 "group": "true",
                 "label": "nome do pai",
                 "required": "true",
-                "data_name": "first_name",
+                "data_name": "first_name5",
                 "lenght_max": "60",
                 "length_min": "3",
                 "invalid_text": "O nome não atende os requisitos minimos",
@@ -127,7 +127,7 @@ const forms = {
                 "group": "true",
                 "label": "seu primeiro nome",
                 "required": "true",
-                "data_name": "first_name",
+                "data_name": "first_name6",
                 "lenght_max": "60",
                 "length_min": "3",
                 "invalid_text": "O nome não atende os requisitos minimos",
@@ -140,7 +140,7 @@ const forms = {
                 "group": "true",
                 "label": "Nome do mãe",
                 "required": "true",
-                "data_name": "first_name",
+                "data_name": "first_name7",
                 "lenght_max": "60",
                 "length_min": "3",
                 "invalid_text": "O nome não atende os requisitos minimos",
@@ -153,7 +153,7 @@ const forms = {
                 "group": "true",
                 "label": "nome do pai",
                 "required": "true",
-                "data_name": "first_name",
+                "data_name": "first_name8",
                 "lenght_max": "60",
                 "length_min": "3",
                 "invalid_text": "O nome não atende os requisitos minimos",
@@ -179,7 +179,7 @@ const forms = {
                 "group": "false",
                 "label": "Foto do local",
                 "required": "false",
-                "data_name": "foto",
+                "data_name": "foto1",
                 "lenght_max": "0",
                 "length_min": "0",
                 "invalid_text": "a idade esta fora do intervalo",
@@ -192,7 +192,7 @@ const forms = {
                 "group": "false",
                 "label": "faça uma nota de audio",
                 "required": "false",
-                "data_name": "audio_nota",
+                "data_name": "audio_nota1",
                 "lenght_max": "60",
                 "length_min": "3",
                 "invalid_text": "O nome não atende os requisitos minimos",
@@ -205,7 +205,7 @@ const forms = {
                 "group": "false",
                 "label": "Foto do local",
                 "required": "false",
-                "data_name": "foto",
+                "data_name": "foto2",
                 "lenght_max": "0",
                 "length_min": "0",
                 "invalid_text": "a idade esta fora do intervalo",
@@ -218,7 +218,7 @@ const forms = {
                 "group": "true",
                 "label": "Qual data de realização da pericia?",
                 "required": "true",
-                "data_name": "data_pericia",
+                "data_name": "data_pericia2",
                 "lenght_max": "60",
                 "length_min": "3",
                 "invalid_text": "O nome não atende os requisitos minimos",
@@ -231,7 +231,7 @@ const forms = {
                 "group": "true",
                 "label": "Qual data de realização da pericia?",
                 "required": "true",
-                "data_name": "data_pericia",
+                "data_name": "data_pericia3",
                 "lenght_max": "60",
                 "length_min": "3",
                 "invalid_text": "O nome não atende os requisitos minimos",
@@ -251,7 +251,7 @@ const forms = {
                   "group": "true",
                   "label": "Qual data de realização da pericia?",
                   "required": "true",
-                  "data_name": "data_pericia",
+                  "data_name": "data_pericia4",
                   "lenght_max": "60",
                   "length_min": "3",
                   "invalid_text": "O nome não atende os requisitos minimos",
@@ -264,7 +264,7 @@ const forms = {
                   "group": "false",
                   "label": "faça uma nota de audio",
                   "required": "false",
-                  "data_name": "audio_nota",
+                  "data_name": "audio_nota2",
                   "lenght_max": "60",
                   "length_min": "3",
                   "invalid_text": "O nome não atende os requisitos minimos",
@@ -394,8 +394,12 @@ class StepList extends Component {
   }
 }
 
+const mapStateToProps = state => ({
+  form: state.newState.form
+});
+
 StepList.navigationOptions = {
   title: 'Morte Violenta',
 };
 
-export default StepList;
+export default connect(mapStateToProps, null)(StepList);
