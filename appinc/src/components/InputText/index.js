@@ -12,7 +12,6 @@ import styles from './styles';
 class InputText extends Component {
   state = {
     inputSave: '',
-    descricao: 'Descrição teste',
     flag: null,
   }
 
@@ -20,18 +19,31 @@ class InputText extends Component {
     this.setState({ inputSave: this.props.default_value });
   }
 
-  addInput = data => {
-    this.props.getCreateForm({ data });
+  addFormInput = data => {
+    const form = {};
+    form[data] = null;
+    this.props.getCreateForm(form);
     this.setState({ flag: true });
   }
 
+  saveFormInput = data => {
+    const { inputSave } = this.state;
+    const form = {};
+    form[data] = inputSave;
+    this.props.getSaveStateForm(form);
+  }
+
   render() {
-    const { data_name, lenght_max, label, hint, default_value } = this.props.data;
+    const { data_name, label, hint } = this.props.data;
+    const { saveStep } = this.props.form;
     if (!this.state.flag) {
-      this.addInput(data_name);
+      this.addFormInput(data_name);
     }
+    if (saveStep) {
+      this.saveFormInput(data_name);
+    }
+    //this.saveFormInput(data_name);
     console.tron.log(['input text', this.props]);
-    const max = lenght_max;
     return (
       <View style={styles.container}>
       <Text style={styles.Name}>{label}:</Text>
