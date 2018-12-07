@@ -25,7 +25,7 @@ class Main extends Component {
     axios.get('http://35.231.239.168/api/pericia/formularios/1')
       .then((resp) => {
         console.tron.log(resp.data);
-       // AsyncStorage.setItem('@Form', JSON.stringify(resp.data));
+        AsyncStorage.setItem('@Form', JSON.stringify(resp.data));
       }).catch(err => {
         console.tron.log(err);
       });
@@ -36,7 +36,7 @@ class Main extends Component {
   }
 
   componentWillMount() {
-    //this.requestFroms();
+    this.requestFroms();
     console.tron.log(this.props);
   }
 

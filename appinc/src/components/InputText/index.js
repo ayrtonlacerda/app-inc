@@ -5,13 +5,13 @@ import { bindActionCreators } from 'redux';
 import { Creators as FormActions } from '../../store/ducks/form';
 
 // styles
-import { View, TextInput, TouchableOpacity, Text } from 'react-native';
+import { View, TextInput, Text } from 'react-native';
 import styles from './styles';
 
 
 class InputText extends Component {
   state = {
-    inputSave: '',
+    inputSave: null,
     flag: null,
   }
 
@@ -28,14 +28,22 @@ class InputText extends Component {
 
   saveFormInput = data => {
     const { inputSave } = this.state;
+    const { default_value } = this.props.data;
     const form = {};
-    form[data] = inputSave;
+    if (!inputSave) {
+      form[data] = default_value;
+    } else {
+      form[data] = inputSave;
+    }
     this.props.getSaveStateForm(form);
+    this.props.startControlArray();
   }
 
   render() {
-    const { data_name, label, hint } = this.props.data;
+    const { data_name, label, hint, } = this.props.data;
     const { saveStep } = this.props.form;
+    console.tron.log(['savestep', saveStep]);
+    // this.props.startControlArray();
     if (!this.state.flag) {
       this.addFormInput(data_name);
     }
