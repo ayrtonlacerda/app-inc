@@ -15,7 +15,6 @@
     "react-native-audio": "^4.2.2",
     "react-native-barcode-scanner-google": "^1.4.2",
     "react-native-datepicker": "^1.7.2",
-    "react-native-image-picker": "^0.27.1",
     "react-native-sound": "^0.10.9",
     "react-native-vector-icons": "^6.0.2",
     "react-navigation": "2.0",
