@@ -3,7 +3,7 @@ import { colors, metric } from '../../styles';
 
 const styles = StyleSheet.create({
   header: {
-    backgroundColor: "#ffba08",
+    backgroundColor: "#344955",
     padding: 14,
     paddingTop: 7,
     flexDirection: 'row',

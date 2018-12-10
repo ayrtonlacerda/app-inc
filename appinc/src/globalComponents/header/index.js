@@ -10,7 +10,7 @@ const Header = (props) => {
 
   return (
     <View style={styles.header}>
-      <StatusBar backgroundColor='#FFF' barStyle="dark-content" />
+      <StatusBar backgroundColor='#344955' barStyle="light-content" />
         <View style={styles.viewIcon}>
           {
             showMenu && (

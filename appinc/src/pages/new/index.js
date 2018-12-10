@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import { View, Text, Picker, TouchableOpacity, StatusBar, AsyncStorage } from 'react-native';
+import { View, Text, Picker, TouchableOpacity, StatusBar, AsyncStorage, TextInput } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { Header } from '../../globalComponents';
 import styles from './styles';
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { Creators as NewActions } from '../../store/ducks/new';
+//import { Creators as NewActions } from '../../store/ducks/new';
 
 
 const formulario = [
@@ -288,7 +288,10 @@ class New extends Component {
           openMenu={navigation.toggleDrawer}
         />
         <View style={styles.forms1}>
-          <Text style={styles.textType}> Área </Text>
+          <View style={styles.title}>
+            <View style={styles.ball}><Text style={styles.numberType}> 1 </Text></View>
+            <Text style={styles.textType}> Tipo: </Text>
+          </View>
             <View style={styles.Picker}>
               <Picker
                 style={styles.estiloPicker}
@@ -296,7 +299,7 @@ class New extends Component {
                 selectedValue={this.state.tipo}
                 onValueChange={(itemValue) => this.setState({ tipo: itemValue })}
               >
-                <Picker.Item label='Nenhum' />
+                <Picker.Item label='Area' />
                 <Picker.Item label='Homicídio' value='homicidio' />
                 <Picker.Item label='Perícia veicular' value='carro' />
                 <Picker.Item label='Incêndio' value='incendio' />
@@ -306,7 +309,6 @@ class New extends Component {
         </View>
 
         <View style={styles.forms2}>
-          <Text style={styles.textType}> Subárea </Text>
             <View style={styles.Picker}>
               <Picker
                 style={styles.estiloPicker}
@@ -314,7 +316,7 @@ class New extends Component {
                 selectedValue={this.state.subtipo}
                 onValueChange={(itemValue) => this.setState({ subtipo: itemValue })}
               >
-                <Picker.Item label='Nenhum' />
+                <Picker.Item label='Classe' />
                 <Picker.Item label='Morte violenta' value='morteviolenta' />
                 <Picker.Item label='Estrangulamento' value='estrangulamento' />
                 <Picker.Item label='Batida' value='batida' />
@@ -322,16 +324,28 @@ class New extends Component {
               </Picker>
             </View>
         </View>
+        <View style={styles.forms}>
+          <View style={styles.title}>
+              <View style={styles.ball}><Text style={styles.numberType}> 2 </Text></View>
+              <Text style={styles.textType}> Referência: </Text>
+          </View>
+          <TextInput
+            style={styles.input}
+            autoCapitalize="none"
+            autoCorrect={false}
+            multiline
+            maxLength={72}
+            underlineColorAndroid="rgba(0,0,0,0)"
+            onChangeText={inputSave => this.setState({ inputSave })}
+          />
+        </View>
 
-        {
-           tipo && subtipo && (
             <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('StepList')}>
               <Text style={styles.buttonText}>
-                Iniciar
+                Continuar
               </Text>
             </TouchableOpacity>
-          )
-        }
+
 
       </View>
     );
@@ -342,9 +356,9 @@ const mapStateToProps = state => ({
   newState: state.newState
 });
 
-const mapDispatchToProps = dispatch => bindActionCreators(NewActions, dispatch);
+//const mapDispatchToProps = dispatch => bindActionCreators(NewActions, dispatch);
 
-export default connect(mapStateToProps, mapDispatchToProps)(New);
+export default connect(mapStateToProps, null)(New);
 
 
 /*

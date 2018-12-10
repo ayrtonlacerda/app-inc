@@ -4,22 +4,10 @@ import { colors, metrics } from '../../styles';
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: colors.white,
+    backgroundColor: colors.light2,
     //alignItems: 'center',
     //justifyContent: 'center',
   },
-
-  header: {
-    backgroundColor: colors.dark,
-    padding: 14,
-    paddingTop: 7,
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderColor: colors.regular,
-    borderBottomWidth: 0.4,
-  },
-
   icon: {
     color: colors.white,
     alignSelf: 'flex-start',
@@ -45,39 +33,63 @@ const styles = StyleSheet.create({
     width: 15,
     height: 15,
   },
-
-  forms1: {
-    margin: metrics.basePadding,
+  forms: {
+    marginHorizontal: metrics.basePadding,
     marginTop: 30,
-
+  },
+  forms1: {
+    marginHorizontal: metrics.basePadding,
+    marginTop: 30,
   },
 
   forms2: {
-    margin: metrics.basePadding,
+    marginHorizontal: metrics.basePadding,
   },
-
+  numberType: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    fontSize: 18,
+    color: colors.halfblack,
+    fontWeight: 'bold',
+    right: 2,
+  },
+  ball: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: 10,
+    borderRadius: 30,
+    width: 35,
+    height: 35,
+    backgroundColor: colors.secundary,
+  },
+  title: {
+    alignItems: 'center',
+    flexDirection: 'row',
+  },
   textType: {
-    fontSize: 22,
-    color: colors.dark,
+    marginLeft: 18,
+    fontSize: 18,
+    color: colors.halfblack,
     fontWeight: 'bold',
   },
 
   Picker: {
-    backgroundColor: colors.lighter,
-    borderRadius: 50,        
+    backgroundColor: colors.white,
+    height: 50,
+    borderRadius: 4,
     paddingHorizontal: 35,
-    marginTop: metrics.basePadding / 2,      
+    marginTop: 15,
   },
 
   estiloPicker: {
-    backgroundColor: colors.lighter,  
+    backgroundColor: colors.white,
+    color: colors.tercery,
   },
 
   button: {
-    backgroundColor: colors.dark,
-    borderRadius: metrics.baseRadius,
+    backgroundColor: colors.secundary,
     height: 50,
-    marginTop: metrics.baseMargin * 2,
+    marginTop: 110,
     marginHorizontal: metrics.baseMargin * 2,
     paddingHorizontal: metrics.basePadding,
     justifyContent: 'center',
@@ -86,10 +98,18 @@ const styles = StyleSheet.create({
   },
 
   buttonText: {
-    color: colors.white,
+    color: colors.primary,
     fontWeight: 'bold',
     fontSize: 18,
   },
+  input: {
+    backgroundColor: colors.transparent,
+    height: 46,
+    borderBottomWidth: 1,
+    color: colors.tercery,
+    fontSize: 16,
+  }
+
 
 });
 
