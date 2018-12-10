@@ -3,12 +3,13 @@ package com.appinc;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.imagepicker.ImagePickerPackage;
 import com.airbnb.android.react.lottie.LottiePackage;
 import com.rnim.rn.audio.ReactNativeAudioPackage;
 import com.zmxv.RNSound.RNSoundPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
 import com.spyworldxp.barcodescanner.BarcodeScannerPackage;
-import com.imagepicker.ImagePickerPackage;
+
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
@@ -29,12 +30,12 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new ImagePickerPackage(),
             new LottiePackage(),
             new ReactNativeAudioPackage(),
             new RNSoundPackage(),
             new VectorIconsPackage(),
-            new BarcodeScannerPackage(),
-            new ImagePickerPackage()
+            new BarcodeScannerPackage()
       );
     }
 

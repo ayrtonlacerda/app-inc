@@ -7,7 +7,7 @@ const styles = StyleSheet.create({
     alignItems: 'flex-start',
   },
   titulo: {
-    width: 189,
+    width: 300,
     height: 22,
     color: '#000000',
     fontFamily: 'Roboto',

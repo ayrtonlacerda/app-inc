@@ -4,24 +4,36 @@ import { colors, metrics } from '../../styles';
 const styles = StyleSheet.create({
     container: {
       flex: 1,
-      backgroundColor: colors.light,
-      alignItems: 'center',
+      backgroundColor: colors.white,
+      alignItems: 'flex-start',
       justifyContent: 'center',
       padding: metrics.basePadding,
+      //flexDirection: 'row',
+    },
+    label: {
+      fontSize: 18,
+      color: '#000'
+    },
+    hint: {
+      fontSize: 14,
+      color: colors.regular
     },
     controls: {
-      marginTop: metrics.baseMargin * 4,
-
+      marginTop: metrics.baseMargin,
       flexDirection: 'row',
       justifyContent: 'center',
       alignItems: 'center',
-      //flex: 1,
-      //padding: metrics.basePadding,
+      borderWidth: 2,
+      borderColor: colors.dark,
+      borderRadius: 25,
+      paddingHorizontal: 5,
+      width: 340,
 
     },
     progressText: {
       //paddingTop: 50,
-      fontSize: 100,
+      marginLeft: 10,
+      fontSize: 34,
       color: '#000'
     },
     button: {
@@ -36,7 +48,7 @@ const styles = StyleSheet.create({
       color: '#000'
     },
     buttonText: {
-      fontSize: 20,
+      fontSize: 15,
       color: '#fff',
       margin: 5,
     },

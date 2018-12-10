@@ -23,7 +23,7 @@ class Camera extends React.Component {
     };
 
     ImagePicker.showImagePicker(options, (response) => {
-      console.tron.log('Response = ', response);
+     // console.tron.log('Response = ', response);
 
       if (response.didCancel) {
         console.log('User cancelled photo picker');
@@ -70,20 +70,20 @@ class Camera extends React.Component {
       }
     });
   }
-  
-  render() {
-    return (
 
+  render() {
+    const { hint, label, data_name } = this.props.data;
+    return (
       <View style={styles.container}>
         <View style={styles.containerText}>
-          <Text style={styles.Name}>Item:</Text>
+          <Text style={styles.Name}>{label}:</Text>
           <TextInput
             style={styles.input}
             autoCapitalize="none"
             autoCorrect={false}
             multiline
-            placeholder={this.props.descricao}
-            maxLength={this.props.lenght_max}
+            placeholder={hint}
+            maxLength={60}
             underlineColorAndroid="rgba(0,0,0,0)"
             onChangeText={inputSave => this.setState({ inputSave })}
           />
