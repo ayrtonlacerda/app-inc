@@ -24,6 +24,7 @@ class GeoLocation extends Component {
        longitude: null,
        acuracia: null,
        error: null,
+       view: true,
      });
   // método navigator.geolocation ( nativo do react native)
   // usando função getCurrentLocation, que retorna uma mensagem JSON com campos :
@@ -55,17 +56,17 @@ class GeoLocation extends Component {
    };
 
    submitGeolocation = () => {
-    
+
    }
 
   render() {
+    const { label } = this.props.data;
     return (
-      <View styles={styles.main}>
-        <View style={styles.image}>
-          <Image source={require('../../assents/imgs/point.png')} />
+      <View styles={styles.container}>
+        <View style={styles.cabecalho}>
+            <Image source={require('../../assents/imgs/point.png')} style={styles.image} />
+            <Text style={styles.label}>{label}</Text>
         </View>
-
-
         <View styles={styles.main}>
           <TouchableOpacity
             onPress={this.refresh}
@@ -74,41 +75,31 @@ class GeoLocation extends Component {
             <Text style={styles.button_text}>Verificar localização</Text>
           </TouchableOpacity>
         </View>
-
-          {this.state.error
-            ? <View style={styles.input}>
+        {
+          this.state.error && (
+            <View style={styles.input}>
                 <Text style={styles.info_text}>Error: {this.state.error}</Text>
               </View>
-            : <ScrollView>
-
+          )
+        }
+        {
+          this.state.view && (
+            <View style={styles.info}>
                 <View style={styles.input}>
                   <Text style={styles.info_text}>Latitude: {this.state.latitude}</Text>
                 </View>
-
                 <View style={styles.input}>
                   <Text style={styles.info_text}>Longitude: {this.state.longitude}</Text>
                 </View>
-
                 <View style={styles.input}>
                   <Text style={styles.info_text}>Altitute: {this.state.altitude} </Text>
                 </View>
-
                 <View style={styles.input}>
                   <Text style={styles.info_text}>Acurácia: {this.state.acuracia} </Text>
                 </View>
-
-              </ScrollView>
-          }
-
-          <View styles={styles.main}>
-            <TouchableOpacity
-              onPress={this.submitGeolocation}
-              style={styles.button}
-            >
-              <Text style={styles.button_text}>Submit</Text>
-            </TouchableOpacity>
-          </View>
-
+              </View>
+          )
+        }
 
       </View>
     );

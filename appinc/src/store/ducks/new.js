@@ -9,6 +9,7 @@ const InitialState = {
   erro: null,
   load: false,
   sucsses: false,
+  form: 'sjahdjkashdkashd',
 };
 
 export default function newState(state = InitialState, action) {
@@ -24,18 +25,3 @@ export default function newState(state = InitialState, action) {
   }
 }
 
-export const Creators = {
-  getNewRequest: () => ({
-    type: Types.GET_REQUEST,
-  }),
-
-  getNewSucsses: data => ({
-    type: Types.GET_SUCSSES,
-    payload: { data },
-  }),
-
-  getNewFailure: erro => ({
-    type: Types.GET_FAILURE,
-    payload: { erro },
-  }),
-};

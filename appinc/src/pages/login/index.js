@@ -1,6 +1,17 @@
 import React, { Component } from 'react';
 import { StackActions, NavigationActions } from 'react-navigation';
-import { View, Text, TextInput, Image, TouchableOpacity, StatusBar, ImageBackground } from 'react-native';
+import {
+  View,
+  Text,
+  TextInput,
+  Image,
+  TouchableOpacity,
+  StatusBar,
+  ImageBackground,
+  Animated,
+  Easing
+} from 'react-native';
+import LottieView from 'lottie-react-native';
 
 import styles from './styles';
 
@@ -9,6 +20,10 @@ class Login extends Component {
   static navigationOptions = {
     header: null,
   };
+
+  state = {
+    progress: new Animated.Value(0),
+  }
 
   navigateToLogged = () => {
     const resetAction = StackActions.reset({
@@ -21,11 +36,22 @@ class Login extends Component {
     this.props.navigation.dispatch(resetAction);
   }
 
+  onPressAnimated = async () => {
+    this.animation.play(30, 1000);
+  }
+
   render() {
     return (
       <ImageBackground source={require('../../assents/imgs/local_crime.jpg')} style={styles.backgroundImage} >
         <View style={styles.container}>
           <StatusBar backgroundColor="rgba(34, 34, 34, 0.75)" />
+
+            <LottieView
+              source={require('../../assents/lottie/30-Brightness.json')}
+              ref={animation => {
+                this.animation = animation;
+              }}
+            />
 
           <Text style={styles.title}>Bem-Vindo</Text>
           <Text style={styles.descript}>Por favor digite seu cpf</Text>

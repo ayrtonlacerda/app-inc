@@ -1,7 +1,13 @@
 import React, { Component } from 'react';
-import { View, Text, Picker, TouchableOpacity, StatusBar, AsyncStorage } from 'react-native';
+import { View, Text, Picker, TouchableOpacity, StatusBar, AsyncStorage, TextInput } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
+import { Header } from '../../globalComponents';
 import styles from './styles';
+
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+//import { Creators as NewActions } from '../../store/ducks/new';
+
 
 const formulario = [
     {
@@ -224,73 +230,76 @@ class New extends Component {
     form: null,
   }
 
-formulario = (tipo, subtipo) => {
-  if (tipo === formulario[0].area) {
-      if (subtipo === formulario[0].subareas[0].type) {
-        console.tron.log(formulario[0].subareas[0].data);
-        const data = formulario[0].subareas[0].data;
-        if (data) {
-          this.state.form = formulario[0].subareas[0].data;
-          this.navigateToStepList('StepList', this.state.form);
+  async componentWillMount() {
+    const value = await AsyncStorage.getItem('@Form');
+    const form = JSON.parse(value)
+    console.tron.log(['testeasjhdajksd', form]);
+  }
+
+  navigateToStepList = () => this.props.navigation.navigate('StepList', { form: this.state.form });
+
+  formulario = (tipo, subtipo) => {
+    if (tipo === formulario[0].area) {
+        if (subtipo === formulario[0].subareas[0].type) {
+          console.tron.log(formulario[0].subareas[0].data);
+          const data = formulario[0].subareas[0].data;
+          if (data) {
+            this.state.form = formulario[0].subareas[0].data;
+            this.navigateToStepList('StepList', this.state.form);
+          }
         }
-      }
-      if (subtipo === formulario[0].subareas[1].type) {
-        console.tron.log(formulario[0].subareas[1].data);
-      }
-  }
-  if (tipo === formulario[1].area) {
-    if (subtipo === formulario[1].subareas[0].type) {
-      console.tron.log(formulario[1].subareas[0].data);
+        if (subtipo === formulario[0].subareas[1].type) {
+          console.tron.log(formulario[0].subareas[1].data);
+        }
     }
-    if (subtipo === formulario[1].subareas[1].type) {
-      console.tron.log(formulario[1].subareas[1].data);
+    if (tipo === formulario[1].area) {
+      if (subtipo === formulario[1].subareas[0].type) {
+        console.tron.log(formulario[1].subareas[0].data);
+      }
+      if (subtipo === formulario[1].subareas[1].type) {
+        console.tron.log(formulario[1].subareas[1].data);
+      }
     }
   }
-}
 
-navigateToStepList = () => this.props.navigation.navigate('StepList', { form: this.state.form });
+  retrieveData = async () => {
 
-
-async componentWillMount() {
-  const value = await AsyncStorage.getItem('@Form');
-  const form = JSON.parse(value)
-  console.tron.log(['testeasjhdajksd', form]);
-}
- 
-
-retrieveData = async () => {
-  
-  try {
-    
-    
-    console.tron.log(['value', value]);
-    if (value !== null) {
-      // We have data!!
+    try {
+      console.tron.log(['value', value]);
+      if (value !== null) {
+        // We have data!!
+        console.tron.log([value]);
+      }
+    } catch (error) {
       console.tron.log([value]);
+      // Error retrieving data
     }
-   } catch (error) {
-    console.tron.log([value]);
-     // Error retrieving data
-   }
-}
+  }
 
   render() {
     const { tipo, subtipo } = this.state;
-   
+    const { navigation } = this.props;
+    console.tron.log(this.props);
     return (
       <View style={styles.container}>
-      <StatusBar backgroundColor="#EEE" barStyle='dark-content' />      
-
+        <Header
+          title='Nova Pericia'
+          showMenu
+          openMenu={navigation.toggleDrawer}
+        />
         <View style={styles.forms1}>
-          <Text style={styles.textType}> Área </Text>
+          <View style={styles.title}>
+            <View style={styles.ball}><Text style={styles.numberType}> 1 </Text></View>
+            <Text style={styles.textType}> Tipo: </Text>
+          </View>
             <View style={styles.Picker}>
               <Picker
                 style={styles.estiloPicker}
                 placeholder="Selecione a pericia desejada"
                 selectedValue={this.state.tipo}
                 onValueChange={(itemValue) => this.setState({ tipo: itemValue })}
-              > 
-                <Picker.Item label='Nenhum' />
+              >
+                <Picker.Item label='Area' />
                 <Picker.Item label='Homicídio' value='homicidio' />
                 <Picker.Item label='Perícia veicular' value='carro' />
                 <Picker.Item label='Incêndio' value='incendio' />
@@ -300,7 +309,6 @@ retrieveData = async () => {
         </View>
 
         <View style={styles.forms2}>
-          <Text style={styles.textType}> Subárea </Text>
             <View style={styles.Picker}>
               <Picker
                 style={styles.estiloPicker}
@@ -308,7 +316,7 @@ retrieveData = async () => {
                 selectedValue={this.state.subtipo}
                 onValueChange={(itemValue) => this.setState({ subtipo: itemValue })}
               >
-                <Picker.Item label='Nenhum' />
+                <Picker.Item label='Classe' />
                 <Picker.Item label='Morte violenta' value='morteviolenta' />
                 <Picker.Item label='Estrangulamento' value='estrangulamento' />
                 <Picker.Item label='Batida' value='batida' />
@@ -316,23 +324,41 @@ retrieveData = async () => {
               </Picker>
             </View>
         </View>
+        <View style={styles.forms}>
+          <View style={styles.title}>
+              <View style={styles.ball}><Text style={styles.numberType}> 2 </Text></View>
+              <Text style={styles.textType}> Referência: </Text>
+          </View>
+          <TextInput
+            style={styles.input}
+            autoCapitalize="none"
+            autoCorrect={false}
+            multiline
+            maxLength={72}
+            underlineColorAndroid="rgba(0,0,0,0)"
+            onChangeText={inputSave => this.setState({ inputSave })}
+          />
+        </View>
 
-        {
-           tipo && subtipo && (
-            <TouchableOpacity style={styles.button} onPress={() => this.retrieveData()}>
+            <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('StepList')}>
               <Text style={styles.buttonText}>
-                Iniciar
+                Continuar
               </Text>
             </TouchableOpacity>
-          )
-        }
+
 
       </View>
     );
   }
 }
 
-export default New;
+const mapStateToProps = state => ({
+  newState: state.newState
+});
+
+//const mapDispatchToProps = dispatch => bindActionCreators(NewActions, dispatch);
+
+export default connect(mapStateToProps, null)(New);
 
 
 /*

@@ -4,121 +4,116 @@ import { colors, metrics } from '../../styles';
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
-
+    backgroundColor: colors.white,
+    //alignItems: 'center',
   },
-
-  header: {
-    backgroundColor: colors.dark,
-    padding: 14,
-    paddingTop: 7,
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderColor: colors.regular,
-    borderBottomWidth: 0.4,
-  },
-
-  icon: {
-    color: colors.black,
-    marginLeft: 15,
-  },
-
-  viewIcon: {
-    marginLeft: 4,
-  },
-
-  viewTitle: {
-    flex: 1,
-    //marginLeft: 120,
-  },
-
-  headerTitle: {
-    color: colors.white,
-    fontSize: 20,
-    fontWeight: 'bold',
-    alignSelf: 'center',
-  },
-
   bodyS: {
     justifyContent: 'center',
-    alignSelf: 'center',
-
+    alignItems: 'center',
+    //paddingHorizontal: 21,
+  },
+  halfBody: {
+    height: 170,
+    width: 360,
+    //justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: "#ffba08"
+  },
+  tokenView: {
+    marginTop: 25,
+    width: 320,
+    height: 55,
+    borderRadius: 50,
+    backgroundColor: "rgba(0, 0, 0, 0.3)",
+    alignItems: 'center',
+    flexDirection: 'row',
+    justifyContent: 'center',
+  },
+  token: {
+    fontFamily: "Roboto",
+    fontSize: 18,
+    fontWeight: "bold",
+    fontStyle: "normal",
+    letterSpacing: 0,
+    color: "#ffffff"
+  },
+  tokenD: {
+    fontFamily: "Roboto",
+    fontSize: 19,
+    fontWeight: "bold",
+    fontStyle: "normal",
+    letterSpacing: 0,
+    color: "#2afe3f",
   },
 
-  concerto: {
-    width: 15,
-    height: 15,
+  info: {
+    alignSelf: 'center',
+    justifyContent: 'center',
+    bottom: 80,
   },
 
   profile: {
     alignSelf: 'center',
     margin: metrics.baseMargin,
-    marginTop: 20,
-    //height: 250,
+    elevation: 1,
   },
 
   ImageStyle: {
-    width: 180,
-    height: 179,
-  },
-
-  card:{
-    backgroundColor: 'white',
-    padding: 10,
-    marginHorizontal: 20,
-    marginTop: 20,
-    borderRadius: 10,
-    justifyContent: 'center',
-    alignItems: 'center'
-  },
-
-  name:{
-    fontSize: 21,
-    fontWeight: 'bold',
-    color: colors.dark,
-    marginVertical: 5,
-
-  },
-
-  info:{
-    fontSize: 15,
-    fontWeight: 'bold',
-    color: colors.dark
-  },
-
-  element: {
-    marginVertical: 3,
-    alignItems: 'center',
-  },
-
-  button:{
-    backgroundColor: colors.dark,
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginTop: metrics.baseMargin / 2,
-    //paddingHorizontal: 80,
-    //paddingVertical: 15,
+    width: 150,
+    height: 150,
+    borderColor: '#160f30',
+    borderWidth: 3,
     borderRadius: 100,
-    height: 50,
-    width: 300,
   },
 
-  button2:{
-  backgroundColor: colors.dark,
-  alignItems: 'center',
-  justifyContent: 'center',
-  marginTop: metrics.baseMargin / 2,
-  //paddingHorizontal: 80,
-  //paddingVertical: 15,
-  borderRadius: 100,
-  height: 50,
-  width: 300,
-},
+  name: {
+    fontFamily: "Roboto",
+    fontSize: 24,
+    fontWeight: "bold",
+    fontStyle: "normal",
+    letterSpacing: 0,
+    color: "#000",
+  },
 
-  button_text:{
-    color: colors.white,
-    fontWeight: 'bold',
+  button: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: metrics.baseMargin,
+    width: 320,
+    height: 55,
+    borderRadius: 200,
+    backgroundColor: "rgba(0, 0, 0, 0.74)",
+  },
+
+  button2: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: metrics.baseMargin,
+    width: 320,
+    height: 55,
+    borderRadius: 200,
+    backgroundColor: "#fff",
+    borderColor: "rgba(0, 0, 0, 0.74)",
+    borderWidth: 2,
+
+  },
+
+  button_text2: {
+    fontFamily: "Roboto",
+    fontSize: 18,
+    fontWeight: "bold",
+    fontStyle: "normal",
+    letterSpacing: 0,
+    color: "rgba(0, 0, 0, 0.74)",
+  },
+
+  button_text: {
+    fontFamily: "Roboto",
+    fontSize: 18,
+    fontWeight: "bold",
+    fontStyle: "normal",
+    letterSpacing: 0,
+    color: "#ffffff",
   },
 
 
