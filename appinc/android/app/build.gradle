@@ -137,12 +137,13 @@ android {
 }
 
 dependencies {
+    compile project(':react-native-image-picker')
     compile project(':lottie-react-native')
     compile project(':react-native-audio')
     compile project(':react-native-sound')
     compile project(':react-native-vector-icons')
     compile project(':react-native-barcode-scanner-google')
-    compile project(':react-native-image-picker')
+    // compile project(':react-native-image-picker')
     compile fileTree(dir: "libs", include: ["*.jar"])
     compile "com.android.support:appcompat-v7:28.0.0"
     compile "com.facebook.react:react-native:+"  // From node_modules
