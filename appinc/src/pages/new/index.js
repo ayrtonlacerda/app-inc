@@ -7,7 +7,7 @@ import styles from './styles';
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-//import { Creators as NewActions } from '../../store/ducks/new';
+import { Creators as NewActions } from '../../store/ducks/new';
 
 
 const formulario = [
@@ -398,9 +398,22 @@ class New extends Component {
     this.setState({ showRef : true});
   }
 
+  onPressButton = () => {
+    const { navigation, getReference } = this.props;
+    const { inputSave } = this.state;
+    if(inputSave) {
+      getReference(this.state.inputSave);
+      navigation.navigate('StepList');
+    } else {
+      getReference('Laudo sem Nome');
+      navigation.navigate('StepList');
+    }    
+  }
+
   render() {
     const { tipo, subtipo, ssubtipo, formQuerry, classe, subClasse, incrementar, contador, showRef } = this.state;
     const { navigation } = this.props;
+
     return (
       <View style={styles.container}>
         <Header
@@ -482,6 +495,7 @@ class New extends Component {
                 </Picker>
               </View>
           </View>
+
           )
         }
   
@@ -504,8 +518,7 @@ class New extends Component {
                 </View>
           )
         }
-
-            <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('StepList')}>
+            <TouchableOpacity style={styles.button} onPress={() => this.onPressButton()}>
               <Text style={styles.buttonText}>
                 Continuar
               </Text>
@@ -521,4 +534,9 @@ const mapStateToProps = state => ({
   newState: state.newState
 });
 
-export default connect(mapStateToProps, null)(New);
+
+const mapDispatchToProps = dispatch => bindActionCreators(NewActions, dispatch);
+
+export default connect(mapStateToProps, mapDispatchToProps)(New);
+
+
