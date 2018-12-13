@@ -314,11 +314,17 @@ class StepList extends Component {
     this.props.navigation.goBack();
   }
 
+  saveForm = () => {
+    const { reference, saveForm } = this.props;
+    console.tron.log(['saveformstep', reference]);
+    saveForm(reference);
+  }
+
 
   render() {
     console.tron.log(this.props);
     //const { steps } = this.props;
-    const { modalVisible, load } = this.state;
+    const { modalVisible, load } = this.state;    
     //const form = this.props.navigation.getParam('form');
     //console.tron.log('seus steps');
     //console.tron.log(form);
@@ -335,7 +341,7 @@ class StepList extends Component {
             />
 
           <View style={styles.container}>
-            <TouchableOpacity style={styles.salvarbutton} onPress={() => this.setState({ load: true })}>
+            <TouchableOpacity style={styles.salvarbutton} onPress={() => this.saveForm()}>
                 <Text style={styles.buttonText}>
                   Salvar
                 </Text>
@@ -370,7 +376,8 @@ class StepList extends Component {
 }
 
 const mapStateToProps = state => ({
-  form: state.newState.form
+  form: state.newState.form,
+  reference: state.newState.reference,
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators(FormAction, dispatch);
