@@ -350,30 +350,28 @@ class StepList extends Component {
         <Header title={form_name} showArrow goBack={this.props.navigation.goBack} />
         <ScrollView>
 
-            <FlatList
-              data={steps}
-              renderItem={item => <StepBox steps={item} />}
-            />
+        <FlatList
+        data={steps}
+        renderItem={item => <StepBox steps={item} />}
+        />
 
-          <View style={styles.container}>
-            <TouchableOpacity style={styles.salvarbutton} onPress={() => this.saveForm()}>
-                <Text style={styles.buttonText}>
-                  Salvar
-                </Text>
-              </TouchableOpacity>
+        <View style={styles.container}>
 
-              <TouchableOpacity style={styles.enviarbutton} onPress={() => this.sendForm()}>
-                <Text style={styles.buttonText}>
-                  Enviar
-                </Text>
-              </TouchableOpacity>
 
-              <TouchableOpacity style={styles.enviarbutton} onPress={() => this.resetAsync()}>
-                <Text style={styles.buttonText}>
-                  Reset Async
-                </Text>
-              </TouchableOpacity>
-          </View>
+        <TouchableOpacity style={styles.enviarbutton} onPress={this.navigateToLogged}>
+        <Text style={styles.buttonText}>
+        Enviar
+        </Text>
+        </TouchableOpacity>
+
+
+        <TouchableOpacity style={styles.salvarbutton} onPress={() => this.setState({ load: true })}>
+          <Text style={styles.buttonTextsalvar}>
+            Salvar
+          </Text>
+          </TouchableOpacity>
+        </View>
+
 
         </ScrollView>
 

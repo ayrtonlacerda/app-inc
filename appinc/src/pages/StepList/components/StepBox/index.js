@@ -1,3 +1,4 @@
+
 import React, { Component } from 'react';
 //redux
 import { connect } from 'react-redux';
@@ -5,7 +6,7 @@ import { bindActionCreators } from 'redux';
 import { Creators as FormsActions } from '../../../../store/ducks/form'
 
 // styles
-import { View, Text, TouchableOpacity } from 'react-native';
+import { View, Text, TouchableOpacity, ProgressBarAndroid } from 'react-native';
 import { withNavigation } from 'react-navigation';
 import styles from './styles';
 import Icon from 'react-native-vector-icons/MaterialIcons';
@@ -39,16 +40,23 @@ class StepBoxComponent extends Component {
     }
 
     return (
-      <View style={styles.container}>
-        <View style={styles.text}>
-          <Text style={styles.titulo}>{item.step_name}</Text>
-          <Text style={styles.descricao}>{item.step_description}</Text>
-        </View>
-
-        <TouchableOpacity onPress={() => this.props.navigation.navigate('StepPage', { step: item })}>
-          <View style={styles.viewicon}>
-          <Icon name="keyboard-arrow-right" size={60} style={styles.icon} />
+       <View style={styles.container}>
+        <TouchableOpacity onPress={() => props.navigation.navigate('StepPage', { step: item })}>
+          <View style={styles.card_titulo}>
+            <Text style={styles.titulo}>{item.step_name}</Text>
           </View>
+          <View style={styles.card_descricao}>
+            <Text style={styles.descricao}>{item.step_description}</Text>
+          </View>
+
+          <View style={styles.bar}>
+          <ProgressBarAndroid
+            styleAttr="Horizontal"
+            indeterminate={false}
+            progress={0.1}
+          />
+          </View>
+
         </TouchableOpacity>
       </View>
     );

@@ -75,26 +75,29 @@ class Camera extends React.Component {
     const { hint, label, data_name } = this.props.data;
     return (
       <View style={styles.container}>
+
+        <TouchableOpacity onPress={this.selectPhotoTapped.bind(this)}>
+          <View style = {styles.avatarContainer}>
+          { this.state.avatarSource === null ? <View style = {styles.avatarContainer2}><Icon name="add-a-photo" size={30} style={styles.icon} />
+          <View style = {styles.text_foto}><Text>Tirar uma foto</Text></View></View>:
+            <Image style={styles.avatar} source={this.state.avatarSource} />
+          }
+          </View>
+        </TouchableOpacity>
+
         <View style={styles.containerText}>
-          <Text style={styles.Name}>{label}:</Text>
           <TextInput
             style={styles.input}
             autoCapitalize="none"
             autoCorrect={false}
             multiline
             placeholder={hint}
-            maxLength={60}
+            maxLength={100}
             underlineColorAndroid="rgba(0,0,0,0)"
             onChangeText={inputSave => this.setState({ inputSave })}
           />
       </View>
-        <TouchableOpacity onPress={this.selectPhotoTapped.bind(this)}>
-          <View style={[styles.avatar, styles.avatarContainer, {marginBottom: 20}]}>
-          { this.state.avatarSource === null ? <Icon name="add-a-photo" size={45} style={styles.icon} /> :
-            <Image style={styles.avatar} source={this.state.avatarSource} />
-          }
-          </View>
-        </TouchableOpacity>
+
       </View>
     );
   }
