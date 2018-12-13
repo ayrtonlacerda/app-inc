@@ -42,7 +42,6 @@ class InputText extends Component {
   render() {
     const { data_name, label, hint, } = this.props.data;
     const { saveStep } = this.props.form;
-    console.tron.log(['savestep', saveStep]);
     // this.props.startControlArray();
     if (!this.state.flag) {
       this.addFormInput(data_name);
@@ -51,7 +50,6 @@ class InputText extends Component {
       this.saveFormInput(data_name);
     }
     //this.saveFormInput(data_name);
-    console.tron.log(['input text', this.props]);
     return (
       <View style={styles.container}>
       <Text style={styles.Name}>{label}:</Text>

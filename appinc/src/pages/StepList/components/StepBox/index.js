@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
+import { View, Text, TouchableOpacity, ProgressBarAndroid } from 'react-native';
 import { withNavigation } from 'react-navigation';
 import styles from './styles';
 import Icon from 'react-native-vector-icons/MaterialIcons';
@@ -9,18 +9,27 @@ const StepBox = (props) => {
   const { steps } = props;
   const { item } = steps;
   return (
+    // Card Steplist
     <View style={styles.container}>
-      <View style={styles.text}>
+    <TouchableOpacity onPress={() => props.navigation.navigate('StepPage', { step: item })}>
+      <View style={styles.card_titulo}>
         <Text style={styles.titulo}>{item.step_name}</Text>
+      </View>
+      <View style={styles.card_descricao}>
         <Text style={styles.descricao}>{item.step_description}</Text>
       </View>
 
-      <TouchableOpacity onPress={() => props.navigation.navigate('StepPage', { step: item })}>
-        <View style={styles.viewicon}>
-        <Icon name="keyboard-arrow-right" size={60} style={styles.icon} />
-        </View>
-      </TouchableOpacity>
+      <View style={styles.bar}>
+      <ProgressBarAndroid
+        styleAttr="Horizontal"
+        indeterminate={false}
+        progress={0.1}
+      />
+      </View>
+
+    </TouchableOpacity>
     </View>
+    // Card Steplist
   );
 };
 

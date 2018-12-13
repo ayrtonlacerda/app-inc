@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { colors, metrics } from '../../styles';
+import { colors, metrics, responsividade } from '../../styles';
 
 const styles = StyleSheet.create({
   container: {
@@ -10,6 +10,7 @@ const styles = StyleSheet.create({
   bodyS: {
     justifyContent: 'center',
     alignItems: 'center',
+      backgroundColor: "#344955"
     //paddingHorizontal: 21,
   },
   halfBody: {
@@ -17,7 +18,7 @@ const styles = StyleSheet.create({
     width: 360,
     //justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: "#ffba08"
+    backgroundColor: "#344955"
   },
   tokenView: {
     marginTop: 25,
@@ -31,7 +32,7 @@ const styles = StyleSheet.create({
   },
   token: {
     fontFamily: "Roboto",
-    fontSize: 18,
+    fontSize: 16,
     fontWeight: "bold",
     fontStyle: "normal",
     letterSpacing: 0,
@@ -39,7 +40,7 @@ const styles = StyleSheet.create({
   },
   tokenD: {
     fontFamily: "Roboto",
-    fontSize: 19,
+    fontSize: 16,
     fontWeight: "bold",
     fontStyle: "normal",
     letterSpacing: 0,
@@ -61,40 +62,45 @@ const styles = StyleSheet.create({
   ImageStyle: {
     width: 150,
     height: 150,
-    borderColor: '#160f30',
+    borderColor: 'white',
     borderWidth: 3,
     borderRadius: 100,
   },
 
+  name_view:{
+    alignItems: 'center',
+    justifyContent: 'center',
+    margin: 15,
+  },
   name: {
     fontFamily: "Roboto",
     fontSize: 24,
     fontWeight: "bold",
     fontStyle: "normal",
     letterSpacing: 0,
-    color: "#000",
+    color: "white",
   },
 
   button: {
     alignItems: 'center',
     justifyContent: 'center',
     marginTop: metrics.baseMargin,
-    width: 320,
-    height: 55,
+    width: responsividade.LARGURABUTTON,
+    height: responsividade.ALTURABUTTON,
     borderRadius: 200,
-    backgroundColor: "rgba(0, 0, 0, 0.74)",
+    backgroundColor: "#F9AA33",
   },
 
   button2: {
     alignItems: 'center',
     justifyContent: 'center',
     marginTop: metrics.baseMargin,
-    width: 320,
-    height: 55,
+    width: responsividade.LARGURABUTTON,
+    height: responsividade.ALTURABUTTON,
     borderRadius: 200,
-    backgroundColor: "#fff",
-    borderColor: "rgba(0, 0, 0, 0.74)",
-    borderWidth: 2,
+    backgroundColor: "#344955",
+    borderColor: "#F9AA33",
+    borderWidth: 0,
 
   },
 
@@ -104,7 +110,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     fontStyle: "normal",
     letterSpacing: 0,
-    color: "rgba(0, 0, 0, 0.74)",
+    color: "#F9AA33",
   },
 
   button_text: {
@@ -113,7 +119,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     fontStyle: "normal",
     letterSpacing: 0,
-    color: "#ffffff",
+    color: "#344955",
   },
 
 
