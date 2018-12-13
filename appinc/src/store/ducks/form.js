@@ -1,3 +1,5 @@
+import { AsyncStorage } from 'react-native';
+
 const Types = {
   CREATE_FORM: 'form/CREATE_SAVE',
   SAVE_FORM_STATE: 'form/SAVE_FORM_STATE',
@@ -90,8 +92,13 @@ const controlArraySte = state => {
   return size2;
 };
 
-const saveFormAsync = data => {
+const saveFormAsync = async data => {
   //const form = state.step;
   console.tron.log(["datasaveformasync", data])
-  // AsyncStorage.setItem('@Form', JSON.stringify(form));
+  try {
+    await AsyncStorage.setItem(data.ref, data.state.step);
+    // console.tron.log(["response", response])
+  } catch (error) {
+    console.tron.log('super erro')
+  }  
 }

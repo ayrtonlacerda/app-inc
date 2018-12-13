@@ -268,10 +268,10 @@ class New extends Component {
       console.tron.log(['value', value]);
       if (value !== null) {
         // We have data!!
-        console.tron.log([value]);
+        // console.tron.log([value]);
       }
     } catch (error) {
-      console.tron.log([value]);
+      // console.tron.log([value]);
       // Error retrieving data
     }
   }
@@ -291,7 +291,8 @@ class New extends Component {
   render() {
     const { tipo, subtipo } = this.state;
     const { navigation } = this.props;
-    console.tron.log(this.props);
+    AsyncStorage.setItem('Teste', 'teste');
+    // console.tron.log(this.props);
     return (
       <View style={styles.container}>
         <Header
