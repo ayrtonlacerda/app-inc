@@ -1,33 +1,40 @@
 import { StyleSheet, PixelRatio } from 'react-native';
-import { colors, metrics } from '../../styles';
+import { colors, metrics, responsividade } from '../../styles';
 
 const styles = StyleSheet.create({
     container: {
       flex: 1,
       justifyContent: 'center',
       alignItems: 'center',
-    },
+      // marginBottom: 20,
+      // backgroundColor: 'pink',
+    //   borderWidth: 2,
+    //   borderColor: 'white',
+    //   borderRadius: 10,
+      padding: 10,
+      borderBottomWidth: 0.5,
+      borderBottomColor: 'black',
+      paddingBottom: 40,
+    //   width: responsividade.LARGURAFOTO,
+     },
 
     avatarContainer: {
-      width: 300,
-      height: 300,
-      shadowColor: 'rgba(0, 0, 0, 0.35)',
-      shadowOffset: { width: 4, height: 2 },
-      shadowRadius: 4,
-      borderRadius: 15,
-      elevation: 5,
-      borderColor: '#333333',
-      borderStyle: 'solid',
-      borderWidth: 1,
-      backgroundColor: '#ffffff',
+      width: responsividade.LARGURAFOTO,
+      height: responsividade.ALTURAFOTO,
+      flexDirection: 'row',
+      // margin: 10,
+      backgroundColor: "white",
+      padding: 15,
+      // distância entre foto e título do input text
+      margin: 10,
+      borderRadius: 10,
       justifyContent: 'center',
       alignItems: 'center',
     },
 
-    avatar: {
-      borderRadius: 15,
-      width: 300,
-      height: 300,
+    avatarContainer2: {
+      flexDirection: 'row',
+      backgroundColor: "white",
     },
 
     txt: {
@@ -36,29 +43,38 @@ const styles = StyleSheet.create({
       fontWeight: '200',
     },
 
+    text_foto:{
+      marginLeft: 4,
+      justifyContent: 'center',
+      alignItems: 'center',
+
+    },
+
+
     //input text
     containerText: {
       flex: 1,
-      width: 310,
+      width: responsividade.LARGURAFOTO,
       //alignItems: 'center',
       //justifyContent: 'center',
     },
      Name: {
-      width: 189,
-      color: '#000000',
-      fontFamily: 'Roboto',
-      fontSize: 18,
-      fontWeight: '400',
-      lineHeight: 21,
-     },
-
-    input: {
+       width: responsividade.LARGURABOX,
+       height: 30,
        backgroundColor: colors.transparent,
-       height: 46,
-       borderBottomWidth: 1,
        color: '#000000',
-       fontSize: 16,
-       marginBottom: 15,
+       fontFamily: 'Roboto',
+       fontSize: 18,
+       fontWeight: '400',
+       lineHeight: 21,
+     }
+,
+    input: {
+      backgroundColor: 'white',
+      height: responsividade.ALTURABOX,
+      borderRadius: 4,
+      paddingLeft: 20,
+      fontSize: 16,
     }
   });
 

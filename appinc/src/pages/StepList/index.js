@@ -316,68 +316,37 @@ class StepList extends Component {
 
 
   render() {
-    console.tron.log(this.props);
-    //const { steps } = this.props;
     const { modalVisible, load } = this.state;
     const form = this.props.navigation.getParam('form');
-    console.tron.log('seus steps');
-    console.tron.log(form);
     const { steps, form_name } = forms;
 
     return (
       <View style={styles.container}>
-        <Modal
-          animationcomponent_type="slide"
-          transparent
-          visible={modalVisible}
-          onRequestClose={() => this.closeModal()}
-        >
-          <View style={styles.masterContainer}>
-            <View style={styles.containerModal}>
-              <Text style={styles.step_nameModal}>ATENÇÂO</Text>
-              <Text style={styles.textModal}>Tem certeza que deseja cancelar? Todas as alterações seram perdidas</Text>
-              <View style={styles.containerButton}>
-                <TouchableOpacity onPress={() => this.cancel()}>
-                  <View style={styles.buttonYes}>
-                    <Text style={styles.buttonText}>Sim</Text>
-                  </View>
-                </TouchableOpacity>
-                <TouchableOpacity onPress={() => this.setState({ modalVisible: false })}>
-                  <View style={styles.buttonNo}>
-                    <Text style={styles.buttonText}>Não</Text>
-                  </View>
-                </TouchableOpacity>
-              </View>
-            </View>
-          </View>
-        </Modal>
         <Header title={form_name} />
         <ScrollView>
 
-            <FlatList
-              data={steps}
-              renderItem={item => <StepBox steps={item} />}
-            />
+        <FlatList
+        data={steps}
+        renderItem={item => <StepBox steps={item} />}
+        />
 
-          <View style={styles.container}>
-            <TouchableOpacity style={styles.salvarbutton} onPress={() => this.setState({ load: true })}>
-                <Text style={styles.buttonText}>
-                  Salvar
-                </Text>
-              </TouchableOpacity>
+        <View style={styles.container}>
 
-              <TouchableOpacity style={styles.enviarbutton} onPress={this.navigateToLogged}>
-                <Text style={styles.buttonText}>
-                  Enviar
-                </Text>
-              </TouchableOpacity>
 
-              <TouchableOpacity style={styles.cancelarbutton} onPress={() => this.openModal()}>
-                <Text style={styles.buttonText}>
-                  Cancelar
-                </Text>
-              </TouchableOpacity>
-          </View>
+        <TouchableOpacity style={styles.enviarbutton} onPress={this.navigateToLogged}>
+        <Text style={styles.buttonText}>
+        Enviar
+        </Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity style={styles.salvarbutton} onPress={() => this.setState({ load: true })}>
+        <Text style={styles.buttonTextsalvar}>
+        Salvar
+        </Text>
+        </TouchableOpacity>
+
+
+        </View>
 
         </ScrollView>
 

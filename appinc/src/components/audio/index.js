@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import axios from 'axios';
-
 import {
   AppRegistry,
   StyleSheet,
@@ -10,8 +8,9 @@ import {
   TouchableHighlight,
   Platform,
   PermissionsAndroid,
+  Image,
 } from 'react-native';
-import Icon from 'react-native-vector-icons/MaterialIcons';
+import Icon from 'react-native-vector-icons/Ionicons';
 
 import Sound from 'react-native-sound';
 import { AudioRecorder, AudioUtils } from 'react-native-audio';
@@ -31,7 +30,38 @@ class AudioRec extends Component {
       finished: false,
       audioPath: AudioUtils.DocumentDirectoryPath + '/test.aac',
       hasPermission: true,
+      gravarcor: 'black',
+      stopcor: 'black',
+      playcor: 'black',
     };
+
+    gravar = () => {
+
+      this.setState({ gravarcor: 'red'});
+
+    }
+
+    stop = () =>{
+
+      this.setState({ gravarcor: 'black'});
+      this.setState({ stopcor: 'grey'});
+
+    }
+
+    play = () =>{
+
+      this.setState({ stopcor: 'black'});
+      this.setState({ playcor: 'grey'});
+
+    }
+
+
+    pausar = () =>{
+
+      this.setState({ gravarcor: 'black'});
+
+    }
+
 
     prepareRecordingPath(audioPath) {
       AudioRecorder.prepareRecordingAtPath(audioPath, {
@@ -85,25 +115,52 @@ class AudioRec extends Component {
     _renderButton(title, onPress, active) {
       var style = (active) ? styles.activeButtonText : styles.buttonText;
 
-      return (
-        <TouchableHighlight style={styles.button} onPress={onPress}>
-          <Text style={style}>
-            {title}
-          </Text>
-        </TouchableHighlight>
-      );
+      if (title === 'GRAVAR') {
+        return (
+          <TouchableHighlight style={styles.button} onPress={onPress}>
+              <Icon name="md-microphone" size={28} style={{color: this.state.gravarcor}} />
+          </TouchableHighlight>
+        );
+      }
+
+      if (title === 'PARAR') {
+        return (
+          <TouchableHighlight style={styles.button} onPress={onPress}>
+              <Icon name="md-square" size={28} style={{color: this.state.stopcor}} />
+          </TouchableHighlight>
+        );
+      }
+
+      if (title === 'PLAY') {
+        return (
+          <TouchableHighlight style={styles.button} onPress={onPress}>
+              <Icon name="md-play" size={28} style={{color: this.state.playcor}} />
+          </TouchableHighlight>
+        );
+      }
+
     }
 
     _renderPauseButton(onPress, active) {
       var style = (active) ? styles.activeButtonText : styles.buttonText;
       var title = this.state.paused ? "RESUME" : "PAUSE";
-      return (
-        <TouchableHighlight style={styles.button} onPress={onPress}>
-          <Text style={style}>
-            {title}
-          </Text>
-        </TouchableHighlight>
-      );
+
+      if (title === 'RESUME') {
+        return (
+          <TouchableHighlight style={styles.button} onPress={onPress}>
+              <Text>Cont.</Text>
+          </TouchableHighlight>
+        );
+      }
+
+      if (title === 'PAUSE') {
+        return (
+          <TouchableHighlight style={styles.button} onPress={onPress}>
+              <Icon name="md-pause" size={28} style={styles.icon} />
+          </TouchableHighlight>
+        );
+      }
+
     }
 
     async _pause() {
@@ -218,19 +275,22 @@ class AudioRec extends Component {
     const { label, hint } = this.props.data;
 
       return (
-        <View style={styles.container}>
-        <Text style={styles.label}>{label}:</Text>
-        <Text style={styles.hint}>{hint}</Text>
-          <View style={styles.controls}>
-            { this._renderButton('RECORD', () => { this._record(); }, this.state.recording ) }
-            { this._renderButton('PLAY', () => { this._play(); }) }
-            {/* {this._renderButton("PAUSE", () => {this._pause()} )} */}
-            { this._renderPauseButton(() => {this.state.paused ? this._resume() : this._pause() })}
-            { this._renderButton('STOP', () => { this._stop(); }) }
-            <Text style={styles.progressText}>{this.state.currentTime}s</Text>
+
+          <View style={styles.container}>
+          <Text style={styles.label}>{label}:</Text>
+            <View style={styles.controls}>
+              { this._renderButton('GRAVAR', () => { this._record();this.gravar()}, this.state.recording ) }
+              { this._renderButton('PARAR', () => { this._stop(); this.stop()}) }
+              { this._renderButton('PLAY', () => { this._play();this.play()}) }
+              { this._renderPauseButton(() => {this.state.paused ? this._resume() : this._pause(); this.pausar() })}
+              <View style={styles.seconds}>
+              <Text style={styles.progressText}>{this.state.currentTime}s</Text>
+              </View>
+            </View>
           </View>
 
-        </View>
+
+
       );
     }
   }

@@ -24,7 +24,7 @@ class MyDatePicker extends Component {
           <DatePicker
             style={styles.dataPicker}
             mode="date"
-            placeholder="select date"
+            placeholder="selecionar"
             format="DD/MM/YYYY"
             minDate="01-01-2018"
             maxDate="01-01-2100"
@@ -33,16 +33,18 @@ class MyDatePicker extends Component {
             onDateChange={(date) => { this.props.submitDATE({ date }); this.setState({ date }); }}
             customStyles={{
               dateIcon: {
-              position: 'absolute',
-                width: 40,
-                height: 40,
-                marginLeft: -30,
+                position: 'relative',
+                width: 0,
+                height: 0,
+                // marginLeft: -50,
               },
               dateInput: {
-                borderWidth: 0,
-                borderStyle: null,
-                height: 0,
-                width: 0,
+                height: 320,
+                width: 55,
+                borderWidth:0,
+                borderRadius: 10,
+                backgroundColor: 'transparent',
+
               },
             }}
             onDateChange={(date) => { this.setState({ date }); }}

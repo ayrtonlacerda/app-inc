@@ -1,15 +1,16 @@
 import { StyleSheet } from 'react-native';
-import { colors, metrics } from '../../styles';
+import { colors, metrics, responsividade } from '../../../../styles';
 
 const styles = StyleSheet.create({
   container: {
-    height: 80,
+
     flexDirection: 'row',
     justifyContent: 'space-between',
-    width: 330,
-    borderBottomWidth: 1,
-    borderColor: '#000000',
-    marginTop: 20,
+    width: responsividade.LARGURACARD,
+    height: responsividade.ALTURACARD,
+    backgroundColor: "white",
+    borderRadius: 4,
+    marginTop: 8,
   },
   viewicon: {
     justifyContent: 'center',
@@ -31,12 +32,28 @@ const styles = StyleSheet.create({
     color: '#000000',
     fontFamily: 'Roboto',
     fontSize: 16,
-    fontWeight: '400',
     lineHeight: 19,
   },
   icon: {
     color: '#000000',
-  }
+  },
+
+  card_titulo:{
+    marginTop: 8,
+    marginLeft: 10,
+  },
+
+  card_descricao:{
+    marginTop: 10,
+    marginLeft: 10,
+  },
+
+  bar:{
+    width: (responsividade.LARGURACARD * 0.9),
+    marginHorizontal: 10,
+    padding: 10,
+
+  },
 
 });
 
