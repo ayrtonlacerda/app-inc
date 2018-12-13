@@ -1,6 +1,6 @@
 import React from 'react';
 import { Text, View, TouchableOpacity, Image, TextInput } from 'react-native';
-import ImagePicker from 'react-native-image-picker';
+// import ImagePicker from 'react-native-image-picker';
 import styles from './styles';
 import axios from 'axios';
 import Icon from 'react-native-vector-icons/MaterialIcons';

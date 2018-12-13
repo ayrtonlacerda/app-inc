@@ -4,14 +4,15 @@ import {
   FlatList,
   ScrollView,
   TouchableOpacity,
-  Text,
-  Modal
+  Text, 
 } from 'react-native';
 import styles from './styles';
 import StepBox from './components/StepBox';
 import { Load } from '../../components';
 import { Header } from '../../globalComponents';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { Creators as FormAction} from '../../store/ducks/form';
 
 const forms = {
   "steps": [
@@ -295,7 +296,6 @@ const forms = {
   "form_version": "1.0"
 };
 
-
 class StepList extends Component {
   state ={
     modalVisible: false,
@@ -319,38 +319,13 @@ class StepList extends Component {
     console.tron.log(this.props);
     //const { steps } = this.props;
     const { modalVisible, load } = this.state;
-    const form = this.props.navigation.getParam('form');
-    console.tron.log('seus steps');
-    console.tron.log(form);
+    //const form = this.props.navigation.getParam('form');
+    //console.tron.log('seus steps');
+    //console.tron.log(form);
     const { steps, form_name } = forms;
 
     return (
-      <View style={styles.container}>
-        <Modal
-          animationcomponent_type="slide"
-          transparent
-          visible={modalVisible}
-          onRequestClose={() => this.closeModal()}
-        >
-          <View style={styles.masterContainer}>
-            <View style={styles.containerModal}>
-              <Text style={styles.step_nameModal}>ATENÇÂO</Text>
-              <Text style={styles.textModal}>Tem certeza que deseja cancelar? Todas as alterações seram perdidas</Text>
-              <View style={styles.containerButton}>
-                <TouchableOpacity onPress={() => this.cancel()}>
-                  <View style={styles.buttonYes}>
-                    <Text style={styles.buttonText}>Sim</Text>
-                  </View>
-                </TouchableOpacity>
-                <TouchableOpacity onPress={() => this.setState({ modalVisible: false })}>
-                  <View style={styles.buttonNo}>
-                    <Text style={styles.buttonText}>Não</Text>
-                  </View>
-                </TouchableOpacity>
-              </View>
-            </View>
-          </View>
-        </Modal>
+      <View style={styles.container}>        
         <Header title={form_name} />
         <ScrollView>
 
@@ -398,8 +373,10 @@ const mapStateToProps = state => ({
   form: state.newState.form
 });
 
+const mapDispatchToProps = dispatch => bindActionCreators(FormAction, dispatch);
+
 StepList.navigationOptions = {
   title: 'Morte Violenta',
 };
 
-export default connect(mapStateToProps, null)(StepList);
+export default connect(mapStateToProps, mapDispatchToProps)(StepList);

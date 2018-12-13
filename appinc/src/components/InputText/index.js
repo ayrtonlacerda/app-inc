@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Creators as FormActions } from '../../store/ducks/form';
+import { Creators as NewActions } from '../../store/ducks/new';
 
 // styles
 import { View, TextInput, Text } from 'react-native';
@@ -12,46 +13,43 @@ import styles from './styles';
 class InputText extends Component {
   state = {
     inputSave: null,
-    flag: null,
   }
 
   componentDidMount() {
     this.setState({ inputSave: this.props.default_value });
-  }
-
-  addFormInput = data => {
-    const form = {};
-    form[data] = null;
-    this.props.getCreateForm(form);
-    this.setState({ flag: true });
-  }
+  }  
 
   saveFormInput = data => {
     const { inputSave } = this.state;
-    const { default_value } = this.props.data;
-    const form = {};
-    if (!inputSave) {
-      form[data] = default_value;
-    } else {
-      form[data] = inputSave;
-    }
-    this.props.getSaveStateForm(form);
-    this.props.startControlArray();
+    const { form, getSaveStateForm, startControlArray } = this.props;
+    
+    console.tron.log(form.step);
+    if ( inputSave ) {
+      for (var key in form.step) {       
+        if ( key === data.data_name) {
+          const form = {};
+          form[data.data_name] = inputSave;
+          console.tron.log(['formsavecampo', form])
+          getSaveStateForm(form);
+        }
+      } 
+    }      
+    startControlArray();
   }
 
   render() {
-    const { data_name, label, hint, } = this.props.data;
-    const { saveStep } = this.props.form;
-    console.tron.log(['savestep', saveStep]);
+    const { data_name, label, hint, default_value, newState} = this.props.data;
+    const { saveStep, step } = this.props.form;
+    console.tron.log(['props', this.props]);
+    
     // this.props.startControlArray();
-    if (!this.state.flag) {
-      this.addFormInput(data_name);
-    }
+    
+   
     if (saveStep) {
-      this.saveFormInput(data_name);
+      this.saveFormInput({data_name, default_value});
     }
     //this.saveFormInput(data_name);
-    console.tron.log(['input text', this.props]);
+    // console.tron.log(['input text', this.props]);
     return (
       <View style={styles.container}>
       <Text style={styles.Name}>{label}:</Text>
@@ -71,7 +69,7 @@ class InputText extends Component {
 }
 
  const mapStateToProps = state => ({
-  form: state.formState,
+  form: state.formState, 
 });
 
 const mapDispatchToProps = dispatch =>

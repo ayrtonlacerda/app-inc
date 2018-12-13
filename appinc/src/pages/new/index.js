@@ -6,7 +6,7 @@ import styles from './styles';
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-//import { Creators as NewActions } from '../../store/ducks/new';
+import { Creators as NewActions } from '../../store/ducks/new';
 
 
 const formulario = [
@@ -276,6 +276,13 @@ class New extends Component {
     }
   }
 
+  onPressButton = () => {
+    const { navigation, getReference } = this.props;
+    getReference(this.state.inputSave);
+    navigation.navigate('StepList');
+    
+  }
+
   render() {
     const { tipo, subtipo } = this.state;
     const { navigation } = this.props;
@@ -336,11 +343,11 @@ class New extends Component {
             multiline
             maxLength={72}
             underlineColorAndroid="rgba(0,0,0,0)"
-            onChangeText={inputSave => this.setState({ inputSave })}
+            onChangeText={inputSave => this.setState({ inputSave })}            
           />
         </View>
 
-            <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('StepList')}>
+            <TouchableOpacity style={styles.button} onPress={() => this.onPressButton()}>
               <Text style={styles.buttonText}>
                 Continuar
               </Text>
@@ -356,9 +363,9 @@ const mapStateToProps = state => ({
   newState: state.newState
 });
 
-//const mapDispatchToProps = dispatch => bindActionCreators(NewActions, dispatch);
+const mapDispatchToProps = dispatch => bindActionCreators(NewActions, dispatch);
 
-export default connect(mapStateToProps, null)(New);
+export default connect(mapStateToProps, mapDispatchToProps)(New);
 
 
 /*

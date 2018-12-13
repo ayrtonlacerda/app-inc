@@ -4,6 +4,7 @@ const Types = {
   START_SAVE_STEP: 'form/SAVE_STEP_STATE',
   STOP_SAVE_STEP: 'form/STOP_SAVE_STEP',
   START_CONTROL_ARRAY: 'form/START_CONTROL_ARRAY',
+  SAVE_FORM: 'form/SAVE_FORM',
 };
 
 const initialState = {
@@ -25,15 +26,19 @@ export default function formState(state = initialState, action) {
     case Types.START_CONTROL_ARRAY: {
       const status = controlArraySte(state);
       if (!state.controlArraySize) {
-        console.tron.log(['statusIf', status]);
+        // console.tron.log(['statusIf', status]);
         return { ...state, controlArraySize: status };
       }
       if (!status) {
-        console.tron.log(['status', status]);
-        return { ...state, saveStep: status };
+        // console.tron.log(['status', status]);
+        return { ...state, saveStep: status, controlArraySize: null  };
       }
-      console.tron.log(['status', status]);
+      // console.tron.log(['status', status]);
       return { ...state, controlArraySize: status };
+    }
+    case Types.SAVE_FORM: {
+      saveFormAsync()
+      return state;
     }
     default:
       return state;
@@ -68,15 +73,21 @@ const controlArraySte = state => {
   if (!arraySize) {
     const step = state.step;
     const size = Object.keys(step).length;
-    console.tron.log(['return', size]);
+    // console.tron.log(['return', size]);
     // const status = true;
     return size;
   }
   const size2 = arraySize - 1;
-  console.tron.log(['array', size2]);
+  // console.tron.log(['array', size2]);
   if (size2 === 0) {
-    console.tron.log('entrei no if');
+    // console.tron.log('entrei no if');
     return false;
   }
   return size2;
 };
+
+const saveFormAsync = state => {
+  const form = state;
+  console.tron.log(form)
+  // AsyncStorage.setItem('@Form', JSON.stringify(form));
+}
