@@ -1,16 +1,33 @@
 import { StyleSheet } from 'react-native';
-import { colors, metrics } from '../../styles';
+import { colors, metrics, responsividade } from '../../styles';
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    // backgroundColor: 'pink',
+    width: responsividade.largura_tela,
+    padding: 20,
+    paddingBottom: 40,
+    borderBottomWidth: 0.5,
+    borderBottomColor: 'black',
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop: 15,
+
   },
   cabecalho: {
+    width: responsividade.LARGURABOX,
+    height: responsividade.ALTURABOX,
     flexDirection: 'row',
     margin: 10,
+    backgroundColor: "white",
+    padding: 15,
+    borderRadius: 4,
+
+  },
+
+  texto_geo:{
+
+    marginLeft: 10,
   },
   image: {
     justifyContent: 'center',
@@ -23,10 +40,10 @@ const styles = StyleSheet.create({
     color: '#000'
   },
   button: {
-    backgroundColor: colors.dark,
-    borderRadius: metrics.baseRadius,
-    height: 50,
-    width: 330,
+    backgroundColor: "#B83E3E",
+    borderRadius: 50,
+    height: responsividade.ALTURAFORM,
+    width: responsividade.LARGURAFORM,
     margin: 10,
     paddingHorizontal: metrics.basePadding,
     justifyContent: 'center',
@@ -41,7 +58,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     alignItems: 'center',
     justifyContent: 'center',
-    color: colors.white
+    color: "black",
   },
   button_view: {
     alignItems: 'center',
@@ -56,7 +73,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold'
   },
   input: {
-     backgroundColor: colors.regular,
+     backgroundColor: "white",
      borderRadius: metrics.baseRadius,
      marginTop: metrics.baseMargin / 4,
      height: 50,

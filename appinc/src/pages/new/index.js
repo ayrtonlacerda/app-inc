@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { View, Text, Picker, TouchableOpacity, StatusBar, AsyncStorage, TextInput } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { Header } from '../../globalComponents';
+import axios from 'axios';
 import styles from './styles';
 
 import { connect } from 'react-redux';
@@ -227,16 +228,35 @@ class New extends Component {
   state ={
     tipo: null,
     subtipo: null,
+    ssubtipo: null,
     form: null,
+    formQuerry: null,
+    classe: null,    
+    incrementar: 2,
+    contador: [1], 
+    showRef: false,
   }
 
   async componentWillMount() {
-    const value = await AsyncStorage.getItem('@Form');
-    const arrayRef = [];
-    // AsyncStorage.setItem('arrayRef', arrayRef );
-    const form = JSON.parse(value);
-    console.tron.log(['formulario', form]);
+    const valueForm = await AsyncStorage.getItem('@Form');
+    const formLocal = JSON.parse(valueForm);
+    this.setState({ form: formLocal});
+    console.tron.log(["Form:",this.state.form]);
+    const valueQuerry = await AsyncStorage.getItem('@Querry');
+    const formQuerryLocal = JSON.parse(valueQuerry);
+    this.setState({ formQuerry: formQuerryLocal});
+    console.tron.log(["Query",this.state.formQuerry]);
+    this.incrementarFuncao();
   }
+
+  incrementarFuncao = () => {
+    const { contador, incrementar} = this.state;
+    const numeroBase = incrementar;
+    const numeroFinal = numeroBase + 1;
+    this.setState({ incrementar : numeroFinal});
+    this.setState({ contador: [...contador,incrementar]})
+    console.tron.log(["contador", contador]);
+  } 
 
   navigateToStepList = () => this.props.navigation.navigate('StepList', { form: this.state.form });
 
@@ -264,18 +284,118 @@ class New extends Component {
     }
   }
 
-  retrieveData = async () => {
-
-    try {
-      console.tron.log(['value', value]);
-      if (value !== null) {
-        // We have data!!
-        // console.tron.log([value]);
+  areaPicker = (value) => {
+    this.setState({ tipo: value},
+      () => {
+        this.incrementarFuncao();
+        this.onAreaPickerChange();
       }
-    } catch (error) {
-      // console.tron.log([value]);
-      // Error retrieving data
+    );
+  }
+
+  onAreaPickerChange = () => {
+    console.tron.log(["onAreaPicker",this.state.formQuerry]);
+    if(this.state.formQuerry[0].area_name == this.state.tipo)
+    {
+      //Renderiza o picker em relação a primeira selacao do Picker
+      this.classePickerOne();
     }
+    if(this.state.formQuerry[1].area_name == this.state.tipo)
+    {
+      //Renderiza o picker em relação a segunda selecao do Picker
+      this.classePickerSecond();
+    }
+  }
+
+  classePickerOne = async (value) => {
+    const classe = this.state.formQuerry[0].classes;
+    await this.setState({ classe });
+    const testeclasse = classe.map(item => console.tron.log(item.classe_name));
+    this.setState({ subtipo: value},
+      () => {
+      }
+    );
+  }
+
+  classePickerSecond = async (value) => {
+    const classe = this.state.formQuerry[1].classes;
+    await this.setState({ classe })
+    const teste = classe.map(item => console.tron.log(item.classe_name)); 
+  }
+
+  subClassePicker = (value) => {
+    this.setState({ subtipo: value},
+      () => {
+        console.tron.log(["Funfou",this.state.subtipo])
+        this.onSubClassePickerChange();
+      }
+    );
+  }
+
+  onSubClassePickerChange = () => {
+    console.tron.log(["onSubClassePicker",this.state.formQuerry[0].classes[1].classe_name]);
+    if(this.state.formQuerry[0].classes[0].classe_name == this.state.subtipo)
+    {
+      //Renderiza o picker em relação a primeira selacao do Picker
+      this.subClassePickerOne();
+    }
+    if(this.state.formQuerry[0].classes[1].classe_name == this.state.subtipo)
+    {
+      //Renderiza o picker em relação a segunda selacao do Picker
+      this.subClassePickerSecond();
+    }
+    if(this.state.formQuerry[1].classes[0].classe_name == this.state.subtipo)
+    {
+      //Renderiza o picker em relação a terceira selacao do Picker
+      this.subClassePickerThird();
+    }
+    if(this.state.formQuerry[1].classes[1].classe_name == this.state.subtipo)
+    {
+      //Renderiza o picker em relação a quarta selacao do Picker
+      this.subClassePickerFourth();
+    }
+  }
+
+  subClassePickerOne = async (value) => {
+    const subClasse = this.state.formQuerry[0].classes[0].sub_classe;
+    await this.setState({ subClasse },
+    () => {
+      console.tron.log(["SubClasse",this.state.subClasse]);
+    });
+    const testeSubClasse = this.state.subClasse.map(item => console.tron.log(item.subclasse_name));
+  }
+
+  subClassePickerSecond = async (value) => {
+    const subClasse = this.state.formQuerry[0].classes[1].sub_classe;
+    await this.setState({ subClasse },
+    () => {
+      console.tron.log(["SubClasse",this.state.subClasse]);
+    });
+    const testeSubClasse = this.state.subClasse.map(item => console.tron.log(item.subclasse_name));
+  }
+
+
+  subClassePickerThird = async (value) => {
+    const subClasse = this.state.formQuerry[1].classes[0].sub_classe;
+    await this.setState({ subClasse },
+    () => {
+      console.tron.log(["SubClasse",this.state.subClasse]);
+    });
+    const testeSubClasse = this.state.subClasse.map(item => console.tron.log(item.subclasse_name));
+  }
+
+
+  subClassePickerFourth = async (value) => {
+    const subClasse = this.state.formQuerry[1].classes[1].sub_classe;
+    await this.setState({ subClasse },
+    () => {
+      console.tron.log(["SubClasse",this.state.subClasse]);
+    });
+    const testeSubClasse = this.state.subClasse.map(item => console.tron.log(item.subclasse_name));
+  }
+
+  lastPicker = () => {
+    this.setState({ showRef : true});
   }
 
   onPressButton = () => {
@@ -291,8 +411,9 @@ class New extends Component {
   }
 
   render() {
-    const { tipo, subtipo } = this.state;
-    const { navigation } = this.props; 
+    const { tipo, subtipo, ssubtipo, formQuerry, classe, subClasse, incrementar, contador, showRef } = this.state;
+    const { navigation } = this.props;
+
     return (
       <View style={styles.container}>
         <Header
@@ -300,59 +421,103 @@ class New extends Component {
           showMenu
           openMenu={navigation.toggleDrawer}
         />
+
         <View style={styles.forms1}>
           <View style={styles.title}>
-            <View style={styles.ball}><Text style={styles.numberType}> 1 </Text></View>
-            <Text style={styles.textType}> Tipo: </Text>
+            <View style={styles.ball}>
+            <Text style={styles.numberType}>{contador[0]}</Text>
+            </View>
+            <Text style={styles.textType}> Área: </Text>
           </View>
             <View style={styles.Picker}>
               <Picker
                 style={styles.estiloPicker}
                 placeholder="Selecione a pericia desejada"
                 selectedValue={this.state.tipo}
-                onValueChange={(itemValue) => this.setState({ tipo: itemValue })}
+                onValueChange={this.areaPicker}
               >
                 <Picker.Item label='Area' />
-                <Picker.Item label='Homicídio' value='homicidio' />
-                <Picker.Item label='Perícia veicular' value='carro' />
+                <Picker.Item label='Homicídio' value='pessoa' />
+                <Picker.Item label='Perícia veicular' value='agencia' />
                 <Picker.Item label='Incêndio' value='incendio' />
                 <Picker.Item label='Crime ambiental' value='crimeambiental' />
               </Picker>
+              {this.incrementarFuncao}
             </View>
         </View>
 
-        <View style={styles.forms2}>
-            <View style={styles.Picker}>
-              <Picker
-                style={styles.estiloPicker}
-                placeholder="Selecione a subárea da pericia desejada"
-                selectedValue={this.state.subtipo}
-                onValueChange={(itemValue) => this.setState({ subtipo: itemValue })}
-              >
-                <Picker.Item label='Classe' />
-                <Picker.Item label='Morte violenta' value='morteviolenta' />
-                <Picker.Item label='Estrangulamento' value='estrangulamento' />
-                <Picker.Item label='Batida' value='batida' />
-                <Picker.Item label='Roubo' value='roubo' />
-              </Picker>
+        {
+          tipo && classe && (
+            <View style={styles.forms2}>
+              <View style={styles.title}>
+                <View style={styles.ball}>
+                  <Text style={styles.numberType}> {contador[1]} </Text> 
+                </View>
+              <Text style={styles.textType}> Classe: </Text>
+              </View>
+                <View style={styles.Picker}>
+                  <Picker
+                    style={styles.estiloPicker}
+                    placeholder="Selecione a subárea da pericia desejada"
+                    selectedValue={this.state.subtipo}
+                    onValueChange={this.subClassePicker}
+                  >
+                  <Picker.Item label='Classe'/>
+                  {
+                    classe.map(item => <Picker.Item label={item.classe_name} value={item.classe_name} />)
+                  }
+                    
+                  </Picker>
+                </View>
             </View>
-        </View>
-        <View style={styles.forms}>
-          <View style={styles.title}>
-              <View style={styles.ball}><Text style={styles.numberType}> 2 </Text></View>
-              <Text style={styles.textType}> Referência: </Text>
+          )
+        }
+
+        {
+          subtipo && subClasse && (
+            <View style={styles.forms2}>
+            <View style={styles.title}>
+              <View style={styles.ball}><Text style={styles.numberType}> {contador[2]} </Text></View>
+              <Text style={styles.textType}> Subclasse: </Text>
+            </View>
+              <View style={styles.Picker}>
+                <Picker
+                  style={styles.estiloPicker}
+                  placeholder="Selecione a subárea da pericia desejada"
+                  selectedValue={this.state.ssubtipo}
+                  onValueChange={this.lastPicker}
+                >
+                <Picker.Item label='Subclasse' />
+                {
+                  subClasse.map(item => <Picker.Item label={item.subclasse_name} value={item.subclasse_name} />)
+                }
+                  
+                </Picker>
+              </View>
           </View>
-          <TextInput
-            style={styles.input}
-            autoCapitalize="none"
-            autoCorrect={false}
-            multiline
-            maxLength={72}
-            underlineColorAndroid="rgba(0,0,0,0)"
-            onChangeText={inputSave => this.setState({ inputSave })}            
-          />
-        </View>
 
+          )
+        }
+  
+        {
+          showRef && (
+                  <View style={styles.forms}>
+                  <View style={styles.title}>
+                      <View style={styles.ball}><Text style={styles.numberType}> {incrementar} </Text></View>
+                      <Text style={styles.textType}> Referência: </Text>
+                  </View>
+                  <TextInput
+                    style={styles.input}
+                    autoCapitalize="none"
+                    autoCorrect={false}
+                    multiline
+                    maxLength={72}
+                    underlineColorAndroid="rgba(0,0,0,0)"
+                    onChangeText={inputSave => this.setState({ inputSave })}
+                  />
+                </View>
+          )
+        }
             <TouchableOpacity style={styles.button} onPress={() => this.onPressButton()}>
               <Text style={styles.buttonText}>
                 Continuar
@@ -369,23 +534,9 @@ const mapStateToProps = state => ({
   newState: state.newState
 });
 
+
 const mapDispatchToProps = dispatch => bindActionCreators(NewActions, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(New);
 
 
-/*
-<View elevation ={5} style={styles.header}>
-          <View style={styles.viewIcon}>
-            <TouchableOpacity onPress={() => { this.props.navigation.navigate('DrawerToggle'); }}>
-              <Icon name="md-menu" size={28} style={styles.icon} />
-            </TouchableOpacity>
-          </View>
-            <View style={styles.viewTitle}>
-              <Text style={styles.headerTitle}>
-                Nova Pericia
-              </Text>
-            </View>
-            <View style={styles.concerto} />
-      </View>
-*/
