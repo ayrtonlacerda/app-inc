@@ -355,24 +355,19 @@ class StepList extends Component {
         renderItem={item => <StepBox steps={item} />}
         />
 
-        <View style={styles.container}>
+          <View style={styles.container}>
+            <TouchableOpacity style={styles.enviarbutton} onPress={() => this.sendForm()}>
+              <Text style={styles.buttonText}>
+                Enviar
+              </Text>
+            </TouchableOpacity>
 
-
-        <TouchableOpacity style={styles.enviarbutton} onPress={this.navigateToLogged}>
-        <Text style={styles.buttonText}>
-        Enviar
-        </Text>
-        </TouchableOpacity>
-
-
-        <TouchableOpacity style={styles.salvarbutton} onPress={() => this.setState({ load: true })}>
-          <Text style={styles.buttonTextsalvar}>
-            Salvar
-          </Text>
-          </TouchableOpacity>
-        </View>
-
-
+            <TouchableOpacity style={styles.salvarbutton} onPress={() => this.saveForm()}>
+              <Text style={styles.buttonTextsalvar}>
+                Salvar
+              </Text>
+            </TouchableOpacity>
+          </View>
         </ScrollView>
 
         {

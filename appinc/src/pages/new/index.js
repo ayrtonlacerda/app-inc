@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, Picker, TouchableOpacity, StatusBar, AsyncStorage, TextInput } from 'react-native';
+import { View, Text, Picker, TouchableOpacity, ScrollView, AsyncStorage, TextInput } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { Header } from '../../globalComponents';
 import axios from 'axios';
@@ -421,7 +421,7 @@ class New extends Component {
           showMenu
           openMenu={navigation.toggleDrawer}
         />
-
+        <ScrollView>
         <View style={styles.forms1}>
           <View style={styles.title}>
             <View style={styles.ball}>
@@ -523,9 +523,9 @@ class New extends Component {
                 Continuar
               </Text>
             </TouchableOpacity>
-
-
+        </ScrollView>
       </View>
+      
     );
   }
 }
