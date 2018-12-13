@@ -1,47 +1,47 @@
 import { StyleSheet } from 'react-native';
-import { colors, metrics } from '../../styles';
+import { colors, metrics,responsividade } from '../../styles';
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
-    backgroundColor: '#ffffff',
+    backgroundColor: '#EDF0F2',
   },
 
   salvarbutton: {
     alignItems: 'center',
     justifyContent: 'center',
-    marginTop: 20,
-    width: 310,
-    height: 45,
+    marginTop: 15,
+    width: responsividade.LARGURASUBMIT,
+    height: responsividade.ALTURASUBMIT,
     borderRadius: 100,
-    backgroundColor: '#333333',
+    borderWidth: 1.5,
+    fontWeight: 'bold',
+    borderColor: 'green',
   },
   enviarbutton: {
     alignItems: 'center',
     justifyContent: 'center',
-    marginTop: 10,
-    width: 310,
-    height: 45,
+    marginTop: 20,
+    width: responsividade.LARGURASUBMIT,
+    height: responsividade.ALTURASUBMIT,
     borderRadius: 100,
-    backgroundColor: '#127510',
+    backgroundColor: '#F9AA33',
 
   },
-  cancelarbutton: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginTop: 10,
-    width: 310,
-    height: 45,
-    borderRadius: 100,
-    backgroundColor: '#cb1010',
-    marginBottom: 20,
-  },
   buttonText: {
-    color: '#ffffff',
+    color: 'white',
     fontFamily: 'Roboto',
     fontSize: 18,
     fontWeight: '500',
+    lineHeight: 28,
+  },
+
+  buttonTextsalvar: {
+    color: 'green',
+    fontFamily: 'Roboto',
+    fontSize: 18,
+    fontWeight: '400',
     lineHeight: 28,
   },
   //modal

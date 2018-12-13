@@ -3,9 +3,10 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Creators as FormActions } from '../../store/ducks/form';
+import {Header} from '../../globalComponents';
 
 // styles
-import { View, FlatList, ScrollView, TouchableOpacity, Text } from 'react-native';
+import { View, FlatList, ScrollView, TouchableOpacity, Text,ProgressBarAndroid  } from 'react-native';
 import styles from './styles';
 import ComponentList from './components/ComponentsList';
 
@@ -23,8 +24,22 @@ class StepPage extends Component {
 
     return (
       <View style={styles.container}>
+      <Header   title='Form'/>
         <ScrollView>
-         { step.components.map(item => <ComponentList data={item} />) }
+        { step.components.map(item =>
+          <View style = {styles.coluna}>
+            <View style = {styles.linha}>
+              <View style={styles.ball}>
+                <Text style={styles.numberType}>1</Text>
+              </View>
+              <Text style={styles.textType}> {item.label}: </Text>
+            </View>
+            <View style={styles.container}>
+            </View>
+            <ComponentList data={item}/>
+          </View>
+        ) }
+
 
          <View style={styles.container}>
           <TouchableOpacity style={styles.salvarbutton} onPress={() => this.saveStep()}>
@@ -33,11 +48,6 @@ class StepPage extends Component {
               </Text>
             </TouchableOpacity>
 
-            <TouchableOpacity style={styles.cancelarbutton} onPress={this.navigateToLogged}>
-              <Text style={styles.buttonText}>
-                Cancelar
-              </Text>
-            </TouchableOpacity>
          </View>
 
         </ScrollView>
@@ -53,4 +63,3 @@ StepPage.navigationOptions = ({ navigation }) => ({
 const mapDispatchToProps = dispatch => bindActionCreators(FormActions, dispatch);
 
 export default connect(null, mapDispatchToProps)(StepPage);
-

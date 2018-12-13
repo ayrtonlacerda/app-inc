@@ -54,7 +54,7 @@ class Main extends Component {
           showMenu
           showExit
           openMenu={navigation.toggleDrawer}
-          title='Bem-Vindo'
+          title='Inicial'
         />
 
         <View style={styles.bodyS}>
@@ -66,12 +66,15 @@ class Main extends Component {
             </View>
           </View>
 
+
           <View style={styles.info}>
             <View style={styles.profile}>
               <Image source={require('../../assents/imgs/perfil.png')} style={styles.ImageStyle} />
             </View>
-            <View>
-              <Text style={styles.name}>Nome e Sobrenome</Text>
+
+
+            <View style={styles.name_view}>
+              <Text style={styles.name}>Nome Sobrenome</Text>
             </View>
 
             <TouchableOpacity onPress={() => {}}>
