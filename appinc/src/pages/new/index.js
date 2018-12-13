@@ -238,14 +238,14 @@ class New extends Component {
   }
 
   async componentWillMount() {
-    this.requestForm();
     const valueForm = await AsyncStorage.getItem('@Form');
     const formLocal = JSON.parse(valueForm);
     this.setState({ form: formLocal});
-    this.requestQuerry();
+    console.tron.log(["Form:",this.state.form]);
     const valueQuerry = await AsyncStorage.getItem('@Querry');
     const formQuerryLocal = JSON.parse(valueQuerry);
     this.setState({ formQuerry: formQuerryLocal});
+    console.tron.log(["Query",this.state.formQuerry]);
     this.incrementarFuncao();
   }
 
@@ -256,26 +256,6 @@ class New extends Component {
     this.setState({ incrementar : numeroFinal});
     this.setState({ contador: [...contador,incrementar]})
     console.tron.log(["contador", contador]);
-  }
-
-  requestQuerry = () => {
-    axios.get('http://35.243.140.44/api/query')
-    .then((resp) => {
-      //console.tron.log(["Querry",resp.data]);
-      AsyncStorage.setItem('@Querry', JSON.stringify(resp.data));
-    }).catch(err => {
-      console.tron.log(err);
-    });
-  }
-  
-  requestForm = () => {
-    axios.get('http://35.243.140.44/api/forms')
-    .then((resp) => {
-      //console.tron.log(["Form",resp.data]);
-      AsyncStorage.setItem('@Form', JSON.stringify(resp.data));
-    }).catch(err => {
-      console.tron.log(err);
-    });
   } 
 
   navigateToStepList = () => this.props.navigation.navigate('StepList', { form: this.state.form });
@@ -540,7 +520,5 @@ class New extends Component {
 const mapStateToProps = state => ({
   newState: state.newState
 });
-
-//const mapDispatchToProps = dispatch => bindActionCreators(NewActions, dispatch);
 
 export default connect(mapStateToProps, null)(New);
