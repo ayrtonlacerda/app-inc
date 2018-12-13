@@ -1,38 +1,67 @@
 import { StyleSheet } from 'react-native';
+import { colors, metrics, responsividade } from '../../styles';
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: '#FDFDFD'
+        backgroundColor: '#EDF0F2',
     },
     salvarbutton: {
       alignItems: 'center',
       justifyContent: 'center',
       marginTop: 20,
-      width: 310,
-      height: 45,
+      marginBottom: 40,
+      width: responsividade.LARGURABUTTON,
+      height: responsividade.ALTURABUTTON,
       borderRadius: 100,
-      backgroundColor: '#333333',
+      backgroundColor: '#F9AA33',
     },
-    cancelarbutton: {
-      alignItems: 'center',
-      justifyContent: 'center',
-      marginTop: 15,
-      width: 310,
-      height: 45,
-      borderRadius: 100,
-      backgroundColor: '#cb1010',
-      marginBottom: 20,
-    },
+
     buttonText: {
       color: '#ffffff',
       fontFamily: 'Roboto',
       fontSize: 18,
       fontWeight: '500',
       lineHeight: 28,
-    }
+    },
+    numberType: {
+      alignItems: 'center',
+      justifyContent: 'center',
+      fontSize: 18,
+      color: 'black',
+      fontWeight: 'bold',
+    },
+    ball: {
+      alignItems: 'center',
+      justifyContent: 'center',
+      padding: 10,
+      borderRadius: 30,
+      width: responsividade.LARGURABOLA,
+      height: responsividade.LARGURABOLA,
+      backgroundColor: '#F9AA33',
+      margin: 15
+    },
+
+    textType: {
+      fontSize: 18,
+      color: 'black',
+      fontWeight: 'bold',
+    },
+
+    coluna:{
+
+      flexDirection: 'column',
+
+    },
+
+    linha:{
+      flexDirection: 'row',
+      alignItems: 'center',
+    // distância entre componentes
+      // marginTop: 30,
+    },
 });
 
 export default styles;
