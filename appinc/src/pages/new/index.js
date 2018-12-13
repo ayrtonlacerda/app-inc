@@ -232,8 +232,10 @@ class New extends Component {
 
   async componentWillMount() {
     const value = await AsyncStorage.getItem('@Form');
-    const form = JSON.parse(value)
-    console.tron.log(['testeasjhdajksd', form]);
+    const arrayRef = [];
+    // AsyncStorage.setItem('arrayRef', arrayRef );
+    const form = JSON.parse(value);
+    console.tron.log(['formulario', form]);
   }
 
   navigateToStepList = () => this.props.navigation.navigate('StepList', { form: this.state.form });
@@ -290,9 +292,7 @@ class New extends Component {
 
   render() {
     const { tipo, subtipo } = this.state;
-    const { navigation } = this.props;
-    AsyncStorage.setItem('Teste', 'teste');
-    // console.tron.log(this.props);
+    const { navigation } = this.props; 
     return (
       <View style={styles.container}>
         <Header

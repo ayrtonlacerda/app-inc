@@ -3,6 +3,7 @@ import {
   View,
   FlatList,
   ScrollView,
+  AsyncStorage,
   TouchableOpacity,
   Text, 
 } from 'react-native';
@@ -320,6 +321,20 @@ class StepList extends Component {
     saveForm(reference);
   }
 
+  sendForm = async () => {
+    try {
+      const response = await AsyncStorage.getItem('arrayRef');
+      //const response = await AsyncStorage.getAllKeys();
+      console.tron.log(['sendForm', response]);
+    } catch (error) {
+      console.tron.log(['sendForm', 'error']);
+    }
+  }
+
+  resetAsync = () => {
+    AsyncStorage.clear();
+  }
+
 
   render() {
     console.tron.log(this.props);
@@ -332,7 +347,7 @@ class StepList extends Component {
 
     return (
       <View style={styles.container}>        
-        <Header title={form_name} />
+        <Header title={form_name} showArrow goBack={this.props.navigation.goBack} />
         <ScrollView>
 
             <FlatList
@@ -347,15 +362,15 @@ class StepList extends Component {
                 </Text>
               </TouchableOpacity>
 
-              <TouchableOpacity style={styles.enviarbutton} onPress={this.navigateToLogged}>
+              <TouchableOpacity style={styles.enviarbutton} onPress={() => this.sendForm()}>
                 <Text style={styles.buttonText}>
                   Enviar
                 </Text>
               </TouchableOpacity>
 
-              <TouchableOpacity style={styles.cancelarbutton} onPress={() => this.openModal()}>
+              <TouchableOpacity style={styles.enviarbutton} onPress={() => this.resetAsync()}>
                 <Text style={styles.buttonText}>
-                  Cancelar
+                  Reset Async
                 </Text>
               </TouchableOpacity>
           </View>
