@@ -278,9 +278,14 @@ class New extends Component {
 
   onPressButton = () => {
     const { navigation, getReference } = this.props;
-    getReference(this.state.inputSave);
-    navigation.navigate('StepList');
-    
+    const { inputSave } = this.state;
+    if(inputSave) {
+      getReference(this.state.inputSave);
+      navigation.navigate('StepList');
+    } else {
+      getReference('Laudo sem Nome');
+      navigation.navigate('StepList');
+    }    
   }
 
   render() {

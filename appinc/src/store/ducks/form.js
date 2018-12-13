@@ -37,7 +37,7 @@ export default function formState(state = initialState, action) {
       return { ...state, controlArraySize: status };
     }
     case Types.SAVE_FORM: {
-      saveFormAsync()
+      saveFormAsync({ ref: action.payload.ref, state })
       return state;
     }
     default:
@@ -63,6 +63,10 @@ export const Creators = {
     type: Types.SAVE_FORM_STATE,
     payload: { data }
   }),
+  saveForm: ref => ({
+    type: Types.SAVE_FORM,
+    payload: { ref }
+  }),
 };
 
 const controlArraySte = state => {
@@ -86,8 +90,8 @@ const controlArraySte = state => {
   return size2;
 };
 
-const saveFormAsync = state => {
-  const form = state;
-  console.tron.log(form)
+const saveFormAsync = data => {
+  //const form = state.step;
+  console.tron.log(["datasaveformasync", data])
   // AsyncStorage.setItem('@Form', JSON.stringify(form));
 }
