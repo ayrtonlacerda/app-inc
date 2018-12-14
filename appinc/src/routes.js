@@ -1,6 +1,7 @@
 import React from 'react';
 //import { Dimensions } from 'react-native';
 import { StackNavigator, createDrawerNavigator } from 'react-navigation';
+import { Menu } from './globalComponents';
 //import { colors } from './styles';
 
 import Login from './pages/login';
@@ -32,7 +33,8 @@ const Routes = StackNavigator(
         Exit: { screen: Login },
       },
       {
-        drawerwidth: 120,
+        contentComponent: props => <Menu props={props}/>,
+        drawerWidth: 270,
       }
     ),
     StepList: { screen: StepList },
