@@ -1,14 +1,17 @@
 import { StyleSheet } from 'react-native';
-import { colors, metrics } from '../../styles';
+import { colors, metrics, responsividade } from '../../styles';
+
 
 const styles = StyleSheet.create({
     container: {
       flex: 1,
-      backgroundColor: colors.white,
-      alignItems: 'flex-start',
-      justifyContent: 'center',
-      padding: metrics.basePadding,
-      //flexDirection: 'row',
+      // backgroundColor: 'pink',
+      width: responsividade.largura_tela,
+      padding: 10,
+      paddingBottom: 40,
+      paddingTop: 10,
+      borderBottomWidth: 0.5,
+      borderBottomColor: 'black',
     },
     label: {
       fontSize: 18,
@@ -23,26 +26,26 @@ const styles = StyleSheet.create({
       flexDirection: 'row',
       justifyContent: 'center',
       alignItems: 'center',
-      borderWidth: 2,
-      borderColor: colors.dark,
       borderRadius: 25,
-      paddingHorizontal: 5,
-      width: 340,
-
+      width: responsividade.LARGURABOX,
     },
     progressText: {
       //paddingTop: 50,
-      marginLeft: 10,
+      // marginLeft: 10,
       fontSize: 34,
       color: '#000'
     },
     button: {
       //padding: 20,
+      justifyContent: 'center',
+      alignItems: 'center',
       margin: metrics.baseMargin / 2,
-      backgroundColor: colors.darker,
-      borderRadius: 20,
-      padding: 3,
-      elevation: 5,
+      backgroundColor: 'white',
+      borderRadius: 50,
+      padding: 5,
+      paddingHorizontal: 3,
+      width: (responsividade.LARGURABOLA*1.5),
+      height: (responsividade.LARGURABOLA*1.5),
     },
     disabledButtonText: {
       color: '#000'
@@ -67,7 +70,24 @@ const styles = StyleSheet.create({
       color: colors.dark,
       fontSize: 18,
       fontWeight: '200',
-    }
+    },
+
+
+    icon:{
+      color: 'black',
+    },
+
+    seconds:{
+      justifyContent: 'center',
+      alignItems: 'center',
+      margin: metrics.baseMargin / 2,
+      backgroundColor: 'white',
+      borderRadius: 50,
+      padding: 5,
+      paddingHorizontal: 3,
+      // width: (responsividade.LARGURABOLA*1.5),
+      // height: (responsividade.LARGURABOLA*1.5),
+    },
 });
 
 export default styles;

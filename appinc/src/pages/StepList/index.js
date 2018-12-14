@@ -3,15 +3,17 @@ import {
   View,
   FlatList,
   ScrollView,
+  AsyncStorage,
   TouchableOpacity,
-  Text,
-  Modal
+  Text, 
 } from 'react-native';
 import styles from './styles';
 import StepBox from './components/StepBox';
 import { Load } from '../../components';
 import { Header } from '../../globalComponents';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { Creators as FormAction} from '../../store/ducks/form';
 
 const forms = {
   "steps": [
@@ -295,7 +297,6 @@ const forms = {
   "form_version": "1.0"
 };
 
-
 class StepList extends Component {
   state ={
     modalVisible: false,
@@ -314,71 +315,59 @@ class StepList extends Component {
     this.props.navigation.goBack();
   }
 
+  saveForm = () => {
+    const { reference, saveForm } = this.props;
+    console.tron.log(['saveformstep', reference]);
+    saveForm(reference);
+  }
+
+  sendForm = async () => {
+    try {
+      const response = await AsyncStorage.getItem('arrayRef');
+      //const response = await AsyncStorage.getAllKeys();
+      console.tron.log(['sendForm', response]);
+    } catch (error) {
+      console.tron.log(['sendForm', 'error']);
+    }
+  }
+
+  resetAsync = () => {
+    AsyncStorage.clear();
+  }
+
 
   render() {
     console.tron.log(this.props);
     //const { steps } = this.props;
-    const { modalVisible, load } = this.state;
-    const form = this.props.navigation.getParam('form');
-    console.tron.log('seus steps');
-    console.tron.log(form);
+    const { modalVisible, load } = this.state;    
+    //const form = this.props.navigation.getParam('form');
+    //console.tron.log('seus steps');
+    //console.tron.log(form);
     const { steps, form_name } = forms;
 
     return (
-      <View style={styles.container}>
-        <Modal
-          animationcomponent_type="slide"
-          transparent
-          visible={modalVisible}
-          onRequestClose={() => this.closeModal()}
-        >
-          <View style={styles.masterContainer}>
-            <View style={styles.containerModal}>
-              <Text style={styles.step_nameModal}>ATENÇÂO</Text>
-              <Text style={styles.textModal}>Tem certeza que deseja cancelar? Todas as alterações seram perdidas</Text>
-              <View style={styles.containerButton}>
-                <TouchableOpacity onPress={() => this.cancel()}>
-                  <View style={styles.buttonYes}>
-                    <Text style={styles.buttonText}>Sim</Text>
-                  </View>
-                </TouchableOpacity>
-                <TouchableOpacity onPress={() => this.setState({ modalVisible: false })}>
-                  <View style={styles.buttonNo}>
-                    <Text style={styles.buttonText}>Não</Text>
-                  </View>
-                </TouchableOpacity>
-              </View>
-            </View>
-          </View>
-        </Modal>
-        <Header title={form_name} />
+      <View style={styles.container}>        
+        <Header title={form_name} showArrow goBack={this.props.navigation.goBack} />
         <ScrollView>
 
-            <FlatList
-              data={steps}
-              renderItem={item => <StepBox steps={item} />}
-            />
+        <FlatList
+        data={steps}
+        renderItem={item => <StepBox steps={item} />}
+        />
 
           <View style={styles.container}>
-            <TouchableOpacity style={styles.salvarbutton} onPress={() => this.setState({ load: true })}>
-                <Text style={styles.buttonText}>
-                  Salvar
-                </Text>
-              </TouchableOpacity>
+            <TouchableOpacity style={styles.enviarbutton} onPress={() => this.sendForm()}>
+              <Text style={styles.buttonText}>
+                Enviar
+              </Text>
+            </TouchableOpacity>
 
-              <TouchableOpacity style={styles.enviarbutton} onPress={this.navigateToLogged}>
-                <Text style={styles.buttonText}>
-                  Enviar
-                </Text>
-              </TouchableOpacity>
-
-              <TouchableOpacity style={styles.cancelarbutton} onPress={() => this.openModal()}>
-                <Text style={styles.buttonText}>
-                  Cancelar
-                </Text>
-              </TouchableOpacity>
+            <TouchableOpacity style={styles.salvarbutton} onPress={() => this.saveForm()}>
+              <Text style={styles.buttonTextsalvar}>
+                Salvar
+              </Text>
+            </TouchableOpacity>
           </View>
-
         </ScrollView>
 
         {
@@ -395,11 +384,14 @@ class StepList extends Component {
 }
 
 const mapStateToProps = state => ({
-  form: state.newState.form
+  form: state.newState.form,
+  reference: state.newState.reference,
 });
+
+const mapDispatchToProps = dispatch => bindActionCreators(FormAction, dispatch);
 
 StepList.navigationOptions = {
   title: 'Morte Violenta',
 };
 
-export default connect(mapStateToProps, null)(StepList);
+export default connect(mapStateToProps, mapDispatchToProps)(StepList);
