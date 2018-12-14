@@ -62,16 +62,16 @@ class GeoLocation extends Component {
   render() {
     const { label } = this.props.data;
     return (
-      <View styles={styles.container}>
-        <View style={styles.cabecalho}>
+      <View style={styles.container}>
+      <View>
+          <View style={styles.cabecalho}>
             <Image source={require('../../assents/imgs/point.png')} style={styles.image} />
-            <Text style={styles.label}>{label}</Text>
-        </View>
+              <View style ={styles.texto_geo}>
+                <Text style={styles.label}>{label}</Text>
+              </View>
+          </View>
         <View styles={styles.main}>
-          <TouchableOpacity
-            onPress={this.refresh}
-            style={styles.button}
-          >
+          <TouchableOpacity onPress={this.refresh} style={styles.button}>
             <Text style={styles.button_text}>Verificar localização</Text>
           </TouchableOpacity>
         </View>
@@ -100,7 +100,7 @@ class GeoLocation extends Component {
               </View>
           )
         }
-
+      </View>
       </View>
     );
   }

@@ -4,7 +4,6 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import styles from './styles';
 import axios from 'axios';
 import { Header } from '../../globalComponents';
-// import { DrawerActions } from 'react-navigation-drawer';
 
 const dias = 23;
 class Main extends Component {
@@ -22,7 +21,7 @@ class Main extends Component {
   }
 
   requestFroms = () => {
-    axios.get('http://35.231.239.168/api/pericia/formularios/1')
+    axios.get('http://35.243.140.44/api/forms')
       .then((resp) => {
         console.tron.log(resp.data);
         AsyncStorage.setItem('@Form', JSON.stringify(resp.data));
@@ -31,12 +30,22 @@ class Main extends Component {
       });
   }
 
+  requestQuerry = () => {
+    axios.get('http://35.243.140.44/api/query')
+    .then((resp) => {
+      AsyncStorage.setItem('@Querry', JSON.stringify(resp.data));
+    }).catch(err => {
+      console.tron.log(err);
+    });
+  }
+
   state ={
     drawerStatus: null,
   }
 
   componentWillMount() {
     this.requestFroms();
+    this.requestQuerry();
     console.tron.log(this.props);
   }
 
@@ -54,7 +63,7 @@ class Main extends Component {
           showMenu
           showExit
           openMenu={navigation.toggleDrawer}
-          title='Bem-Vindo'
+          title='Inicial'
         />
 
         <View style={styles.bodyS}>
@@ -66,12 +75,15 @@ class Main extends Component {
             </View>
           </View>
 
+
           <View style={styles.info}>
             <View style={styles.profile}>
               <Image source={require('../../assents/imgs/perfil.png')} style={styles.ImageStyle} />
             </View>
-            <View>
-              <Text style={styles.name}>Nome e Sobrenome</Text>
+
+
+            <View style={styles.name_view}>
+              <Text style={styles.name}>Nome Sobrenome</Text>
             </View>
 
             <TouchableOpacity onPress={() => {}}>
