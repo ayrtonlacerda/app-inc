@@ -4,6 +4,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import styles from './styles';
 import axios from 'axios';
 import { Header } from '../../globalComponents';
+import { Sketch } from '../../components';
 
 const dias = 23;
 class Main extends Component {
@@ -21,9 +22,9 @@ class Main extends Component {
   }
 
   requestFroms = () => {
-    axios.get('http://35.243.140.44/api/forms')
+    axios.get('http://35.231.239.168/api/pericia/formularios/1')
       .then((resp) => {
-        console.tron.log(resp.data);
+        console.tron.log(['Requisição', resp.data]);
         AsyncStorage.setItem('@Form', JSON.stringify(resp.data));
       }).catch(err => {
         console.tron.log(err);
@@ -53,6 +54,9 @@ class Main extends Component {
 
     //const drawer = this.props.navigation.setParams({ drawer: 'drawer' });
   }
+
+  renderSketch = () => {};
+
   render() {
     const { navigation } = this.props;
     console.tron.log(navigation);
@@ -92,9 +96,9 @@ class Main extends Component {
               </View>
             </TouchableOpacity>
 
-            <TouchableOpacity onPress={() => {}}>
+            <TouchableOpacity onPress={() => this.renderSketch()}>
               <View style={styles.button}>
-                <Text style={styles.button_text}>Minhas Perícias</Text>
+                <Text style={styles.button_text}>Testes</Text>
               </View>
             </TouchableOpacity>
 
