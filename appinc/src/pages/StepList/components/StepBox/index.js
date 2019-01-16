@@ -41,7 +41,7 @@ class StepBoxComponent extends Component {
 
     return (
        <View style={styles.container}>
-        <TouchableOpacity onPress={() => props.navigation.navigate('StepPage', { step: item })}>
+        <TouchableOpacity onPress={() => this.props.navigation.navigate('StepPage', { step: item })}>
           <View style={styles.card_titulo}>
             <Text style={styles.titulo}>{item.step_name}</Text>
           </View>
