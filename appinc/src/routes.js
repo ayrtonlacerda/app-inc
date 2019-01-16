@@ -17,10 +17,13 @@ import Date from './pages/components/date';
 import CameraPage from './pages/components/camera';
 import Croqui from './pages/components/croqui';
 import BarCode from './pages/components/scanner';
+import Veiculo from './pages/components/veiculo';
+
 
 // import testes de tela
 import StepPage from './pages/Step';
 import StepList from './pages/StepList';
+
 
 
 const Routes = StackNavigator(
@@ -47,7 +50,8 @@ const Routes = StackNavigator(
     Camera: { screen: CameraPage },
     Date: { screen: Date },
     Croqui: { screen: Croqui},
-    BarCode: { screen: BarCode }
+    BarCode: { screen: BarCode },
+    Veiculo: { screen: Veiculo }
   },
   {
     navigationOptions: {

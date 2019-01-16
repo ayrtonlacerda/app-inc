@@ -49,7 +49,7 @@ class InputText extends Component {
     }  
     return (
       <View style={styles.container}>
-      <Text style={styles.Name}>{label}:</Text>
+      <Text style={styles.Name}>{hint}</Text>
         <TextInput
           style={styles.input}
           autoCapitalize="none"
