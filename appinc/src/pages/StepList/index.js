@@ -12,6 +12,7 @@ import StepBox from './components/StepBox';
 import { Load } from '../../components';
 import { Header } from '../../globalComponents';
 import { connect } from 'react-redux';
+import axios from 'axios';
 import { bindActionCreators } from 'redux';
 import { Creators as FormAction} from '../../store/ducks/form';
 
@@ -26,7 +27,7 @@ class StepList extends Component {
   }
 
   async componentWillMount() {
-    const valueForm = await AsyncStorage.getItem('@Form');
+    const valueForm = await AsyncStorage.getItem('@Formulario');
     const formLocal = JSON.parse(valueForm);
     this.setState({ form: formLocal});
   }
@@ -63,6 +64,25 @@ class StepList extends Component {
   }
 
 
+ 
+
+
+  async enviaDados() {
+    const dadosDenatran = await AsyncStorage.getItem('@InfoPlaca');
+    console.tron.log(['DadosVeiculo', dadosDenatran]);
+    axios({     
+      method: 'post',
+      url: 'http://35.231.239.168/api/pericia/formulario/envio',
+      data: {
+        form_name: this.state.form.form_name,
+        data_pericia: '2019-01-17 17:00:00',
+        veiculo_data: dadosDenatran, 
+        first_name: 'Paulo'
+      }
+    });
+    
+  }
+
   render() {
     console.tron.log(this.props);
     const { navigation } = this.props;
@@ -85,7 +105,7 @@ class StepList extends Component {
         />
 
           <View style={styles.container}>
-            <TouchableOpacity style={styles.enviarbutton} onPress={() => this.sendForm()}>
+            <TouchableOpacity style={styles.enviarbutton} onPress={() => this.enviaDados()}>
               <Text style={styles.buttonText}>
                 Enviar
               </Text>
@@ -120,7 +140,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => bindActionCreators(FormAction, dispatch);
 
 StepList.navigationOptions = {
-  title: 'Morte Violenta',
+  title: 'Perícia',
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(StepList);

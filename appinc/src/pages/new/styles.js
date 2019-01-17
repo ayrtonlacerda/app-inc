@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { colors, metrics } from '../../styles';
+import { colors, metrics, responsividade } from '../../styles';
 
 const styles = StyleSheet.create({
   container: {
@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
   },
   forms1: {
     marginHorizontal: metrics.basePadding,
-    marginTop: 30,
+    marginTop: 60,
   },
 
   forms2: {
@@ -58,16 +58,22 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     padding: 10,
     borderRadius: 30,
-    width: 35,
-    height: 35,
+    width: responsividade.LARGURABOLA,
+    height: responsividade.LARGURABOLA,
     backgroundColor: colors.secundary,
+    marginTop: 10,
+
   },
   title: {
+    
     alignItems: 'center',
     flexDirection: 'row',
+    height: responsividade.ALTURABOX,
+
   },
   textType: {
-    marginLeft: 18,
+    marginLeft: 10,
+    marginTop: 8,
     fontSize: 18,
     color: colors.halfblack,
     fontWeight: 'bold',
@@ -75,7 +81,7 @@ const styles = StyleSheet.create({
 
   Picker: {
     backgroundColor: colors.white,
-    height: 50,
+    height: responsividade.ALTURABOX,
     borderRadius: 4,
     paddingHorizontal: 35,
     marginTop: 15,
@@ -90,6 +96,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.secundary,
     height: 50,
     marginTop: 110,
+    marginBottom: 100,
     marginHorizontal: metrics.baseMargin * 2,
     paddingHorizontal: metrics.basePadding,
     justifyContent: 'center',

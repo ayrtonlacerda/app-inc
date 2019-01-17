@@ -15,11 +15,13 @@ class Menu extends Component {
 
     render() {
         return(
-            <View style={styles.container}>       
+            <View style={styles.container}>
+            <TouchableOpacity onPress={this.navigateToScreen('Main')}>
                 <View style={styles.profile}>
                     <Image source={require(pathImage)} style={styles.profileImage} />
                     <Text style={styles.profileName}>Bruce Waynne</Text>
                 </View>
+                </TouchableOpacity>
                 <View style={styles.buttonsView}>
                     <TouchableOpacity onPress={this.navigateToScreen('NewMenu')}>
                         <View style={styles.buttonBox}>
@@ -49,7 +51,6 @@ class Menu extends Component {
             </View>
         );
     }
-}    
+}
 
 export default withNavigation(Menu);
-
