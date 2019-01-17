@@ -59,6 +59,7 @@ class InputText extends Component {
           maxLength={72}
           underlineColorAndroid="rgba(0,0,0,0)"
           onChangeText={inputSave => this.setState({ inputSave })}
+          onChangeText={() => {AsyncStorage.setItem('@InfoInputText', this.state.inputSave)}}
         />
       </View>
     );

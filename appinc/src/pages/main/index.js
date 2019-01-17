@@ -6,8 +6,18 @@ import axios from 'axios';
 import { Header } from '../../globalComponents';
 import { Sketch } from '../../components';
 
+import { NavigationActions, withNavigation } from 'react-navigation';
+
 const dias = 23;
 class Main extends Component {
+
+  navigateToScreen = (route) => () => {
+      const navigateAction = NavigationActions.navigate({
+        routeName: route
+      });
+      this.props.navigation.dispatch(navigateAction);
+    }
+
 
   static navigationOptions = {
     header: null,
@@ -22,7 +32,7 @@ class Main extends Component {
   }
 
   requestFroms = () => {
-    axios.get('http://35.231.239.168/api/pericia/formularios/1')
+    axios.get('http://35.231.239.168/api/pericia/formularios/4')
       .then((resp) => {
         console.tron.log(['Requisição', resp.data]);
         AsyncStorage.setItem('@Form', JSON.stringify(resp.data));
@@ -90,7 +100,7 @@ class Main extends Component {
               <Text style={styles.name}>Nome Sobrenome</Text>
             </View>
 
-            <TouchableOpacity onPress={() => {}}>
+            <TouchableOpacity onPress={this.navigateToScreen('NewMenu')}>
               <View style={styles.button}>
                 <Text style={styles.button_text}>Nova Perícia</Text>
               </View>

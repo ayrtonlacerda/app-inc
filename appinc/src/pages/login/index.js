@@ -46,15 +46,8 @@ class Login extends Component {
         <View style={styles.container}>
           <StatusBar backgroundColor="rgba(34, 34, 34, 0.75)" />
 
-            <LottieView
-              source={require('../../assents/lottie/30-Brightness.json')}
-              ref={animation => {
-                this.animation = animation;
-              }}
-            />
-
           <Text style={styles.title}>Bem-Vindo</Text>
-          <Text style={styles.descript}>Por favor digite seu cpf</Text>
+          <Text style={styles.descript}>Por favor digite seu CPF</Text>
 
           <View style={styles.forms}>
             <TextInput

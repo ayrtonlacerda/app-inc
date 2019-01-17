@@ -69,6 +69,19 @@ const styles = StyleSheet.create({
      margin: 100,
    },
 
+   Picker: {
+    backgroundColor: colors.white,
+    height: 50,
+    borderRadius: 4,
+    paddingHorizontal: 35,
+    marginTop: 15,
+  },
+
+  estiloPicker: {
+    backgroundColor: colors.white,
+    color: colors.tercery,
+  },
+
 });
 
 export default styles;
