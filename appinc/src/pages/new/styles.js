@@ -48,10 +48,9 @@ const styles = StyleSheet.create({
   numberType: {
     alignItems: 'center',
     justifyContent: 'center',
-    fontSize: 18,
+    fontSize: 16,
     color: colors.halfblack,
     fontWeight: 'bold',
-    right: 2,
   },
   ball: {
     alignItems: 'center',
@@ -65,7 +64,7 @@ const styles = StyleSheet.create({
 
   },
   title: {
-    
+
     alignItems: 'center',
     flexDirection: 'row',
     height: responsividade.ALTURABOX,
@@ -105,7 +104,7 @@ const styles = StyleSheet.create({
   },
 
   buttonText: {
-    color: colors.primary,
+    color: 'white',
     fontWeight: 'bold',
     fontSize: 18,
   },

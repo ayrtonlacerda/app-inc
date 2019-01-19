@@ -46,6 +46,7 @@ class Login extends Component {
         <View style={styles.container}>
           <StatusBar backgroundColor="rgba(34, 34, 34, 0.75)" />
 
+
           <Text style={styles.title}>Bem-Vindo</Text>
           <Text style={styles.descript}>Por favor digite seu CPF</Text>
 

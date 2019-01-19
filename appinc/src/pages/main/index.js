@@ -83,7 +83,7 @@ class Main extends Component {
         <View style={styles.bodyS}>
           <View style={styles.halfBody}>
             <View style={styles.tokenView}>
-              <Text style={styles.token}>Token valido por </Text>
+              <Text style={styles.token}>Token válido por </Text>
               <Text style={styles.tokenD}>{dias}</Text>
               <Text style={styles.token}> dias</Text>
             </View>
@@ -106,9 +106,9 @@ class Main extends Component {
               </View>
             </TouchableOpacity>
 
-            <TouchableOpacity onPress={() => this.renderSketch()}>
+            <TouchableOpacity onPress={this.navigateToScreen('Hist')}>
               <View style={styles.button}>
-                <Text style={styles.button_text}>Testes</Text>
+                <Text style={styles.button_text}>Minhas Perícias</Text>
               </View>
             </TouchableOpacity>
 

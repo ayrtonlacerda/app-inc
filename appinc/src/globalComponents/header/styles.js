@@ -30,7 +30,6 @@ const styles = StyleSheet.create({
 
   viewTitle: {
     flex: 1,
-    //marginLeft: 120,
   },
 
   headerTitle: {
@@ -38,6 +37,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: 'bold',
     alignSelf: 'center',
+    right: 10,
   },
 
 });

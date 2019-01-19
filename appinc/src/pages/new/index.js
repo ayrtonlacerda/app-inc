@@ -250,8 +250,8 @@ class New extends Component {
     showRef: false,
     fadeAnim: new Animated.Value(0),
     fadeAnim_l: new Animated.Value(0),
-    fadeAnim_s: new Animated.Value(0), 
-    fadeAnim_ref: new Animated.Value(0), 
+    fadeAnim_s: new Animated.Value(0),
+    fadeAnim_ref: new Animated.Value(0),
      // Initial value for opacity: 0
 
 
@@ -453,9 +453,9 @@ class New extends Component {
   async setUrl() {
     const respPura = await AsyncStorage.getItem('@Formulario');
     const resposta = JSON.parse(respPura);
-    this.setState({ 
-      resposta: resposta,  
-      showRef: true,  
+    this.setState({
+      resposta: resposta,
+      showRef: true,
     });
         // FUNÇÂO RESPONSÁVEL PELA ANIMAÇÃO
         Animated.timing(                  // Animate over time
@@ -498,9 +498,9 @@ class New extends Component {
                 onValueChange={(baseUrl => this.setState({ baseUrl }), this.reqUrl )}
               >
                 <Picker.Item label='Selecione a perícia' />
-                <Picker.Item label='Agência Bancária' value='4' />
-                <Picker.Item label='Perícia veicular' value='5' />
-                <Picker.Item label='Incêndio' value='1' />
+                <Picker.Item label='Veículos' value='4' />
+                <Picker.Item label='Arrombamento de caixa' value='6' />
+                <Picker.Item label='Exemplo' value='1' />
               </Picker>
 
             </View>

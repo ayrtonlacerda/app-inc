@@ -13,9 +13,11 @@ import ComponentList from './components/ComponentsList';
 
 class StepPage extends Component {
 
+
   saveStep = () => {
     this.props.saveStepState();
   }
+
 
   render() {
     const { navigation } = this.props;
@@ -24,13 +26,13 @@ class StepPage extends Component {
 
     return (
       <View style={styles.container}>
-      <Header   title='Form'/>
+      <Header   title={this.props.navigation.state.params.step.step_name} showArrow goBack={this.props.navigation.goBack}/ >
         <ScrollView>
-        { step.components.map(item =>
+        { step.components.map((item , i) =>
           <View style = {styles.coluna}>
             <View style = {styles.linha}>
               <View style={styles.ball}>
-                <Text style={styles.numberType}>1</Text>
+                <Text style={styles.numberType}>{i + 1}</Text>
               </View>
               <Text style={styles.textType}> {item.label}: </Text>
             </View>

@@ -41,6 +41,7 @@ class Camera extends React.Component {
         images: null
       });
       console.tron.log('received image', image.data);
+      AsyncStorage.setItem('@Foto', image.data );
      
     }).catch(e => alert(e));
   }
