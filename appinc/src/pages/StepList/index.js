@@ -64,21 +64,25 @@ class StepList extends Component {
   }
 
 
- 
-
-
   async enviaDados() {
     const dadosDenatran = await AsyncStorage.getItem('@InfoPlaca');
+    const dadosFipe = await AsyncStorage.getItem('@InfoFipe');
+
+
     console.tron.log(['DadosVeiculo', dadosDenatran]);
+    console.tron.log(['DadosFipe', dadosFipe]);
+
     axios({     
       method: 'post',
       url: 'http://35.231.239.168/api/pericia/formulario/envio',
       data: {
         form_name: this.state.form.form_name,
-        data_pericia: '2019-01-17 17:00:00',
-        veiculo_data: dadosDenatran, 
-        first_name: 'Paulo'
+        data_inicio: '2019-01-18',
+        data_despacho:  '2019-01-18',
+        info_veiculo: dadosDenatran,
+        data_final: '2019-01-18',
       }
+ 
     });
     
   }
