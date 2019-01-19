@@ -12,7 +12,7 @@ import styles from './styles';
 
 class InputText extends Component {
   state = {
-    inputSave: null,
+    inputSave:'',
   }
 
   componentDidMount() {
