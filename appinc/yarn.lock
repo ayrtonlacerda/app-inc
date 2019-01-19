@@ -4722,6 +4722,12 @@ react-native-barcode-scanner-google@^1.4.2:
   version "1.4.2"
   resolved "https://registry.yarnpkg.com/react-native-barcode-scanner-google/-/react-native-barcode-scanner-google-1.4.2.tgz#48b781b9c0c00847b4c3fc2d5b2b3bab1ba43ea8"
 
+react-native-camera@^1.8.0:
+  version "1.8.0"
+  resolved "https://registry.yarnpkg.com/react-native-camera/-/react-native-camera-1.8.0.tgz#e4749b112b99ce04c60f581d24624cd413d2d14a"
+  dependencies:
+    prop-types "^15.6.2"
+
 react-native-datepicker@^1.7.2:
   version "1.7.2"
   resolved "https://registry.yarnpkg.com/react-native-datepicker/-/react-native-datepicker-1.7.2.tgz#58d0822591a0ac9b32aba082650222a0ee29669d"

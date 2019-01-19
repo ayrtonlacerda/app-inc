@@ -32,6 +32,7 @@ const styles = StyleSheet.create({
   image: {
     justifyContent: 'center',
     alignItems: 'center',
+    marginRight: 9,
     height: 25,
     width: 25,
   },
@@ -48,6 +49,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: metrics.basePadding,
     justifyContent: 'center',
     alignItems: 'center',
+    flexDirection: 'row',
   },
   info: {
     alignItems: 'center',
@@ -55,10 +57,10 @@ const styles = StyleSheet.create({
   },
   info_text: {
     fontSize: 15,
-    fontWeight: 'bold',
     alignItems: 'center',
     justifyContent: 'center',
     color: "black",
+    opacity: 0.5,
   },
   button_view: {
     alignItems: 'center',
@@ -70,18 +72,19 @@ const styles = StyleSheet.create({
   button_text: {
     color: 'white',
     fontSize: 15,
-    fontWeight: 'bold'
+    fontWeight: 'bold',
+    marginLeft: 5,
   },
   input: {
-     backgroundColor: "white",
-     borderRadius: metrics.baseRadius,
-     marginTop: metrics.baseMargin / 4,
-     height: 50,
-     width: 330,
-     margin: 5,
-     paddingHorizontal: metrics.basePadding,
-     justifyContent: 'center',
-     alignItems: 'flex-start'
+    backgroundColor: 'white',
+    height: responsividade.ALTURABOX,
+    width: responsividade.LARGURABOX,
+    margin: 5,
+    borderRadius: 4,
+    paddingLeft: 20,
+    fontSize: 16,
+    justifyContent: 'center',
+    alignItems: 'flex-start',
    },
    main:
    {

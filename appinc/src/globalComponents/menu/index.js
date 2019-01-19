@@ -15,11 +15,13 @@ class Menu extends Component {
 
     render() {
         return(
-            <View style={styles.container}>       
+            <View style={styles.container}>
+            <TouchableOpacity onPress={this.navigateToScreen('Main')}>
                 <View style={styles.profile}>
                     <Image source={require(pathImage)} style={styles.profileImage} />
                     <Text style={styles.profileName}>Bruce Waynne</Text>
                 </View>
+                </TouchableOpacity>
                 <View style={styles.buttonsView}>
                     <TouchableOpacity onPress={this.navigateToScreen('NewMenu')}>
                         <View style={styles.buttonBox}>
@@ -27,7 +29,7 @@ class Menu extends Component {
                             <Text style={styles.textButton}>Nova Perícia</Text>
                         </View>
                     </TouchableOpacity>
-                    <TouchableOpacity>
+                    <TouchableOpacity onPress={this.navigateToScreen('Hist')}>
                         <View style={styles.buttonBox}>
                             <Icon name="history" size={19} color="#fff" style={styles.icon} />
                             <Text style={styles.textButton}>Minhas perícias</Text>
@@ -49,7 +51,6 @@ class Menu extends Component {
             </View>
         );
     }
-}    
+}
 
 export default withNavigation(Menu);
-

@@ -18,6 +18,7 @@ const styles = StyleSheet.create({
     borderWidth: 1.5,
     fontWeight: 'bold',
     borderColor: 'green',
+        marginBottom: 30,
   },
   enviarbutton: {
     alignItems: 'center',
@@ -43,6 +44,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: '400',
     lineHeight: 28,
+
   },
   //modal
   masterContainer: {

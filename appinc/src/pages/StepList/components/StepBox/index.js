@@ -25,7 +25,7 @@ class StepBoxComponent extends Component {
       // console.tron.log(component);
       const form = {};
       form[component.data_name] = null;
-      getCreateForm(form);      
+      getCreateForm(form);
     });
   }
 
@@ -41,7 +41,7 @@ class StepBoxComponent extends Component {
 
     return (
        <View style={styles.container}>
-        <TouchableOpacity onPress={() => this.props.navigation.navigate('StepPage', { step: item })}>
+        <TouchableOpacity onPress={() => this.props.navigation.navigate('StepPage', { step: item , titulo: this.state.titulo })}>
           <View style={styles.card_titulo}>
             <Text style={styles.titulo}>{item.step_name}</Text>
           </View>

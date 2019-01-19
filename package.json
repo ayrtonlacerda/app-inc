@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+  "react-native-camera": "git+https://git@github.com/react-native-community/react-native-camera",
+    "react-native-image-picker": "^0.28.0"
+  }
+}

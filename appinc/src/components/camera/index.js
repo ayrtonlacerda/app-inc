@@ -1,6 +1,7 @@
 import React from 'react';
 import { Text, View, TouchableOpacity, Image, TextInput } from 'react-native';
-// import ImagePicker from 'react-native-image-picker';
+
+ // import ImagePicker from 'react-native-image-picker';
 import styles from './styles';
 import axios from 'axios';
 import Icon from 'react-native-vector-icons/MaterialIcons';
@@ -74,6 +75,9 @@ class Camera extends React.Component {
   render() {
     const { hint, label, data_name } = this.props.data;
     return (
+
+
+
       <View style={styles.container}>
 
         <TouchableOpacity onPress={this.selectPhotoTapped.bind(this)}>
@@ -91,7 +95,7 @@ class Camera extends React.Component {
             autoCapitalize="none"
             autoCorrect={false}
             multiline
-            placeholder={hint}
+            placeholder={'Notas...'}
             maxLength={100}
             underlineColorAndroid="rgba(0,0,0,0)"
             onChangeText={inputSave => this.setState({ inputSave })}

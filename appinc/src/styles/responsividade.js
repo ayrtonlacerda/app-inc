@@ -31,3 +31,5 @@ export const ALTURASUBMIT = largura_tela * 0.15;
 
 //Bola icone
 export const LARGURABOLA = largura_tela*0.1;
+
+export const BORDABOTAO = 5;

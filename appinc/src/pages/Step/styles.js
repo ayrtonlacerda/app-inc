@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
     numberType: {
       alignItems: 'center',
       justifyContent: 'center',
-      fontSize: 18,
+      fontSize: 14,
       color: 'black',
       fontWeight: 'bold',
     },
@@ -41,11 +41,13 @@ const styles = StyleSheet.create({
       width: responsividade.LARGURABOLA,
       height: responsividade.LARGURABOLA,
       backgroundColor: '#F9AA33',
-      margin: 15
+      margin: 15,
+      flexDirection: 'row',
+      alignItems: 'center',
     },
 
     textType: {
-      fontSize: 18,
+      fontSize: 16,
       color: 'black',
       fontWeight: 'bold',
     },
