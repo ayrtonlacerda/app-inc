@@ -67,9 +67,11 @@ class StepList extends Component {
   async enviaDados() {
     const dadosDenatran = await AsyncStorage.getItem('@InfoPlaca');
     const dadosFipe = await AsyncStorage.getItem('@InfoFipe');
+    const geoloc = await AsyncStorage.getItem('@Geolocalizacao');
+    const date = await AsyncStorage.getItem('@Date');
+    const foto = await AsyncStorage.getItem('@Foto');
 
-
-    console.tron.log(['DadosVeiculo', dadosDenatran]);
+    console.tron.log(['Geoloc', geoloc]);
     console.tron.log(['DadosFipe', dadosFipe]);
 
     axios({     
@@ -78,9 +80,12 @@ class StepList extends Component {
       data: {
         form_name: this.state.form.form_name,
         data_inicio: '2019-01-18',
-        data_despacho:  '2019-01-18',
-        info_veiculo: dadosDenatran,
+        data_despacho:  date,
         data_final: '2019-01-18',
+        info_veiculo: dadosDenatran,
+        local_pericia: geoloc,
+        foto: foto,
+
       }
  
     });

@@ -1,6 +1,6 @@
 
 import React, { Component } from 'react';
-import { View, Text, TouchableOpacity, Image, ScrollView } from 'react-native';
+import { View, Text, TouchableOpacity, Image, ScrollView, AsyncStorage } from 'react-native';
 import styles from './styles';
 
 //import { connect } from 'react-redux';
@@ -42,6 +42,9 @@ class GeoLocation extends Component {
      navigator.geolocation.getCurrentPosition(
        // acessando os campos retornados na mensagem JSON e atribuindo a variavel de estado correspondente
       (position) => {
+
+        AsyncStorage.setItem('@Geolocalizacao', (JSON.stringify( position)));
+
         this.setState({
           latitude: position.coords.latitude,
           longitude: position.coords.longitude,
@@ -53,12 +56,16 @@ class GeoLocation extends Component {
       (error) => this.setState({ error: error.message }),
       { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 },
     );
+
+    
    };
 
    submitGeolocation = () => {
 
+
    }
 
+ 
   render() {
     const { label } = this.props.data;
     return (

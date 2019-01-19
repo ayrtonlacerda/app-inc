@@ -28,6 +28,16 @@ const styles = StyleSheet.create({
      borderRadius: 4,
      paddingLeft: 20,
      fontSize: 16,
+  },
+
+  hint:{
+
+    fontSize: 14,
+    fontWeight: 'bold',
+    color: 'black',
+    opacity: 0.3,
+    paddingVertical: 10,
+
   }
 
 });

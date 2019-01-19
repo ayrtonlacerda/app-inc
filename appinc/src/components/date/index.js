@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import DatePicker from 'react-native-datepicker';
-import { View, Image, Text, TouchableOpacity } from 'react-native';
+import { View, Image, Text, TouchableOpacity, AsyncStorage } from 'react-native';
 
 import styles from './styles';
 
 //import { connect } from 'react-redux';
 //import { bindActionCreators } from 'redux';
 //import { Creators as DateAction } from '../../store/ducks/date';
+
 
 class MyDatePicker extends Component {
 
@@ -47,7 +48,8 @@ class MyDatePicker extends Component {
 
               },
             }}
-            onDateChange={(date) => { this.setState({ date }); }}
+            onDateChange={(date) => { this.setState({ date }); this.getDate(); }}
+            onDateChange={(date)=>AsyncStorage.setItem('@Date', date)}
           />
 
           <View style={styles.datecontainer}>

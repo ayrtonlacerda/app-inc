@@ -4,13 +4,15 @@ import { colors, metrics,responsividade } from '../../styles';
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // backgroundColor: 'pink',
     width: responsividade.largura_tela,
     padding: 20,
     paddingBottom: 40,
     borderBottomWidth: 0.5,
     borderBottomColor: 'black',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
+
    Name: {
     width: responsividade.LARGURABOX,
     height: 30,
@@ -25,11 +27,25 @@ const styles = StyleSheet.create({
   input: {
      backgroundColor: 'white',
      height: responsividade.ALTURABOX,
+     width: responsividade.LARGURABOX,
+     margin: 5,
      borderRadius: 4,
      paddingLeft: 20,
      fontSize: 16,
   },
 
+  input_o: {
+     backgroundColor: 'white',
+     height: responsividade.ALTURABOX,
+     width: responsividade.LARGURABOX,
+     margin: 5,
+     borderRadius: 4,
+     paddingLeft: 20,
+     fontSize: 16,
+     justifyContent: 'center',
+     alignItems: 'flex-start',
+  }
+,
   button: {
     backgroundColor: "#B83E3E",
     borderRadius: 50,
@@ -39,8 +55,19 @@ const styles = StyleSheet.create({
     paddingHorizontal: metrics.basePadding,
     justifyContent: 'center',
     alignItems: 'center',
+    marginBottom: 40,
   },
-
+  info: {
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  info_text: {
+    fontSize: 15,
+    alignItems: 'center',
+    justifyContent: 'center',
+    color: "black",
+    opacity: 0.5,
+  },
   button_view: {
     alignItems: 'center',
     justifyContent: 'center',
@@ -53,34 +80,69 @@ const styles = StyleSheet.create({
     fontSize: 15,
     fontWeight: 'bold'
   },
-  input: {
-     backgroundColor: "white",
-     borderRadius: metrics.baseRadius,
-     marginTop: metrics.baseMargin / 4,
-     height: 50,
-     width: 330,
-     margin: 5,
-     paddingHorizontal: metrics.basePadding,
-     justifyContent: 'center',
-     alignItems: 'flex-start'
-   },
+
    main:
    {
-     margin: 100,
+     justifyContent: 'center',
+     alignItems: 'center',
    },
 
    Picker: {
-    backgroundColor: colors.white,
-    height: 50,
-    borderRadius: 4,
-    paddingHorizontal: 35,
-    marginTop: 15,
-  },
+     backgroundColor: 'white',
+     height: responsividade.ALTURABOX,
+     width: responsividade.LARGURABOX,
+     margin: 5,
+     borderRadius: 4,
+     paddingLeft: 20,
+     fontSize: 16,
 
-  estiloPicker: {
-    backgroundColor: colors.white,
-    color: colors.tercery,
-  },
+   },
+
+   estiloPicker: {
+     backgroundColor: colors.white,
+     borderRadius: 5,
+     fontSize: 15,
+     alignItems: 'center',
+     justifyContent: 'center',
+     color: "black",
+     opacity: 0.5,
+   },
+
+hintview:{
+  margin: 10,
+  marginTop: 20,
+},
+
+hint:{
+  fontSize: 14,
+  fontWeight: 'bold',
+},
+
+numberType: {
+  alignItems: 'center',
+  justifyContent: 'center',
+  fontSize: 13,
+  color: 'black',
+  fontWeight: 'bold',
+},
+miniball: {
+  alignItems: 'center',
+  justifyContent: 'center',
+  padding: 10,
+  borderRadius: 30,
+  width: responsividade.LARGURABOLA*0.73,
+  height: responsividade.LARGURABOLA*0.73,
+  backgroundColor: '#F9AA33',
+  marginLeft: 20
+},
+
+
+hint_title:{
+  alignItems: 'center',
+  flexDirection: 'row',
+
+},
+
 
 });
 

@@ -29,7 +29,7 @@ class Menu extends Component {
                             <Text style={styles.textButton}>Nova Perícia</Text>
                         </View>
                     </TouchableOpacity>
-                    <TouchableOpacity>
+                    <TouchableOpacity onPress={this.navigateToScreen('Hist')}>
                         <View style={styles.buttonBox}>
                             <Icon name="history" size={19} color="#fff" style={styles.icon} />
                             <Text style={styles.textButton}>Minhas perícias</Text>
