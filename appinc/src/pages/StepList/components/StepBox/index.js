@@ -17,14 +17,19 @@ class StepBoxComponent extends Component {
     createdForms: null,
   }
 
-  createFormsSave = () => {
+  createFormsSave = () => { 
     const { getCreateForm, steps } = this.props;
     this.setState({ createdForms: true })
 
     steps.item.components.forEach(component => {
       // console.tron.log(component);
       const form = {};
-      form[component.data_name] = null;
+
+      if(component.component_type === 'date') {
+        form[component.data_name] = { key: component.data_name, value: '1980-01-21' };
+      }else{
+        form[component.data_name] = { key: component.data_name, value: component.default_value }; 
+      }
       getCreateForm(form);      
     });
   }
