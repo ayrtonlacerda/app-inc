@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, Picker, TouchableOpacity, ScrollView, AsyncStorage, TextInput } from 'react-native';
+import { View, Text, Picker, TouchableOpacity, ScrollView, AsyncStorage, TextInput, Animated } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { Header } from '../../globalComponents';
 import axios from 'axios';
@@ -8,6 +8,19 @@ import styles from './styles';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Creators as NewActions } from '../../store/ducks/new';
+
+// <Animated.View
+// style={{
+// ...this.props.style,
+// opacity: fadeAnim,  }}>
+// <Text>Deu certo?</Text>
+// </Animated.View>
+
+// <TouchableOpacity style={styles.button} onPress={() => this.iniciar()}>
+//   <Text style={styles.buttonText}>
+//     Continuar
+//   </Text>
+// </TouchableOpacity>
 
 
 const formulario = [
@@ -231,10 +244,20 @@ class New extends Component {
     ssubtipo: null,
     form: null,
     formQuerry: null,
-    classe: null,    
+    classe: null,
     incrementar: 2,
-    contador: [1], 
+    contador: [1],
     showRef: false,
+    fadeAnim: new Animated.Value(0),
+    fadeAnim_l: new Animated.Value(0),
+    fadeAnim_s: new Animated.Value(0),
+    fadeAnim_ref: new Animated.Value(0),
+     // Initial value for opacity: 0
+
+
+    baseUrl: null,
+    resposta: null,
+    escolha: null,
   }
 
   async componentWillMount() {
@@ -256,33 +279,11 @@ class New extends Component {
     this.setState({ incrementar : numeroFinal});
     this.setState({ contador: [...contador,incrementar]})
     console.tron.log(["contador", contador]);
-  } 
 
-  navigateToStepList = () => this.props.navigation.navigate('StepList', { form: this.state.form });
 
-  formulario = (tipo, subtipo) => {
-    if (tipo === formulario[0].area) {
-        if (subtipo === formulario[0].subareas[0].type) {
-          console.tron.log(formulario[0].subareas[0].data);
-          const data = formulario[0].subareas[0].data;
-          if (data) {
-            this.state.form = formulario[0].subareas[0].data;
-            this.navigateToStepList('StepList', this.state.form);
-          }
-        }
-        if (subtipo === formulario[0].subareas[1].type) {
-          console.tron.log(formulario[0].subareas[1].data);
-        }
-    }
-    if (tipo === formulario[1].area) {
-      if (subtipo === formulario[1].subareas[0].type) {
-        console.tron.log(formulario[1].subareas[0].data);
-      }
-      if (subtipo === formulario[1].subareas[1].type) {
-        console.tron.log(formulario[1].subareas[1].data);
-      }
-    }
   }
+
+  navigateToStepList = () => this.props.navigation.navigate('StepList', { form: this.state.resposta });
 
   areaPicker = (value) => {
     this.setState({ tipo: value},
@@ -291,6 +292,16 @@ class New extends Component {
         this.onAreaPickerChange();
       }
     );
+
+    // FUNÇÂO RESPONSÁVEL PELA ANIMAÇÃO
+    Animated.timing(                  // Animate over time
+      this.state.fadeAnim,            // The animated value to drive
+      {
+        toValue: 1,                   // Animate to opacity: 1 (opaque)
+        duration: 2000,              // Make it take a while
+      }
+    ).start();
+
   }
 
   onAreaPickerChange = () => {
@@ -320,7 +331,7 @@ class New extends Component {
   classePickerSecond = async (value) => {
     const classe = this.state.formQuerry[1].classes;
     await this.setState({ classe })
-    const teste = classe.map(item => console.tron.log(item.classe_name)); 
+    const teste = classe.map(item => console.tron.log(item.classe_name));
   }
 
   subClassePicker = (value) => {
@@ -330,6 +341,15 @@ class New extends Component {
         this.onSubClassePickerChange();
       }
     );
+
+    // FUNÇÂO RESPONSÁVEL PELA ANIMAÇÃO
+    Animated.timing(                  // Animate over time
+      this.state.fadeAnim_s,            // The animated value to drive
+      {
+        toValue: 1,                   // Animate to opacity: 1 (opaque)
+        duration: 2000,              // Make it take a while
+      }
+    ).start();
   }
 
   onSubClassePickerChange = () => {
@@ -396,6 +416,15 @@ class New extends Component {
 
   lastPicker = () => {
     this.setState({ showRef : true});
+
+    // FUNÇÂO RESPONSÁVEL PELA ANIMAÇÃO
+    Animated.timing(                  // Animate over time
+      this.state.fadeAnim_ref,            // The animated value to drive
+      {
+        toValue: 1,                   // Animate to opacity: 1 (opaque)
+        duration: 2000,              // Make it take a while
+      }
+    ).start();
   }
 
   onPressButton = () => {
@@ -403,15 +432,44 @@ class New extends Component {
     const { inputSave } = this.state;
     if(inputSave) {
       getReference(this.state.inputSave);
-      navigation.navigate('StepList');
+      navigation.navigate('StepList' , { inputSave: this.state.inputSave });
     } else {
       getReference('Laudo sem Nome');
       navigation.navigate('StepList');
-    }    
+    }
+  }
+
+  reqUrl = (value) => {
+    axios.get('http://35.231.239.168/api/pericia/formularios/'+value)
+      .then((resp) => {
+        console.tron.log(['Requisição New', resp.data]);
+        AsyncStorage.setItem('@Formulario', JSON.stringify(resp.data));
+        this.setUrl();
+      }).catch(err => {
+        console.tron.log(err);
+      });
+  }
+
+  async setUrl() {
+    const respPura = await AsyncStorage.getItem('@Formulario');
+    const resposta = JSON.parse(respPura);
+    this.setState({
+      resposta: resposta,
+      showRef: true,
+    });
+        // FUNÇÂO RESPONSÁVEL PELA ANIMAÇÃO
+        Animated.timing(                  // Animate over time
+          this.state.fadeAnim_ref,            // The animated value to drive
+          {
+            toValue: 1,                   // Animate to opacity: 1 (opaque)
+            duration: 2000,              // Make it take a while
+          }
+        ).start();
+    console.tron.log(['Opa', this.state.resposta])
   }
 
   render() {
-    const { tipo, subtipo, ssubtipo, formQuerry, classe, subClasse, incrementar, contador, showRef } = this.state;
+    const { tipo, subtipo, ssubtipo, formQuerry, classe, subClasse, incrementar, contador, showRef ,fadeAnim_ref, fadeAnim , fadeAnim_l , fadeAnim_s, baseUrl } = this.state;
     const { navigation } = this.props;
 
     return (
@@ -422,100 +480,53 @@ class New extends Component {
           openMenu={navigation.toggleDrawer}
         />
         <ScrollView>
+
+
+
         <View style={styles.forms1}>
           <View style={styles.title}>
             <View style={styles.ball}>
-            <Text style={styles.numberType}>{contador[0]}</Text>
+            <Text style={styles.numberType}>1</Text>
             </View>
-            <Text style={styles.textType}> Área: </Text>
+            <Text style={styles.textType}> Perícia: </Text>
           </View>
             <View style={styles.Picker}>
               <Picker
                 style={styles.estiloPicker}
-                placeholder="Selecione a pericia desejada"
-                selectedValue={this.state.tipo}
-                onValueChange={this.areaPicker}
+                placeholder="Selecione a perícia"
+                selectedValue={this.state.baseUrl}
+                onValueChange={(baseUrl => this.setState({ baseUrl }), this.reqUrl )}
               >
-                <Picker.Item label='Area' />
-                <Picker.Item label='Homicídio' value='pessoa' />
-                <Picker.Item label='Perícia veicular' value='agencia' />
-                <Picker.Item label='Incêndio' value='incendio' />
-                <Picker.Item label='Crime ambiental' value='crimeambiental' />
+                <Picker.Item label='Selecione a perícia' />
+                <Picker.Item label='Veículos' value='4' />
+                <Picker.Item label='Arrombamento de caixa' value='6' />
+                <Picker.Item label='Exemplo' value='1' />
               </Picker>
-              {this.incrementarFuncao}
+
             </View>
         </View>
 
         {
-          tipo && classe && (
-            <View style={styles.forms2}>
-              <View style={styles.title}>
-                <View style={styles.ball}>
-                  <Text style={styles.numberType}> {contador[1]} </Text> 
-                </View>
-              <Text style={styles.textType}> Classe: </Text>
-              </View>
-                <View style={styles.Picker}>
-                  <Picker
-                    style={styles.estiloPicker}
-                    placeholder="Selecione a subárea da pericia desejada"
-                    selectedValue={this.state.subtipo}
-                    onValueChange={this.subClassePicker}
-                  >
-                  <Picker.Item label='Classe'/>
-                  {
-                    classe.map(item => <Picker.Item label={item.classe_name} value={item.classe_name} />)
-                  }
-                    
-                  </Picker>
-                </View>
-            </View>
-          )
-        }
-
-        {
-          subtipo && subClasse && (
-            <View style={styles.forms2}>
-            <View style={styles.title}>
-              <View style={styles.ball}><Text style={styles.numberType}> {contador[2]} </Text></View>
-              <Text style={styles.textType}> Subclasse: </Text>
-            </View>
-              <View style={styles.Picker}>
-                <Picker
-                  style={styles.estiloPicker}
-                  placeholder="Selecione a subárea da pericia desejada"
-                  selectedValue={this.state.ssubtipo}
-                  onValueChange={this.lastPicker}
-                >
-                <Picker.Item label='Subclasse' />
-                {
-                  subClasse.map(item => <Picker.Item label={item.subclasse_name} value={item.subclasse_name} />)
-                }
-                  
-                </Picker>
-              </View>
-          </View>
-
-          )
-        }
-  
-        {
           showRef && (
+
+            <Animated.View
+            style={{ ...this.props.style , opacity: fadeAnim_ref }}>
+            {this.props.children}
                   <View style={styles.forms}>
                   <View style={styles.title}>
-                      <View style={styles.ball}><Text style={styles.numberType}> {incrementar} </Text></View>
+                      <View style={styles.ball}><Text style={styles.numberType}> 2 </Text></View>
                       <Text style={styles.textType}> Referência: </Text>
                   </View>
                   <TextInput
                     style={styles.input}
                     autoCapitalize="none"
                     autoCorrect={false}
-                    multiline
                     maxLength={72}
                     underlineColorAndroid="rgba(0,0,0,0)"
                     onChangeText={inputSave => this.setState({ inputSave })}
                   />
                 </View>
+                  </Animated.View>
           )
         }
             <TouchableOpacity style={styles.button} onPress={() => this.onPressButton()}>
@@ -525,7 +536,7 @@ class New extends Component {
             </TouchableOpacity>
         </ScrollView>
       </View>
-      
+
     );
   }
 }
@@ -538,5 +549,3 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => bindActionCreators(NewActions, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(New);
-
-

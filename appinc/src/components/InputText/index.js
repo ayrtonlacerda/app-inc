@@ -17,56 +17,55 @@ class InputText extends Component {
 
   componentDidMount() {
     this.setState({ inputSave: this.props.default_value });
-  }  
+  }
 
   saveFormInput = data => {
     const { inputSave } = this.state;
     const { form, getSaveStateForm, startControlArray } = this.props;
-    
+
     console.tron.log(form.step);
     if ( inputSave ) {
-      for (var key in form.step) {       
+      for (var key in form.step) {
         if ( key === data.data_name) {
           const form = {};
-          form[data.data_name] = inputSave;
+          form[data.data_name] = { key: data.data_name, value: inputSave};
           console.tron.log(['formsavecampo', form])
           getSaveStateForm(form);
         }
-      } 
-    }      
+      }
+    }
     startControlArray();
   }
 
   render() {
-
     const { data_name, label, hint, default_value, newState} = this.props.data;
     const { saveStep, step } = this.props.form;
     console.tron.log(['props', this.props]);
-    // this.props.startControlArray();    
-   
+    // this.props.startControlArray();
+
     if (saveStep) {
       this.saveFormInput({data_name, default_value});
-    }  
+    }
     return (
       <View style={styles.container}>
-      <Text style={styles.Name}>{label}:</Text>
+      <Text style = {styles.hint}>{hint}</Text>
         <TextInput
           style={styles.input}
           autoCapitalize="none"
           autoCorrect={false}
-          multiline
-          placeholder={hint}
-          maxLength={72}
+          placeholder={"Digite aqui..."}
+          maxLength={255}
           underlineColorAndroid="rgba(0,0,0,0)"
-          onChangeText={inputSave => this.setState({ inputSave })}
+          onChangeText={inputSave => this.setState({ inputSave})}
         />
+
       </View>
     );
   }
 }
 
- const mapStateToProps = state => ({
-  form: state.formState, 
+const mapStateToProps = state => ({
+  form: state.formState,
 });
 
 const mapDispatchToProps = dispatch =>

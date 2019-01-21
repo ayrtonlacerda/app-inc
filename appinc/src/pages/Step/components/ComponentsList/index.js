@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, ScrollView } from 'react-native';
-import { InputText, AudioRec, Camera, MyDatePicker, GeoLocation } from '../../../../components';
+import { InputText, AudioRec, Camera, MyDatePicker, GeoLocation, Veiculos } from '../../../../components';
 import styles from './styles';
 
 
@@ -39,6 +39,13 @@ const ComponentList = (props) => (
           props.data.component_type === 'geoloc' && (
             <View style={styles.component}>
               <GeoLocation data={props.data} />
+            </View>
+          )
+        }
+        {
+          props.data.component_type === 'veiculo' && (
+            <View style={styles.component}>
+              <Veiculos data={props.data} />
             </View>
           )
         }

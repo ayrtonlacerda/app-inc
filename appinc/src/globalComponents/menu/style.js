@@ -6,10 +6,10 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         width: 270,
-        backgroundColor: colors.primary,                
+        backgroundColor: colors.primary,
     },
     profile: {
-        flexDirection: 'row',        
+        flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'flex-start',
         borderBottomWidth: 0.5,
@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         color: colors.white,
     },
-    buttonsView: {        
+    buttonsView: {
         marginTop: 30,
         alignItems: 'flex-start',
         justifyContent: 'space-around',
@@ -38,11 +38,11 @@ const styles = StyleSheet.create({
         paddingLeft: 15,
     },
     buttonBox: {
-        height: 50,               
+        height: 50,
         alignItems: 'center',
         justifyContent: 'flex-start',
         marginBottom: 0,
-        flexDirection:'row',      
+        flexDirection:'row',
     },
     textButton: {
         fontSize: 16,

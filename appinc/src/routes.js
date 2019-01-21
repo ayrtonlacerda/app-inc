@@ -15,16 +15,21 @@ import Audio from './pages/components/audio';
 import InputT from './pages/components/input';
 import Date from './pages/components/date';
 import CameraPage from './pages/components/camera';
+import Croqui from './pages/components/croqui';
+import BarCode from './pages/components/scanner';
+import Veiculo from './pages/components/veiculo';
+
 
 // import testes de tela
 import StepPage from './pages/Step';
 import StepList from './pages/StepList';
 
 
+
 const Routes = StackNavigator(
   {
 
-    Login: { screen: Login},
+    Login: { screen: New},
     StepPage: { screen: StepPage },
     Logged: createDrawerNavigator(
       {
@@ -44,6 +49,9 @@ const Routes = StackNavigator(
     Geoloc: { screen: GeoLoc },
     Camera: { screen: CameraPage },
     Date: { screen: Date },
+    Croqui: { screen: Croqui},
+    BarCode: { screen: BarCode },
+    Veiculo: { screen: Veiculo }
   },
   {
     navigationOptions: {

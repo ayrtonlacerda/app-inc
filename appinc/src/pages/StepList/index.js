@@ -12,295 +12,24 @@ import StepBox from './components/StepBox';
 import { Load } from '../../components';
 import { Header } from '../../globalComponents';
 import { connect } from 'react-redux';
+import axios from 'axios';
 import { bindActionCreators } from 'redux';
 import { Creators as FormAction} from '../../store/ducks/form';
 
-const forms = {
-  "steps": [
-      {
-          "step_name": "Preparo",
-          "components": [
-                {
-                  "hint": "informe a geolocalização",
-                  "group": "false",
-                  "label": "Em que local você está?",
-                  "required": "false",
-                  "data_name": "position_gps",
-                  "lenght_max": "60",
-                  "length_min": "3",
-                  "invalid_text": "O nome não atende os requisitos minimos",
-                  "default_value": "de tal",
-                  "component_type": "geoloc",
-                  "required_message": ""
-                },
-                {
-                  "hint": "Nota de audio",
-                  "group": "false",
-                  "label": "faça uma nota de audio",
-                  "required": "false",
-                  "data_name": "audio_nota",
-                  "lenght_max": "60",
-                  "length_min": "3",
-                  "invalid_text": "O nome não atende os requisitos minimos",
-                  "default_value": "de tal",
-                  "component_type": "audiorec",
-                  "required_message": ""
-                },
-                {
-                  "hint": "informe o primeiro nome do usuário",
-                  "group": "true",
-                  "label": "Qual é o seu primeiro nome?",
-                  "required": "true",
-                  "data_name": "first_name1",
-                  "lenght_max": "60",
-                  "length_min": "3",
-                  "invalid_text": "O nome não atende os requisitos minimos",
-                  "default_value": "Fulano",
-                  "component_type": "text",
-                  "required_message": "O nome do usuário é obrigatório"
-                },
-                {
-                  "hint": "informe o primeiro nome do usuário",
-                  "group": "true",
-                  "label": "Qual é o seu primeiro nome?",
-                  "required": "true",
-                  "data_name": "first_name2",
-                  "lenght_max": "60",
-                  "length_min": "3",
-                  "invalid_text": "O nome não atende os requisitos minimos",
-                  "default_value": "Fulano",
-                  "component_type": "text",
-                  "required_message": "O nome do usuário é obrigatório"
-                },
-                {
-                  "hint": "Retire uma foto do local",
-                  "group": "false",
-                  "label": "Foto do local",
-                  "required": "false",
-                  "data_name": "foto",
-                  "lenght_max": "0",
-                  "length_min": "0",
-                  "invalid_text": "a idade esta fora do intervalo",
-                  "default_value": "99",
-                  "component_type": "camera",
-                  "required_message": ""
-              },
-              {
-                "hint": "informe o primeiro nome do usuário",
-                "group": "true",
-                "label": "seu primeiro nome",
-                "required": "true",
-                "data_name": "first_name3",
-                "lenght_max": "60",
-                "length_min": "3",
-                "invalid_text": "O nome não atende os requisitos minimos",
-                "default_value": "Fulano",
-                "component_type": "text",
-                "required_message": "O nome do usuário é obrigatório"
-              },
-              {
-                "hint": "informe o nome da mãe do usuário",
-                "group": "true",
-                "label": "Nome do mãe",
-                "required": "true",
-                "data_name": "first_name4",
-                "lenght_max": "60",
-                "length_min": "3",
-                "invalid_text": "O nome não atende os requisitos minimos",
-                "default_value": "Fulano",
-                "component_type": "text",
-                "required_message": "O nome do usuário é obrigatório"
-              },
-              {
-                "hint": "informe o nome do pai do usuário",
-                "group": "true",
-                "label": "nome do pai",
-                "required": "true",
-                "data_name": "first_name5",
-                "lenght_max": "60",
-                "length_min": "3",
-                "invalid_text": "O nome não atende os requisitos minimos",
-                "default_value": "Fulano",
-                "component_type": "text",
-                "required_message": "O nome do usuário é obrigatório"
-              },
-              {
-                "hint": "informe o primeiro nome do usuário",
-                "group": "true",
-                "label": "seu primeiro nome",
-                "required": "true",
-                "data_name": "first_name6",
-                "lenght_max": "60",
-                "length_min": "3",
-                "invalid_text": "O nome não atende os requisitos minimos",
-                "default_value": "Fulano",
-                "component_type": "text",
-                "required_message": "O nome do usuário é obrigatório"
-              },
-              {
-                "hint": "informe o nome da mãe do usuário",
-                "group": "true",
-                "label": "Nome do mãe",
-                "required": "true",
-                "data_name": "first_name7",
-                "lenght_max": "60",
-                "length_min": "3",
-                "invalid_text": "O nome não atende os requisitos minimos",
-                "default_value": "Fulano",
-                "component_type": "text",
-                "required_message": "O nome do usuário é obrigatório"
-              },
-              {
-                "hint": "informe o nome do pai do usuário",
-                "group": "true",
-                "label": "nome do pai",
-                "required": "true",
-                "data_name": "first_name8",
-                "lenght_max": "60",
-                "length_min": "3",
-                "invalid_text": "O nome não atende os requisitos minimos",
-                "default_value": "Fulano",
-                "component_type": "text",
-                "required_message": "O nome do usuário é obrigatório"
-              },
-              {
-                "hint": "informe a data da pericia",
-                "group": "true",
-                "label": "Qual data de realização da pericia?",
-                "required": "true",
-                "data_name": "data_pericia",
-                "lenght_max": "60",
-                "length_min": "3",
-                "invalid_text": "O nome não atende os requisitos minimos",
-                "default_value": "Fulano",
-                "component_type": "date",
-                "required_message": "O nome do usuário é obrigatório"
-            },
-              {
-                "hint": "Retire uma foto do local",
-                "group": "false",
-                "label": "Foto do local",
-                "required": "false",
-                "data_name": "foto1",
-                "lenght_max": "0",
-                "length_min": "0",
-                "invalid_text": "a idade esta fora do intervalo",
-                "default_value": "99",
-                "component_type": "camera",
-                "required_message": ""
-              },
-              {
-                "hint": "Nota de audio",
-                "group": "false",
-                "label": "faça uma nota de audio",
-                "required": "false",
-                "data_name": "audio_nota1",
-                "lenght_max": "60",
-                "length_min": "3",
-                "invalid_text": "O nome não atende os requisitos minimos",
-                "default_value": "de tal",
-                "component_type": "audiorec",
-                "required_message": ""
-            },
-              {
-                "hint": "Retire uma foto do local",
-                "group": "false",
-                "label": "Foto do local",
-                "required": "false",
-                "data_name": "foto2",
-                "lenght_max": "0",
-                "length_min": "0",
-                "invalid_text": "a idade esta fora do intervalo",
-                "default_value": "99",
-                "component_type": "camera",
-                "required_message": ""
-              },
-              {
-                "hint": "informe a data da pericia",
-                "group": "true",
-                "label": "Qual data de realização da pericia?",
-                "required": "true",
-                "data_name": "data_pericia2",
-                "lenght_max": "60",
-                "length_min": "3",
-                "invalid_text": "O nome não atende os requisitos minimos",
-                "default_value": "Fulano",
-                "component_type": "date",
-                "required_message": "O nome do usuário é obrigatório"
-              },
-              {
-                "hint": "informe a data da pericia",
-                "group": "true",
-                "label": "Qual data de realização da pericia?",
-                "required": "true",
-                "data_name": "data_pericia3",
-                "lenght_max": "60",
-                "length_min": "3",
-                "invalid_text": "O nome não atende os requisitos minimos",
-                "default_value": "Fulano",
-                "component_type": "date",
-                "required_message": "O nome do usuário é obrigatório"
-              },
-
-          ],
-          "step_description": "Informações preliminares da pericia"
-      },
-      {
-          "step_name": "Reconhecimento",
-          "components": [
-              {
-                  "hint": "informe a data da pericia",
-                  "group": "true",
-                  "label": "Qual data de realização da pericia?",
-                  "required": "true",
-                  "data_name": "data_pericia4",
-                  "lenght_max": "60",
-                  "length_min": "3",
-                  "invalid_text": "O nome não atende os requisitos minimos",
-                  "default_value": "Fulano",
-                  "component_type": "date",
-                  "required_message": "O nome do usuário é obrigatório"
-              },
-              {
-                  "hint": "Nota de audio",
-                  "group": "false",
-                  "label": "faça uma nota de audio",
-                  "required": "false",
-                  "data_name": "audio_nota2",
-                  "lenght_max": "60",
-                  "length_min": "3",
-                  "invalid_text": "O nome não atende os requisitos minimos",
-                  "default_value": "de tal",
-                  "component_type": "audiorec",
-                  "required_message": ""
-              },
-              {
-                  "hint": "informe a idade do usuário",
-                  "group": "false",
-                  "label": "Qual é a sua idade?",
-                  "required": "false",
-                  "data_name": "age",
-                  "lenght_max": "0",
-                  "length_min": "0",
-                  "invalid_text": "a idade esta fora do intervalo",
-                  "default_value": "99",
-                  "component_type": "text",
-                  "required_message": ""
-              }
-          ],
-          "step_description": "Informações do local e da cena"
-      }
-  ],
-  "classe": "homicidio",
-  "form_name": "Morte Violenta",
-  "sub_classe": "Morte Violenta",
-  "form_version": "1.0"
-};
+  
 
 class StepList extends Component {
   state ={
     modalVisible: false,
     load: false,
+    form: '',
+    teste: 10
+  }
+
+  async componentWillMount() {
+    const valueForm = await AsyncStorage.getItem('@Formulario');
+    const formLocal = JSON.parse(valueForm);
+    this.setState({ form: formLocal});
   }
 
   closeModal() {
@@ -311,7 +40,7 @@ class StepList extends Component {
     this.setState({ modalVisible: true });
   }
 
-  cancel() {
+  cancel() { 
     this.props.navigation.goBack();
   }
 
@@ -324,7 +53,6 @@ class StepList extends Component {
   sendForm = async () => {
     try {
       const response = await AsyncStorage.getItem('arrayRef');
-      //const response = await AsyncStorage.getAllKeys();
       console.tron.log(['sendForm', response]);
     } catch (error) {
       console.tron.log(['sendForm', 'error']);
@@ -336,14 +64,74 @@ class StepList extends Component {
   }
 
 
+  async enviaDados() {
+    const dadosDenatran = await AsyncStorage.getItem('@InfoPlaca');
+    const dadosFipe = await AsyncStorage.getItem('@InfoFipe');
+    const geoloc = await AsyncStorage.getItem('@Geolocalizacao');
+    const date = await AsyncStorage.getItem('@Date');
+    const foto = await AsyncStorage.getItem('@Foto');
+
+    console.tron.log(['Geoloc', geoloc]);
+    console.tron.log(['DadosFipe', dadosFipe]);
+
+    axios({     
+      method: 'post',
+      url: 'http://35.231.239.168/api/pericia/formulario/envio',
+      data: {
+        form_name: this.state.form.form_name,
+        data_inicio: '2019-01-18',
+        data_despacho:  date,
+        data_final: '2019-01-18',
+        info_veiculo: dadosDenatran,
+        local_pericia: geoloc,
+        foto: foto,
+      } 
+    });    
+  }
+
+  enviaForm = async () => {
+    const { formulario } = this.props;
+    const data = new FormData();
+    data.append('form_name', this.state.form.form_name);
+
+    for (var key in formulario.step) {
+      data.append(formulario.step[key].key, formulario.step[key].value)
+      //console.tron.log(['elemente forech', formulario.step[key]])
+    }
+     
+    console.tron.log(['elemente forech', data]); 
+    console.log(['elemente forech', data]);  
+
+    axios({
+      method: 'post',
+      url: 'http://35.231.239.168/api/pericia/formulario/envio',
+      data: data,
+      config: { 
+        headers: {
+          'Content-Type': 'multipart/form-data', 
+          'Accept': 'application/json'              
+        }}
+      })
+      .then(function (response) {
+          //handle success
+          console.log(response); 
+      }) 
+      .catch(function (response) {
+          //handle error
+          console.log(response);
+      });
+  }
+
   render() {
     console.tron.log(this.props);
+    const { navigation } = this.props;
     //const { steps } = this.props;
     const { modalVisible, load } = this.state;    
-    //const form = this.props.navigation.getParam('form');
-    //console.tron.log('seus steps');
-    //console.tron.log(form);
-    const { steps, form_name } = forms;
+    const form = this.props.navigation.getParam('form', this.state.form);
+    console.tron.log('FORMEEE',form);
+   
+
+    const { steps, form_name } = this.state.form;
 
     return (
       <View style={styles.container}>        
@@ -356,7 +144,7 @@ class StepList extends Component {
         />
 
           <View style={styles.container}>
-            <TouchableOpacity style={styles.enviarbutton} onPress={() => this.sendForm()}>
+            <TouchableOpacity style={styles.enviarbutton} onPress={() => this.enviaForm()}>
               <Text style={styles.buttonText}>
                 Enviar
               </Text>
@@ -386,12 +174,13 @@ class StepList extends Component {
 const mapStateToProps = state => ({
   form: state.newState.form,
   reference: state.newState.reference,
+  formulario: state.formState,
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators(FormAction, dispatch);
 
 StepList.navigationOptions = {
-  title: 'Morte Violenta',
+  title: 'Perícia',
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(StepList);
