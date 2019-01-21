@@ -4,6 +4,10 @@ import {
   Image, TouchableOpacity, NativeModules, Dimensions, TextInput, AsyncStorage
 } from 'react-native';
 
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { Creators as FormActions } from '../../store/ducks/form';
+
 import Video from 'react-native-video';
 import styles from './styles';
 import axios from 'axios';
@@ -16,7 +20,9 @@ class Camera extends React.Component {
 
   state = {
     avatarSource: null,
-    videoSource: null
+    videoSource: null,
+    imageData: null,
+    imagePath: null,
   };
 
   constructor() {
@@ -27,22 +33,23 @@ class Camera extends React.Component {
     };
   }
 
-  pickSingleWithCamera(cropping) {
+  async pickSingleWithCamera(cropping) {
     ImagePicker.openCamera({
       cropping: cropping,
       width: 500,
       height: 500,
-      includeExif: false,
+      includeExif: true,
       includeBase64: true,
-    }).then(image => {
+    }).then(image => { 
    
       this.setState({
         image: {uri: image.path, width: image.width, height: image.height,},
-        images: null
+        images: null,
       });
-      console.tron.log('received image', image.data);
-      AsyncStorage.setItem('@Foto', image.data );
-     
+
+      console.tron.log(['received image', image]);
+      this.setState({ imageData: image.data, imagePath: image.path });
+      AsyncStorage.setItem('@Foto', image.data );      
     }).catch(e => alert(e));
   }
 
@@ -53,7 +60,7 @@ class Camera extends React.Component {
       width: 300,
       height: 300,
       cropping: cropit,
-      includeBase64: true,
+      includeBase64: false,
       includeExif: true,
     }).then(image => {
       console.log('received base64 image');
@@ -180,8 +187,33 @@ class Camera extends React.Component {
     return this.renderImage(image);
   }
 
+  saveFormInput = data => {
+    const { imageData, imagePath } = this.state;
+    const { form, getSaveStateForm, startControlArray } = this.props;
+
+    console.tron.log(form.step);
+    if ( imagePath ) {
+      for (var key in form.step) { 
+        if ( key === data.data_name) {
+          const form = {};
+          form[data.data_name] = { key: data.data_name, value: { uri: imagePath, type:'image/jpeg', name: `${data.data_name}.jpg` } };
+          console.tron.log(['formsavecampo', form]) 
+          getSaveStateForm(form);
+        }  
+      }
+    }
+    startControlArray();
+  }
+
+
   render() {
-    const { hint, label, data_name } = this.props.data;
+    const { data_name, label, hint, default_value, newState} = this.props.data;
+    const { saveStep } = this.props.form;
+
+    if (saveStep) {
+      this.saveFormInput({data_name, default_value});
+    }
+
     return (
       <View style={styles.container}>
 
@@ -213,4 +245,11 @@ class Camera extends React.Component {
 
 }
 
-export default Camera;
+const mapStateToProps = state => ({
+  form: state.formState,
+});
+
+const mapDispatchToProps = dispatch =>
+  bindActionCreators(FormActions, dispatch);
+
+export default connect(mapStateToProps, mapDispatchToProps)(Camera);

@@ -85,11 +85,41 @@ class StepList extends Component {
         info_veiculo: dadosDenatran,
         local_pericia: geoloc,
         foto: foto,
+      } 
+    });    
+  }
 
-      }
- 
-    });
-    
+  enviaForm = async () => {
+    const { formulario } = this.props;
+    const data = new FormData();
+    data.append('form_name', this.state.form.form_name);
+
+    for (var key in formulario.step) {
+      data.append(formulario.step[key].key, formulario.step[key].value)
+      //console.tron.log(['elemente forech', formulario.step[key]])
+    }
+     
+    console.tron.log(['elemente forech', data]); 
+    console.log(['elemente forech', data]);  
+
+    axios({
+      method: 'post',
+      url: 'http://35.231.239.168/api/pericia/formulario/envio',
+      data: data,
+      config: { 
+        headers: {
+          'Content-Type': 'multipart/form-data', 
+          'Accept': 'application/json'              
+        }}
+      })
+      .then(function (response) {
+          //handle success
+          console.log(response); 
+      }) 
+      .catch(function (response) {
+          //handle error
+          console.log(response);
+      });
   }
 
   render() {
@@ -114,7 +144,7 @@ class StepList extends Component {
         />
 
           <View style={styles.container}>
-            <TouchableOpacity style={styles.enviarbutton} onPress={() => this.enviaDados()}>
+            <TouchableOpacity style={styles.enviarbutton} onPress={() => this.enviaForm()}>
               <Text style={styles.buttonText}>
                 Enviar
               </Text>
@@ -144,6 +174,7 @@ class StepList extends Component {
 const mapStateToProps = state => ({
   form: state.newState.form,
   reference: state.newState.reference,
+  formulario: state.formState,
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators(FormAction, dispatch);
