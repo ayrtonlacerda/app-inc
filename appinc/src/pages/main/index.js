@@ -4,9 +4,20 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import styles from './styles';
 import axios from 'axios';
 import { Header } from '../../globalComponents';
+import { Sketch } from '../../components';
+
+import { NavigationActions, withNavigation } from 'react-navigation';
 
 const dias = 23;
 class Main extends Component {
+
+  navigateToScreen = (route) => () => {
+      const navigateAction = NavigationActions.navigate({
+        routeName: route
+      });
+      this.props.navigation.dispatch(navigateAction);
+    }
+
 
   static navigationOptions = {
     header: null,
@@ -21,9 +32,9 @@ class Main extends Component {
   }
 
   requestFroms = () => {
-    axios.get('http://35.243.140.44/api/forms')
+    axios.get('http://35.231.239.168/api/pericia/formularios/4')
       .then((resp) => {
-        console.tron.log(resp.data);
+        console.tron.log(['Requisição', resp.data]);
         AsyncStorage.setItem('@Form', JSON.stringify(resp.data));
       }).catch(err => {
         console.tron.log(err);
@@ -53,6 +64,9 @@ class Main extends Component {
 
     //const drawer = this.props.navigation.setParams({ drawer: 'drawer' });
   }
+
+  renderSketch = () => {};
+
   render() {
     const { navigation } = this.props;
     console.tron.log(navigation);
@@ -69,7 +83,7 @@ class Main extends Component {
         <View style={styles.bodyS}>
           <View style={styles.halfBody}>
             <View style={styles.tokenView}>
-              <Text style={styles.token}>Token valido por </Text>
+              <Text style={styles.token}>Token válido por </Text>
               <Text style={styles.tokenD}>{dias}</Text>
               <Text style={styles.token}> dias</Text>
             </View>
@@ -86,13 +100,13 @@ class Main extends Component {
               <Text style={styles.name}>Nome Sobrenome</Text>
             </View>
 
-            <TouchableOpacity onPress={() => {}}>
+            <TouchableOpacity onPress={this.navigateToScreen('NewMenu')}>
               <View style={styles.button}>
                 <Text style={styles.button_text}>Nova Perícia</Text>
               </View>
             </TouchableOpacity>
 
-            <TouchableOpacity onPress={() => {}}>
+            <TouchableOpacity onPress={this.navigateToScreen('Hist')}>
               <View style={styles.button}>
                 <Text style={styles.button_text}>Minhas Perícias</Text>
               </View>

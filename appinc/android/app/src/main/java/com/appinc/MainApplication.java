@@ -3,6 +3,7 @@ package com.appinc;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.reactnative.ivpusic.imagepicker.PickerPackage;
 import com.airbnb.android.react.lottie.LottiePackage;
 import com.rnim.rn.audio.ReactNativeAudioPackage;
 import com.zmxv.RNSound.RNSoundPackage;
@@ -28,7 +29,8 @@ public class MainApplication extends Application implements ReactApplication {
     @Override
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
-          new MainReactPackage(),            
+          new MainReactPackage(),
+            new PickerPackage(),          
             new LottiePackage(),
             new ReactNativeAudioPackage(),
             new RNSoundPackage(),
