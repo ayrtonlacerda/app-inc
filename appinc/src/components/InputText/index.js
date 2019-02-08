@@ -3,7 +3,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Creators as FormActions } from '../../store/ducks/form';
-import { Creators as NewActions } from '../../store/ducks/new';
 
 // styles
 import { View, TextInput, Text } from 'react-native';
